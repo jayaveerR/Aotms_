@@ -11,7 +11,7 @@ const trustStats = [
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen pt-32 md:pt-36 pb-16 overflow-hidden bg-background">
+    <section className="relative pt-32 md:pt-36 pb-16 overflow-hidden bg-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Content */}
