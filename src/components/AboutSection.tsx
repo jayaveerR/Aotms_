@@ -23,9 +23,9 @@ const highlights = [
 ];
 
 const floatingIcons = [
-  { icon: Code, delay: 0, position: "top-4 -right-4", color: "bg-accent" },
-  { icon: Monitor, delay: 0.5, position: "-bottom-2 -left-2", color: "bg-primary" },
-  { icon: Rocket, delay: 1, position: "top-1/4 -left-6", color: "bg-foreground" },
+  { icon: Code, delay: 0, position: "top-0 -right-2", color: "bg-accent" },
+  { icon: Monitor, delay: 0.5, position: "-bottom-4 left-4", color: "bg-primary" },
+  { icon: Rocket, delay: 1, position: "top-1/4 -left-4", color: "bg-foreground" },
 ];
 
 export const AboutSection = () => {
@@ -53,9 +53,24 @@ export const AboutSection = () => {
   return (
     <section id="about" className="py-16 md:py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6">
-        {/* Blue background container */}
-        <div className="relative bg-primary rounded-2xl md:rounded-3xl overflow-visible">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-16">
+        {/* Light grey background container with white shape */}
+        <div className="relative bg-muted/50 rounded-2xl md:rounded-3xl overflow-visible">
+          {/* White angular shape overlay */}
+          <div className="absolute inset-0 overflow-hidden rounded-2xl md:rounded-3xl">
+            <svg 
+              className="absolute top-0 right-0 h-full w-2/3" 
+              viewBox="0 0 400 500" 
+              preserveAspectRatio="none"
+              fill="none"
+            >
+              <path 
+                d="M100 0 L400 0 L400 500 L50 500 L100 0" 
+                fill="hsl(var(--background))"
+              />
+            </svg>
+          </div>
+
+          <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-16">
             
             {/* Left Column - Circular Image extending outside */}
             <motion.div
@@ -66,24 +81,28 @@ export const AboutSection = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative perspective-1000 order-2 lg:order-1 flex items-center justify-center lg:justify-start lg:-ml-20"
+              className="relative perspective-1000 order-2 lg:order-1 flex items-center justify-center lg:justify-start lg:-ml-8"
             >
               <motion.div
                 style={{ rotateX, rotateY }}
                 className="relative preserve-3d"
               >
                 {/* Main Circle Container */}
-                <div className="relative w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px]">
+                <div className="relative w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px]">
                   
-                  {/* Outer glow ring */}
+                  {/* Decorative background blur circles */}
+                  <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
+                  <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-primary/10 rounded-full blur-2xl" />
+                  
+                  {/* Outer ring - primary color */}
                   <motion.div 
-                    className="absolute inset-0 rounded-full bg-background/20 blur-sm"
-                    animate={{ scale: [1, 1.02, 1] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-0 rounded-full border-4 border-primary/30"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                   />
                   
                   {/* Dark circle background */}
-                  <div className="absolute inset-2 rounded-full bg-foreground shadow-2xl" />
+                  <div className="absolute inset-3 rounded-full bg-foreground shadow-2xl" />
                   
                   {/* Main image circle */}
                   <div className="absolute inset-6 md:inset-8 rounded-full overflow-hidden border-4 border-background shadow-2xl">
@@ -94,7 +113,7 @@ export const AboutSection = () => {
                     />
                   </div>
 
-                  {/* Floating Icons with smooth animations */}
+                  {/* Floating Icons with smooth animations - matching hero style */}
                   {floatingIcons.map((item, index) => (
                     <motion.div
                       key={index}
@@ -102,18 +121,12 @@ export const AboutSection = () => {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.3 + item.delay * 0.3 }}
-                      animate={{ 
-                        y: [0, -8, 0],
-                        rotate: [0, 5, -5, 0]
-                      }}
-                      whileHover={{ scale: 1.2 }}
-                      className={`absolute ${item.position} w-10 h-10 md:w-12 md:h-12 rounded-xl ${item.color} shadow-lg flex items-center justify-center cursor-pointer`}
-                      style={{ transition: "transform 0.3s ease" }}
+                      className={`absolute ${item.position} w-10 h-10 md:w-12 md:h-12 rounded-xl ${item.color} shadow-lg flex items-center justify-center`}
                     >
                       <motion.div
-                        animate={{ y: [0, -8, 0] }}
+                        animate={{ y: [0, -6, 0] }}
                         transition={{ 
-                          duration: 2 + index * 0.5, 
+                          duration: 3 + index * 0.5, 
                           repeat: Infinity, 
                           ease: "easeInOut",
                           delay: item.delay 
@@ -124,18 +137,42 @@ export const AboutSection = () => {
                     </motion.div>
                   ))}
 
-                  {/* Decorative circles */}
+                  {/* Decorative shapes - matching hero theme */}
                   <motion.div
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -bottom-4 right-8 w-6 h-6 rounded-full bg-accent shadow-md"
-                  />
-                  
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute -top-4 right-16 w-8 h-8"
+                  >
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-primary/30">
+                      <path
+                        d="M50 5 L55 45 L95 50 L55 55 L50 95 L45 55 L5 50 L45 45 Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </motion.div>
+
                   <motion.div
-                    animate={{ y: [-5, 5, -5] }}
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-16 -right-6"
+                  >
+                    <div className="w-4 h-4 bg-accent/50 rounded-full" />
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-8 right-0 w-4 h-4 rounded-full border-2 border-accent"
-                  />
+                    className="absolute -bottom-2 right-1/3"
+                  >
+                    <svg className="w-10 h-5 text-primary/40" viewBox="0 0 48 24">
+                      <path
+                        d="M0 12 Q12 0 24 12 Q36 24 48 12"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                      />
+                    </svg>
+                  </motion.div>
 
                   {/* Floating Badge */}
                   <motion.div
@@ -143,7 +180,7 @@ export const AboutSection = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.5 }}
-                    className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-background px-5 py-2.5 rounded-full shadow-xl border border-border whitespace-nowrap"
+                    className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-card rounded-2xl shadow-xl p-3 border border-border whitespace-nowrap"
                   >
                     <span className="text-xs md:text-sm font-bold text-foreground">10+ Years of <span className="text-accent">Excellence</span></span>
                   </motion.div>
@@ -160,17 +197,25 @@ export const AboutSection = () => {
               className="space-y-5 order-1 lg:order-2 text-center lg:text-left"
             >
               {/* Section Label */}
-              <span className="inline-block px-4 py-1.5 bg-background/20 text-background text-xs font-semibold rounded-full uppercase tracking-wide">
+              <motion.span 
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary text-xs font-semibold rounded-full uppercase tracking-wide"
+              >
+                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
                 About Us
-              </span>
+              </motion.span>
 
               {/* Main Heading */}
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-background leading-tight">
-                Building <span className="text-accent">Careers</span>, Not Just Courses
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold leading-tight">
+                <span className="text-foreground">Building </span>
+                <span className="text-primary">Careers</span>
+                <span className="text-foreground">, Not Just </span>
+                <span className="text-accent">Courses</span>
               </h2>
 
               {/* Description */}
-              <p className="text-sm md:text-base text-background/80 leading-relaxed max-w-lg mx-auto lg:mx-0">
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0">
                 We are a professional IT training institute focused on real-world skills, 
                 industry-level projects, and career outcomes. Our mission is to make students 
                 job-ready with confidence.
@@ -185,14 +230,14 @@ export const AboutSection = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className="group bg-background/10 backdrop-blur-sm p-4 rounded-xl border border-background/20 hover:bg-background/20 transition-all duration-300"
+                    whileHover={{ y: -4 }}
+                    className="group bg-card p-4 rounded-xl border border-border hover:shadow-lg transition-all duration-300"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-accent/20 group-hover:bg-accent/30 flex items-center justify-center mb-3 transition-colors duration-300 mx-auto lg:mx-0">
-                      <item.icon className="w-5 h-5 text-accent group-hover:text-accent transition-colors duration-300" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 group-hover:bg-accent/20 flex items-center justify-center mb-3 transition-colors duration-300 mx-auto lg:mx-0">
+                      <item.icon className="w-5 h-5 text-primary group-hover:text-accent transition-colors duration-300" />
                     </div>
-                    <h4 className="text-xs md:text-sm font-semibold text-background mb-1">{item.title}</h4>
-                    <p className="text-xs text-background/70 leading-relaxed">{item.description}</p>
+                    <h4 className="text-xs md:text-sm font-semibold text-foreground mb-1">{item.title}</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -207,7 +252,7 @@ export const AboutSection = () => {
               >
                 <Button 
                   variant="outline" 
-                  className="border-background text-background hover:bg-background hover:text-primary transition-all duration-300 font-semibold"
+                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-semibold"
                 >
                   Know More About Us
                 </Button>
