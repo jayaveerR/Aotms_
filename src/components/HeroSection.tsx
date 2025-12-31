@@ -207,28 +207,6 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-muted-foreground"
-        >
-          <span className="text-xs font-medium uppercase tracking-wider">Scroll</span>
-          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-2">
-            <motion.div
-              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1.5 h-1.5 bg-accent rounded-full"
-            />
-          </div>
-        </motion.div>
-      </motion.div>
 
       {/* Background Decorations */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
