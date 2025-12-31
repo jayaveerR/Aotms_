@@ -25,10 +25,10 @@ const steps = [
 
 export const LearningProcess = () => {
   return (
-    <section className="py-20 md:py-28 bg-foreground relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -52,7 +52,7 @@ export const LearningProcess = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4"
           >
-            <span className="text-background">How Training </span>
+            <span className="text-foreground">How Training </span>
             <span className="text-primary">Works </span>
             <span className="text-accent">Here</span>
           </motion.h2>
@@ -62,7 +62,7 @@ export const LearningProcess = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm md:text-base text-background/60 max-w-md mx-auto"
+            className="text-sm md:text-base text-muted-foreground max-w-md mx-auto"
           >
             A structured, practical approach to make you job-ready
           </motion.p>
@@ -87,7 +87,7 @@ export const LearningProcess = () => {
               {/* Connector Line with animated dot (Desktop only) */}
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-14 left-full w-full z-10">
-                  <div className="relative h-0.5 bg-background/10">
+                  <div className="relative h-0.5 bg-border">
                     <motion.div
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 1 }}
@@ -113,10 +113,10 @@ export const LearningProcess = () => {
               <motion.div 
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl p-6 md:p-8 text-center hover:border-primary/50 hover:bg-background/10 transition-all duration-300 h-full overflow-hidden"
+                className="relative bg-card border border-border rounded-2xl p-6 md:p-8 text-center hover:border-primary/50 hover:shadow-xl transition-all duration-300 h-full overflow-hidden"
               >
                 {/* Hover glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-accent/0 group-hover:from-primary/5 group-hover:via-transparent group-hover:to-accent/5 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-accent/0 group-hover:from-primary/5 group-hover:to-accent/5 transition-all duration-500" />
                 
                 {/* Step Number with circle */}
                 <div className="relative mb-6">
@@ -136,17 +136,17 @@ export const LearningProcess = () => {
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-0 flex items-center justify-center pointer-events-none"
                   >
-                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border border-dashed border-background/20" />
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border border-dashed border-border" />
                   </motion.div>
                 </div>
 
                 {/* Title */}
-                <h3 className="relative text-base md:text-lg font-semibold text-background mb-3 group-hover:text-accent transition-colors duration-300">
+                <h3 className="relative text-base md:text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="relative text-xs md:text-sm text-background/50 leading-relaxed group-hover:text-background/70 transition-colors duration-300">
+                <p className="relative text-xs md:text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
                   {step.description}
                 </p>
 
@@ -171,7 +171,7 @@ export const LearningProcess = () => {
           transition={{ duration: 0.5, delay: 0.9 }}
           className="text-center mt-14 md:mt-20"
         >
-          <p className="text-sm text-background/60 mb-6">
+          <p className="text-sm text-muted-foreground mb-6">
             Join today and follow this 
             <span className="text-accent font-semibold"> structured path </span> 
             to your IT career
