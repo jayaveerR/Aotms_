@@ -15,7 +15,7 @@ export const HeroSection = () => {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Content */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             {/* Floating Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -25,10 +25,10 @@ export const HeroSection = () => {
               <motion.span
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="hero-badge inline-flex"
+                className="hero-badge inline-flex text-xs"
               >
-                <span className="w-2 h-2 bg-accent rounded-full animate-pulse-soft" />
-                <span>Expert-Led IT Training in Vijayawada</span>
+                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse-soft" />
+                <span>Trusted IT Training Institute</span>
               </motion.span>
             </motion.div>
 
@@ -37,12 +37,13 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground leading-tight"
+              className="font-display font-bold leading-tight"
             >
-              Become <span className="text-primary">Job-Ready</span> in <span className="text-accent">90 Days</span>
-              <br />
-              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground/80">
-                with Expert-Led IT Training Vijayawada
+              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground">
+                Become <span className="text-primary">Job-Ready</span> in <span className="text-accent">90 Days</span>
+              </span>
+              <span className="block text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mt-1">
+                with Expert-Led IT Training <span className="text-primary">Vijayawada</span>
               </span>
             </motion.h1>
 
@@ -51,7 +52,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm md:text-base text-muted-foreground max-w-md leading-relaxed"
+              className="text-xs md:text-sm text-muted-foreground max-w-sm leading-relaxed"
             >
               AI, Cloud, DevOps & Full Stack Courses with Real-World Projects 
               and Placement Support from Industry Experts.
@@ -62,14 +63,14 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3"
             >
-              <button className="btn-primary group flex items-center justify-center gap-2">
+              <button className="btn-primary group flex items-center justify-center gap-2 text-sm px-5 py-2.5">
                 Start Learning Now
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="btn-secondary group flex items-center justify-center gap-2">
-                <PlayCircle className="w-5 h-5 text-accent" />
+              <button className="btn-secondary group flex items-center justify-center gap-2 text-sm px-5 py-2.5">
+                <PlayCircle className="w-4 h-4 text-accent" />
                 Free Demo Class
               </button>
             </motion.div>
@@ -79,9 +80,9 @@ export const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-sm text-muted-foreground italic"
+              className="text-xs text-muted-foreground italic"
             >
-              Start Your Education Journey, <span className="text-primary font-medium">For a Better Future</span>
+              Start Your Education Journey, <span className="text-accent font-medium">For a Better Future</span>
             </motion.p>
 
             {/* Trust Indicators */}
@@ -89,7 +90,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="flex flex-wrap gap-6 md:gap-10 pt-6 border-t border-border"
+              className="flex flex-wrap gap-4 md:gap-8 pt-4 border-t border-border"
             >
               {trustStats.map((stat, index) => (
                 <motion.div
@@ -99,13 +100,13 @@ export const HeroSection = () => {
                   transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
                   className="trust-stat"
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <stat.icon className="w-5 h-5 text-accent" />
-                    <span className="trust-stat-number">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <stat.icon className="w-4 h-4 text-accent" />
+                    <span className="trust-stat-number text-base md:text-lg">
                       <CountUpNumber end={stat.value} suffix={stat.suffix} />
                     </span>
                   </div>
-                  <span className="trust-stat-label">{stat.label}</span>
+                  <span className="trust-stat-label text-xs">{stat.label}</span>
                 </motion.div>
               ))}
             </motion.div>
