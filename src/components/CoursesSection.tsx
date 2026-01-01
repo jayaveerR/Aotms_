@@ -1,94 +1,113 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Clock, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useCart } from "@/hooks/use-cart";
+import { ShoppingCart, Star } from "lucide-react";
 
-const categories = ["All Courses", "Full Stack", "Data Science", "Cloud & DevOps", "AI & ML", "Mobile Development"];
-
-const coursesData = [
+const topCourses = [
   {
     id: 1,
-    title: "Full Stack Development with MERN",
-    category: "Full Stack",
-    description: "Master MongoDB, Express, React & Node.js with real-world projects and deployment",
-    duration: "6 Months",
-    level: "Beginner to Advanced",
+    title: "Embedded Systems",
+    price: 35000,
+    image: "/placeholder.svg",
+    rating: 4.8,
+    reviews: 120,
+    isTopCourse: true,
   },
   {
     id: 2,
-    title: "Data Science & Machine Learning",
-    category: "Data Science",
-    description: "Learn Python, ML algorithms, data visualization and predictive modeling",
-    duration: "5 Months",
-    level: "Intermediate",
+    title: "Cloud Computing",
+    price: 35000,
+    image: "/placeholder.svg",
+    rating: 4.9,
+    reviews: 150,
+    isTopCourse: true,
   },
   {
     id: 3,
-    title: "AWS Cloud & DevOps Engineering",
-    category: "Cloud & DevOps",
-    description: "Master cloud architecture, CI/CD pipelines, Docker, Kubernetes & AWS services",
-    duration: "4 Months",
-    level: "Intermediate",
+    title: "Quantum Computing",
+    price: 35000,
+    image: "/placeholder.svg",
+    rating: 4.7,
+    reviews: 90,
+    isTopCourse: true,
   },
   {
     id: 4,
-    title: "Python Full Stack Development",
-    category: "Full Stack",
-    description: "Build scalable web applications with Django, Flask and modern Python frameworks",
-    duration: "5 Months",
-    level: "Beginner to Advanced",
+    title: "Data Science",
+    price: 45000,
+    image: "/placeholder.svg",
+    rating: 4.9,
+    reviews: 200,
+    isTopCourse: true,
   },
   {
     id: 5,
-    title: "Artificial Intelligence & Deep Learning",
-    category: "AI & ML",
-    description: "Neural networks, NLP, computer vision with TensorFlow and PyTorch",
-    duration: "6 Months",
-    level: "Advanced",
+    title: "Data Analytics",
+    price: 35000,
+    image: "/placeholder.svg",
+    rating: 4.8,
+    reviews: 180,
+    isTopCourse: true,
   },
   {
     id: 6,
-    title: "React Native Mobile Development",
-    category: "Mobile Development",
-    description: "Build cross-platform iOS & Android apps with React Native and Expo",
-    duration: "4 Months",
-    level: "Intermediate",
+    title: "AI & Machine Learning",
+    price: 50000,
+    image: "/placeholder.svg",
+    rating: 4.9,
+    reviews: 250,
+    isTopCourse: false,
   },
   {
     id: 7,
-    title: "Azure Cloud Solutions Architecture",
-    category: "Cloud & DevOps",
-    description: "Design and implement enterprise cloud solutions on Microsoft Azure",
-    duration: "4 Months",
-    level: "Advanced",
+    title: "Java Full Stack",
+    price: 40000,
+    image: "/placeholder.svg",
+    rating: 4.7,
+    reviews: 130,
+    isTopCourse: false,
   },
   {
     id: 8,
-    title: "Data Analytics with Power BI",
-    category: "Data Science",
-    description: "Transform data into insights with advanced analytics and visualization",
-    duration: "3 Months",
-    level: "Beginner",
-  },
-  {
-    id: 9,
-    title: "Java Full Stack Development",
-    category: "Full Stack",
-    description: "Enterprise application development with Spring Boot, Hibernate & Angular",
-    duration: "6 Months",
-    level: "Intermediate",
+    title: "Python Full Stack",
+    price: 40000,
+    image: "/placeholder.svg",
+    rating: 4.8,
+    reviews: 160,
+    isTopCourse: false,
   },
 ];
 
 export const CoursesSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All Courses");
+  const { addToCart, items } = useCart();
 
-  const filteredCourses = selectedCategory === "All Courses"
-    ? coursesData
-    : coursesData.filter(course => course.category === selectedCategory);
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
 
   return (
-    <section id="courses" className="py-16 md:py-24 bg-background">
+    <section id="courses" className="py-16 md:py-24 relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage: 'linear-gradient(180deg, #0c0a09 0%, #1c1917 50%, #0c0a09 100%)',
+          backgroundSize: '200% 200%',
+        }}
+        animate={{
+          backgroundPosition: ['0% 0%', '0% 100%', '0% 0%'],
+        }}
+        transition={{
+          duration: 20,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      />
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -98,106 +117,97 @@ export const CoursesSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            <span className="text-foreground">Our </span>
-            <span className="text-primary">Courses</span>
+            <span className="text-foreground">Explore Our </span>
+            <span className="text-primary">Top Courses</span>
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose the Right Course for Your Career
+            Hand-picked courses by industry experts to boost your career.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {categories.map((category, index) => (
-            <motion.button
-              key={category}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
-                  : "bg-secondary text-secondary-foreground hover:bg-primary/10 border border-border"
-              }`}
-            >
-              {category}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredCourses.map((course, index) => (
-            <motion.div
-              key={course.id}
-              layout
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group bg-card border border-border rounded-2xl p-6 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
-            >
-              <div className="mb-4">
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
-                  {course.category}
-                </span>
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                  {course.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {course.description}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5 pt-4 border-t border-border">
-                <div className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-primary" />
-                  <span>{course.duration}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <BarChart3 className="w-4 h-4 text-primary" />
-                  <span>{course.level}</span>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <Button
-                  variant="outline"
-                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                >
-                  View Details
-                </Button>
-                <Button
-                  className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20 transition-all duration-300"
-                >
-                  Join Now
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {filteredCourses.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12"
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
           >
-            <p className="text-muted-foreground text-lg">No courses found in this category</p>
-          </motion.div>
-        )}
+            <CarouselContent>
+              {topCourses.map((course, index) => {
+                const isAdded = items.some(item => item.id === course.id);
+                return (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <motion.div
+                      className="p-1 h-[400px]"
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.div
+                        className="h-full relative overflow-hidden rounded-lg shadow-lg group"
+                        whileHover="hover"
+                        initial="rest"
+                        animate="rest"
+                      >
+                        <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                        
+                        {course.isTopCourse && (
+                          <div className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full z-10">
+                            TOP COURSE
+                          </div>
+                        )}
+
+                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent z-10">
+                          <h3 className="text-xl font-bold text-white truncate">{course.title}</h3>
+                          <div className="flex items-center gap-1 text-yellow-500 text-sm">
+                            <Star className="w-4 h-4 fill-current" />
+                            <span className="font-bold">{course.rating}</span>
+                          </div>
+                        </div>
+
+                        <motion.div
+                          className="absolute inset-0 bg-black/60 backdrop-blur-sm p-6 flex flex-col"
+                          variants={{
+                            rest: { opacity: 0 },
+                            hover: { opacity: 1 }
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <h3 className="text-xl font-bold text-white mb-2">{course.title}</h3>
+                          <div className="flex items-center gap-2 text-sm text-white/80 mb-4">
+                            <div className="flex items-center gap-1 text-yellow-500">
+                              <Star className="w-4 h-4 fill-current" />
+                              <span className="font-bold">{course.rating}</span>
+                            </div>
+                            <span>({course.reviews} reviews)</span>
+                          </div>
+                          <div className="text-2xl font-bold text-primary mb-6 mt-auto pt-4">
+                            {formatPrice(course.price)}
+                          </div>
+                          <Button
+                            onClick={() => addToCart(course)}
+                            disabled={isAdded}
+                            className="w-full"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-2" />
+                            {isAdded ? "Added to Cart" : "Add to Cart"}
+                          </Button>
+                        </motion.div>
+                      </motion.div>
+                    </motion.div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselPrevious className="ml-4" />
+            <CarouselNext className="mr-4" />
+          </Carousel>
+        </motion.div>
       </div>
     </section>
   );

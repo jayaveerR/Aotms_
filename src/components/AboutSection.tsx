@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Factory, Users, Briefcase, Code, Monitor, Rocket } from "lucide-react";
+import { Factory, Users, Briefcase, Play, Monitor, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import aboutStudent from "@/assets/about-student.jpg";
@@ -23,9 +23,7 @@ const highlights = [
 ];
 
 const floatingIcons = [
-  { icon: Code, delay: 0, position: "top-0 -right-2", color: "bg-accent" },
-  { icon: Monitor, delay: 0.5, position: "-bottom-4 left-4", color: "bg-primary" },
-  { icon: Rocket, delay: 1, position: "top-1/4 -left-4", color: "bg-foreground" },
+  { icon: Play, delay: 0, position: "top-0 -right-2", color: "bg-accent" },
 ];
 
 export const AboutSection = () => {
@@ -51,27 +49,13 @@ export const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="py-16 md:py-24 pb-0 bg-background overflow-hidden">
+    <section id="about" className="py-16 md:py-24 pb-0 bg-background overflow-visible">
       <div className="container mx-auto px-6">
-        {/* Light grey background container with white shape */}
-        <div className="relative bg-muted/50 rounded-2xl md:rounded-3xl overflow-visible">
-          {/* White angular shape overlay */}
-          <div className="absolute inset-0 overflow-hidden rounded-2xl md:rounded-3xl">
-            <svg 
-              className="absolute top-0 right-0 h-full w-2/3" 
-              viewBox="0 0 400 500" 
-              preserveAspectRatio="none"
-              fill="none"
-            >
-              <path 
-                d="M100 0 L400 0 L400 500 L50 500 L100 0" 
-                fill="hsl(var(--background))"
-              />
-            </svg>
-          </div>
+        {/* White background container */}
+        <div className="relative bg-background rounded-2xl md:rounded-3xl overflow-visible">
 
           <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-16">
-            
+
             {/* Left Column - Circular Image extending outside */}
             <motion.div
               ref={imageRef}
@@ -89,29 +73,32 @@ export const AboutSection = () => {
               >
                 {/* Main Circle Container */}
                 <div className="relative w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px]">
-                  
+
                   {/* Decorative background blur circles */}
                   <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
-                  <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-primary/10 rounded-full blur-2xl" />
-                  
+
                   {/* Outer ring - primary color */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 rounded-full border-4 border-primary/30"
                     animate={{ rotate: 360 }}
                     transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                   />
-                  
+
                   {/* Dark circle background */}
                   <div className="absolute inset-3 rounded-full bg-foreground shadow-2xl" />
-                  
+
                   {/* Main image circle */}
-                  <div className="absolute inset-6 md:inset-8 rounded-full overflow-hidden border-4 border-background shadow-2xl">
+                  <motion.div
+                    className="absolute inset-6 md:inset-8 rounded-full overflow-hidden border-4 border-background shadow-2xl"
+                    animate={{ scale: [1, 1.02, 1] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
                     <img
                       src={aboutStudent}
                       alt="Student learning IT"
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Floating Icons with smooth animations - matching hero style */}
                   {floatingIcons.map((item, index) => (
@@ -125,17 +112,23 @@ export const AboutSection = () => {
                     >
                       <motion.div
                         animate={{ y: [0, -6, 0] }}
-                        transition={{ 
-                          duration: 3 + index * 0.5, 
-                          repeat: Infinity, 
+                        transition={{
+                          duration: 3 + index * 0.5,
+                          repeat: Infinity,
                           ease: "easeInOut",
-                          delay: item.delay 
+                          delay: item.delay
                         }}
                       >
                         <item.icon className="w-5 h-5 md:w-6 md:h-6 text-background" />
                       </motion.div>
                     </motion.div>
                   ))}
+
+                  {/* New static decorative element */}
+                  <div className="absolute top-1/4 -left-4 w-8 h-8 opacity-50">
+                    <div className="absolute w-full h-0.5 bg-primary top-1/2 -translate-y-1/2" />
+                    <div className="absolute h-full w-0.5 bg-primary left-1/2 -translate-x-1/2" />
+                  </div>
 
                   {/* Decorative shapes - matching hero theme */}
                   <motion.div
@@ -197,7 +190,7 @@ export const AboutSection = () => {
               className="space-y-5 order-1 lg:order-2 text-center lg:text-left"
             >
               {/* Section Label */}
-              <motion.span 
+              <motion.span
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary text-xs font-semibold rounded-full uppercase tracking-wide"
@@ -216,8 +209,8 @@ export const AboutSection = () => {
 
               {/* Description */}
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0">
-                We are a professional IT training institute focused on real-world skills, 
-                industry-level projects, and career outcomes. Our mission is to make students 
+                We are a professional IT training institute focused on real-world skills,
+                industry-level projects, and career outcomes. Our mission is to make students
                 job-ready with confidence.
               </p>
 
@@ -250,8 +243,8 @@ export const AboutSection = () => {
                 transition={{ duration: 0.4, delay: 0.6 }}
                 className="pt-2"
               >
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-semibold"
                 >
                   Know More About Us

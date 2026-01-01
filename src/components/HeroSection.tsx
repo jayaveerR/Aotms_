@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, PlayCircle, Users, Award, Clock } from "lucide-react";
 import { CountUpNumber } from "./CountUpNumber";
 import heroStudent from "@/assets/hero-student.png";
+import { CoursesSection } from "./CoursesSection";
 
 const trustStats = [
   { icon: Users, value: 2000, suffix: "+", label: "Students Trained" },
@@ -204,6 +205,7 @@ export const HeroSection = () => {
               </motion.div>
             </motion.div>
           </motion.div>
+          
         </div>
       </div>
 

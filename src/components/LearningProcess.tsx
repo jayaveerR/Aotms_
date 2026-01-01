@@ -84,31 +84,6 @@ export const LearningProcess = () => {
               }}
               className="group relative"
             >
-              {/* Connector Line with animated dot (Desktop only) */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-14 left-full w-full z-10">
-                  <div className="relative h-0.5 bg-border">
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.4 + index * 0.15 }}
-                      className="h-full bg-gradient-to-r from-primary to-accent origin-left"
-                    />
-                    {/* Animated dot */}
-                    <motion.div
-                      initial={{ left: "0%", opacity: 0 }}
-                      whileInView={{ left: "100%", opacity: [0, 1, 1, 0] }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.5 + index * 0.15 }}
-                      className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent"
-                    />
-                  </div>
-                  {/* Arrow */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-6 border-l-accent -mr-1" />
-                </div>
-              )}
-
               {/* Step Card */}
               <motion.div 
                 whileHover={{ y: -8, scale: 1.02 }}

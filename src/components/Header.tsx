@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Phone, Mail, Clock, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Mail, Clock, Instagram, Linkedin, Youtube, ShoppingCart } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useCart } from "@/hooks/use-cart";
 
 const courses = [
   { name: "Full Stack Development", href: "#courses" },
@@ -29,6 +30,7 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { items } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -181,8 +183,16 @@ export const Header = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* Right side actions */}
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="relative">
+              <ShoppingCart className="w-6 h-6 text-foreground/80 hover:text-primary transition-colors cursor-pointer" />
+              {items.length > 0 && (
+                <span className="absolute -top-2 -right-2 w-5 h-5 bg-primary text-primary-foreground text-xs font-bold rounded-full flex items-center justify-center">
+                  {items.length}
+                </span>
+              )}
+            </div>
             <button className="btn-primary">Enroll Now</button>
           </div>
 
