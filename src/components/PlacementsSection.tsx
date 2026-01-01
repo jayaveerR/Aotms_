@@ -98,7 +98,7 @@ export const PlacementsSection = () => {
           {/* Right Side: UI/UX Animation Numbers List */}
           <div className="space-y-2">
             <div>
-             
+
               <h2 className="text-3xl md:text-5xl font-display font-extrabold text-black leading-tight mb-12">
                 Placement <span className="text-[#008bf8]">Support</span> & <span className="text-[#ff6b00]">Mock Interviews</span>
               </h2>
@@ -114,28 +114,31 @@ export const PlacementsSection = () => {
                   transition={{ delay: index * 0.1 }}
                   className="border-b border-gray-100 last:border-0"
                 >
-                  <button
-                    onClick={() => setOpenId(openId === item.id ? null : item.id)}
-                    className="w-full py-6 flex items-start gap-5 group text-left transition-all"
+                  <div
+                    className="w-full py-6 flex items-start gap-5 group transition-all"
                   >
                     <span className="text-xs font-bold text-[#008bf8] mt-1 shrink-0 font-display">
                       {item.id}
                     </span>
 
                     <div className="flex-grow">
-                      <div className="flex items-center justify-between gap-4">
+                      <button
+                        onClick={() => setOpenId(openId === item.id ? null : item.id)}
+                        className="w-full flex items-center justify-between gap-4 text-left"
+                      >
                         <h3 className={`text-lg md:text-xl font-bold transition-all duration-300 ${openId === item.id ? 'text-[#008bf8]' : 'text-black group-hover:text-gray-600'}`}>
                           {item.title}
                         </h3>
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openId === item.id ? 'bg-[#ff6b00] text-white' : 'bg-gray-50 text-gray-400'}`}>
                           {openId === item.id ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
                         </div>
-                      </div>
+                      </button>
 
                       {openId === item.id && (
                         <motion.div
                           initial={{ height: 0, opacity: 0, marginTop: 0 }}
                           animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden"
                         >
@@ -150,7 +153,7 @@ export const PlacementsSection = () => {
                         </motion.div>
                       )}
                     </div>
-                  </button>
+                  </div>
                 </motion.div>
               ))}
             </div>

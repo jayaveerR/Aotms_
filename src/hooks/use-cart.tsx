@@ -1,4 +1,4 @@
-
+// Cart state management with zustand
 import { create } from 'zustand';
 
 export type Course = {
@@ -21,7 +21,7 @@ export const useCart = create<CartState>((set) => ({
     set((state) => {
       const existingItem = state.items.find((item) => item.id === course.id);
       if (existingItem) {
-        return state; 
+        return state;
       }
       return { items: [...state.items, course] };
     }),

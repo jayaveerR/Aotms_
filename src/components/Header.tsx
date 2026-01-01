@@ -4,13 +4,13 @@ import { Menu, X, ChevronDown, Phone, Mail, Clock, Instagram, Linkedin, Youtube,
 import logo from "@/assets/logo.png";
 import { useCart } from "@/hooks/use-cart";
 
-const courses = [
-  { name: "Full Stack Development", href: "#courses" },
-  { name: "AI & Machine Learning", href: "#courses" },
-  { name: "Cloud Computing (AWS/Azure)", href: "#courses" },
-  { name: "DevOps Engineering", href: "#courses" },
-  { name: "Data Science & Analytics", href: "#courses" },
-];
+import { Link } from "react-router-dom";
+import { coursesData } from "@/data/courses";
+
+const courses = coursesData.map(course => ({
+  name: course.title,
+  href: `/course/${course.slug}`
+}));
 
 const navLinks = [
   { name: "Home", href: "#" },
@@ -45,15 +45,14 @@ export const Header = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "shadow-lg" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "shadow-lg" : ""
+        }`}
     >
       {/* Top Bar - Hidden on scroll */}
-      <motion.div 
+      <motion.div
         initial={{ height: "auto", opacity: 1 }}
-        animate={{ 
-          height: isScrolled ? 0 : "auto", 
+        animate={{
+          height: isScrolled ? 0 : "auto",
           opacity: isScrolled ? 0 : 1,
           paddingTop: isScrolled ? 0 : undefined,
           paddingBottom: isScrolled ? 0 : undefined
@@ -64,16 +63,16 @@ export const Header = () => {
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left - Contact Info */}
           <div className="flex items-center gap-5">
-            <a 
-              href="tel:+918019942233" 
+            <a
+              href="tel:+918019942233"
               className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200"
             >
               <Phone className="w-3.5 h-3.5" />
               <span>+91 8019942233</span>
             </a>
             <span className="w-px h-3 bg-primary-foreground/30" />
-            <a 
-              href="mailto:Info@aotms.com" 
+            <a
+              href="mailto:Info@aotms.com"
               className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200"
             >
               <Mail className="w-3.5 h-3.5" />
@@ -93,16 +92,16 @@ export const Header = () => {
               <span className="text-primary-foreground/50">/</span>
               <a href="#register" className="hover:text-accent transition-colors duration-200 font-medium">Register</a>
             </div>
-            
+
             <span className="w-px h-3 bg-primary-foreground/30" />
-            
+
             <div className="flex items-center gap-2">
               <span className="text-primary-foreground/70">Follow us:</span>
               {socialLinks.map((social) => (
-                <a 
+                <a
                   key={social.label}
-                  href={social.href} 
-                  target="_blank" 
+                  href={social.href}
+                  target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-6 h-6 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-accent hover:text-primary hover:scale-110 transition-all duration-200"
@@ -116,15 +115,14 @@ export const Header = () => {
       </motion.div>
 
       {/* Main Navbar */}
-      <nav className={`bg-background/95 backdrop-blur-md transition-all duration-300 border-b border-border/50 ${
-        isScrolled ? "py-2" : "py-3"
-      }`}>
+      <nav className={`bg-background/95 backdrop-blur-md transition-all duration-300 border-b border-border/50 ${isScrolled ? "py-2" : "py-3"
+        }`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center group">
-            <img 
-              src={logo} 
-              alt="Academy of Tech Masters" 
+            <img
+              src={logo}
+              alt="Academy of Tech Masters"
               className={`transition-all duration-300 ${isScrolled ? "h-9" : "h-11"}`}
             />
           </a>
@@ -145,9 +143,8 @@ export const Header = () => {
                   {link.name}
                   {link.hasDropdown && (
                     <ChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        isDropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   )}
                 </a>
@@ -157,24 +154,29 @@ export const Header = () => {
                   <AnimatePresence>
                     {isDropdownOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 15, scale: 0.98 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        exit={{ opacity: 0, y: 15, scale: 0.98 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 mt-2 w-64 bg-card rounded-xl shadow-xl border border-border p-2 z-50"
+                        className="absolute top-full -left-20 md:left-0 mt-4 w-[280px] md:w-[500px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 z-50 overflow-hidden"
                       >
-                        {courses.map((course, index) => (
-                          <motion.a
-                            key={course.name}
-                            href={course.href}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className="block px-4 py-3 rounded-lg hover:bg-primary/5 transition-colors text-sm text-foreground/80 hover:text-primary"
-                          >
-                            {course.name}
-                          </motion.a>
-                        ))}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 relative z-10">
+                          {courses.map((course, index) => (
+                            <Link
+                              key={course.name}
+                              to={course.href}
+                              onClick={() => setIsDropdownOpen(false)}
+                              className="group/item flex items-center px-4 py-3 rounded-xl hover:bg-blue-50/50 transition-all duration-300"
+                            >
+                              <div className="mr-3 w-1.5 h-1.5 rounded-full bg-slate-200 group-hover/item:bg-blue-600 group-hover/item:scale-125 transition-all duration-300" />
+                              <span className="text-sm font-medium text-slate-600 group-hover/item:text-blue-900 transition-colors">
+                                {course.name}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                        {/* Subtle Background Glow inside dropdown */}
+                        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-50/50 rounded-full blur-3xl pointer-events-none" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -253,27 +255,30 @@ export const Header = () => {
 
                 {/* Mobile Nav Links */}
                 {navLinks.map((link, index) => (
-                  <motion.a
+                  <motion.div
                     key={link.name}
-                    href={link.href}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="text-foreground/80 hover:text-primary py-3 font-medium border-b border-border/50 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {link.name}
-                  </motion.a>
+                    <Link
+                      to={link.href}
+                      className="block text-foreground/80 hover:text-primary py-3 font-medium border-b border-border/50 transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 ))}
 
                 {/* Mobile Social Links */}
                 <div className="flex items-center gap-3 mt-4">
                   <span className="text-sm text-foreground/60">Follow us:</span>
                   {socialLinks.map((social) => (
-                    <a 
+                    <a
                       key={social.label}
-                      href={social.href} 
-                      target="_blank" 
+                      href={social.href}
+                      target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
                       className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-200"

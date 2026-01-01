@@ -35,35 +35,35 @@ export const HeroSection = () => {
 
             {/* Main Heading */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="font-display font-bold leading-tight"
             >
-              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground">
+              <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl text-foreground">
                 Become <span className="text-primary">Job-Ready</span> in <span className="text-accent">90 Days</span>
               </span>
-              <span className="block text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mt-1">
+              <span className="block text-sm sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mt-1">
                 with Expert-Led IT Training <span className="text-primary">Vijayawada</span>
               </span>
             </motion.h1>
 
             {/* Subheading */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xs md:text-sm text-muted-foreground max-w-sm leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-[11px] sm:text-sm text-muted-foreground max-w-sm leading-relaxed"
             >
-              AI, Cloud, DevOps & Full Stack Courses with Real-World Projects 
+              AI, Cloud, DevOps & Full Stack Courses with Real-World Projects
               and Placement Support from Industry Experts.
             </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-3"
             >
               <button className="btn-primary group flex items-center justify-center gap-2 text-sm px-5 py-2.5">
@@ -80,7 +80,7 @@ export const HeroSection = () => {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
               className="text-xs text-muted-foreground italic"
             >
               Start Your Education Journey, <span className="text-accent font-medium">For a Better Future</span>
@@ -88,17 +88,17 @@ export const HeroSection = () => {
 
             {/* Trust Indicators */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="flex flex-wrap gap-4 md:gap-8 pt-4 border-t border-border"
+              transition={{ duration: 0.5, delay: 1 }}
+              className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 pt-4 border-t border-border"
             >
               {trustStats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
+                  transition={{ duration: 0.4, delay: 1.1 + index * 0.1 }}
                   className="trust-stat"
                 >
                   <div className="flex items-center gap-1.5 mb-0.5">
@@ -107,7 +107,7 @@ export const HeroSection = () => {
                       <CountUpNumber end={stat.value} suffix={stat.suffix} />
                     </span>
                   </div>
-                  <span className="trust-stat-label text-xs">{stat.label}</span>
+                  <span className="trust-stat-label text-[10px] sm:text-xs">{stat.label}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -123,7 +123,7 @@ export const HeroSection = () => {
             {/* Decorative Elements */}
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
             <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-primary/10 rounded-full blur-2xl" />
-            
+
             {/* Decorative Shapes */}
             <motion.div
               animate={{ rotate: 360 }}
@@ -216,3 +216,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+

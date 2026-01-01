@@ -1,23 +1,22 @@
 import { motion } from "framer-motion";
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { coursesData } from "@/data/courses";
 
 const quickLinks = [
-  { name: "About Us", href: "#about" },
-  { name: "Courses", href: "#courses" },
-  { name: "Placements", href: "#placements" },
-  { name: "Mentors", href: "#mentors" },
+  { name: "Home", href: "/ #home" },
+  { name: "About Us", href: "/#about" },
+  { name: "Courses", href: "/#courses" },
+  { name: "Placements", href: "/#placements" },
+  { name: "Mentors", href: "/#mentors" },
   { name: "Blog", href: "#" },
   { name: "Contact", href: "#" },
 ];
 
-const courses = [
-  { name: "Full Stack Development", href: "#courses" },
-  { name: "Data Science & ML", href: "#courses" },
-  { name: "Cloud & DevOps", href: "#courses" },
-  { name: "AI & Machine Learning", href: "#courses" },
-  { name: "Mobile Development", href: "#courses" },
-  { name: "Python Development", href: "#courses" },
-];
+const courses = coursesData.slice(0, 6).map(course => ({
+  name: course.title,
+  href: `/course/${course.slug}`
+}));
 
 const socialLinks = [
   { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
@@ -79,12 +78,12 @@ export const Footer = () => {
             <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-gray-500 hover:text-[#008bf8] transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -100,12 +99,12 @@ export const Footer = () => {
             <ul className="space-y-4">
               {courses.map((course) => (
                 <li key={course.name}>
-                  <a
-                    href={course.href}
+                  <Link
+                    to={course.href}
                     className="text-sm text-gray-500 hover:text-[#008bf8] transition-colors"
                   >
                     {course.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

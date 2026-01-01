@@ -104,8 +104,13 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-100%)" },
         },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
       animation: {
+        shimmer: 'shimmer 2s infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
@@ -113,7 +118,6 @@ export default {
         "slide-down": "slide-down 0.3s ease-out forwards",
         "count-up": "count-up 0.5s ease-out forwards",
         "float": "float 6s ease-in-out infinite",
-        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
         "marquee": "marquee 25s linear infinite",
       },
     },
