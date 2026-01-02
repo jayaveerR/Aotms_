@@ -107,11 +107,11 @@ export const FinalCTA = () => {
               <div className="mt-8 flex flex-wrap justify-center gap-6 border-t border-gray-50 pt-8">
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-[#008bf8]" />
-                  <span className="text-xs font-bold text-black">+91 8019942233</span>
+                  <span className="text-xs font-bold text-black">+91 80199 42233</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-[#ff6b00]" />
-                  <span className="text-xs font-bold text-black">info@aotms.com</span>
+                  <span className="text-xs font-bold text-black">Info@aotms.com</span>
                 </div>
               </div>
             </div>

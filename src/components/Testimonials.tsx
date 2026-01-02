@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const testimonials: Testimonial[] = [
     {
-        text: "The placement support at TechVarsity is unparalleled. I was mentored by industry giants and landed a job at a top MNC within weeks of finishing the Full Stack course.",
+        text: "The placement support at AOTMS is unparalleled. I was mentored by industry giants and landed a job at a top MNC within weeks of finishing the Full Stack course.",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
         name: "Briana Patton",
         role: "Full Stack Developer",
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
         role: "UI/UX Designer",
     },
     {
-        text: "If you're looking for a place that cares about your career as much as you do, TechVarsity is it. The teachers are approachable and extremely knowledgeable.",
+        text: "If you're looking for a place that cares about your career as much as you do, AOTMS is it. The teachers are approachable and extremely knowledgeable.",
         image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop",
         name: "Aliza Khan",
         role: "Software Engineer",

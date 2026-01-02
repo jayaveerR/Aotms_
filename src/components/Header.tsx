@@ -21,9 +21,9 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+  { icon: Youtube, href: "https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF", label: "YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/feed/", label: "LinkedIn" },
 ];
 
 export const Header = () => {
@@ -63,13 +63,20 @@ export const Header = () => {
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left - Contact Info */}
           <div className="flex items-center gap-5">
-            <a
-              href="tel:+918019942233"
-              className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              <span>+91 8019942233</span>
-            </a>
+            <div className="flex items-center gap-3">
+              <a
+                href="tel:+918019942233"
+                className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>+91 80199 42233</span>
+              </a>
+              <div className="text-primary-foreground/30 flex gap-2">
+                <a href="tel:+918019952233" className="hover:text-accent transition-colors">+91 80199 52233</a>
+                <span>/</span>
+                <a href="tel:+918019962233" className="hover:text-accent transition-colors">+91 80199 62233</a>
+              </div>
+            </div>
             <span className="w-px h-3 bg-primary-foreground/30" />
             <a
               href="mailto:Info@aotms.com"

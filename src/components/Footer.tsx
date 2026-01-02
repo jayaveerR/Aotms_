@@ -4,26 +4,36 @@ import { Link } from "react-router-dom";
 import { coursesData } from "@/data/courses";
 
 const quickLinks = [
-  { name: "Home", href: "/ #home" },
+  { name: "Home", href: "/" },
   { name: "About Us", href: "/#about" },
-  { name: "Courses", href: "/#courses" },
-  { name: "Placements", href: "/#placements" },
-  { name: "Mentors", href: "/#mentors" },
-  { name: "Blog", href: "#" },
-  { name: "Contact", href: "#" },
+  { name: "Resource Center", href: "/" },
+  { name: "Careers", href: "/" },
+  { name: "Instructor", href: "/" },
+  { name: "Contact Us", href: "/#contact" },
 ];
 
-const courses = coursesData.slice(0, 6).map(course => ({
-  name: course.title,
-  href: `/course/${course.slug}`
-}));
+const footerCourses = [
+  "quantom-computing",
+  "devops-aws-azure",
+  "embedded-systems",
+  "data-science",
+  "cloud-computing",
+  "data-analytics",
+  "python-full-stack"
+];
+
+const courses = footerCourses.map(slug => {
+  const course = coursesData.find(c => c.slug === slug);
+  return {
+    name: course?.title || slug,
+    href: `/course/${slug}`
+  };
+});
 
 const socialLinks = [
-  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+  { icon: Youtube, href: "https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF", label: "YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/feed/", label: "LinkedIn" },
 ];
 
 export const Footer = () => {
@@ -38,32 +48,40 @@ export const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <h3 className="text-3xl font-display font-black mb-6 flex items-center gap-2">
-              <span className="text-[#008bf8]">Tech</span><span>Varsity</span>
+              <span className="text-[#008bf8]">AO</span><span>TMS</span>
             </h3>
             <p className="text-sm text-gray-500 leading-relaxed mb-8 max-w-xs">
-              Empowering the next generation of tech leaders with industry-standard training and 100% placement assistance.
+              At Academy of Tech Masters, we believe that the right skills can transform careers.
             </p>
 
             <div className="space-y-4">
-              <a href="tel:+918019942233" className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#008bf8] transition-colors group">
-                <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-[#008bf8]/10">
-                  <Phone className="w-4 h-4 text-[#008bf8]" />
-                </div>
-                <span>+91 8019942233</span>
-              </a>
+              <div className="space-y-2">
+                <a href="tel:+918019942233" className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#008bf8] transition-colors group">
+                  <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-[#008bf8]/10">
+                    <Phone className="w-4 h-4 text-[#008bf8]" />
+                  </div>
+                  <span>+91 80199 42233</span>
+                </a>
+                <a href="tel:+918019952233" className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#008bf8] transition-colors group ml-11">
+                  <span>+91 80199 52233</span>
+                </a>
+                <a href="tel:+918019962233" className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#008bf8] transition-colors group ml-11">
+                  <span>+91 80199 62233</span>
+                </a>
+              </div>
 
-              <a href="mailto:info@aotms.com" className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#ff6b00] transition-colors group">
+              <a href="mailto:Info@aotms.com" className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#ff6b00] transition-colors group">
                 <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-[#ff6b00]/10">
                   <Mail className="w-4 h-4 text-[#ff6b00]" />
                 </div>
-                <span>info@aotms.com</span>
+                <span>Info@aotms.com</span>
               </a>
 
               <div className="flex items-start gap-3 text-sm text-gray-600">
                 <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center shrink-0">
                   <MapPin className="w-4 h-4 text-black" />
                 </div>
-                <span>M.G. Road, Vijayawada,<br />Andhra Pradesh, India</span>
+                <span>Pothuri Towers, 2nd Floor,<br />MG Road, Near DV manor,<br />VJA - 10</span>
               </div>
             </div>
           </motion.div>
@@ -156,12 +174,11 @@ export const Footer = () => {
           className="border-t border-gray-50 mt-16 pt-10"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-gray-400">
-            <p>© 2024 TechVarsity. High-end Education.</p>
+            <p>Copyright © 2025 AOTMS. All Rights Reserved.</p>
 
             <div className="flex gap-8">
-              <a href="#" className="hover:text-black transition-colors">Privacy</a>
-              <a href="#" className="hover:text-black transition-colors">Terms</a>
-              <a href="#" className="hover:text-black transition-colors">Cookies</a>
+              <Link to="/privacy-policy" className="hover:text-black transition-colors">Privacy Policy</Link>
+              <a href="https://aotms.in/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">Developed By: AOTMS</a>
             </div>
           </div>
         </motion.div>
