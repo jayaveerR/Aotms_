@@ -1,9 +1,9 @@
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { Logos3 } from "@/components/ui/logos3";
+import { Logos3 } from "@/components/courses/CourseLogos";
 import { AboutSection } from "@/components/AboutSection";
 import { LearningProcess } from "@/components/LearningProcess";
-import { CoursesSection } from "@/components/CoursesSection";
+import { ProfessionalPrograms } from "@/components/courses/ProfessionalPrograms";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { MentorsSection } from "@/components/MentorsSection";
 import { PlacementsSection } from "@/components/PlacementsSection";
@@ -20,10 +20,9 @@ const Index = () => {
       <AboutSection />
 
       <LearningProcess />
-      <CoursesSection />
+      <ProfessionalPrograms />
       <WhyChooseUs />
       <MentorsSection />
-      <PlacementsSection />
       <Testimonials />
       <FinalCTA />
       <Footer />

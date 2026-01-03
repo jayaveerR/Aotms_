@@ -1,8 +1,8 @@
 import React from 'react';
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { coursesData } from "@/data/courses";
-import { CourseCard } from "@/components/CourseCard";
+import { CourseCard } from "@/components/courses/CourseCard";
 
 const CoursesListing = () => {
   return (

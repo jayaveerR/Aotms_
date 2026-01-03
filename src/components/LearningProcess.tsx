@@ -86,10 +86,12 @@ export const LearningProcess = () => {
             Join today and follow this <span className="text-accent font-semibold">structured path</span> to your IT career
           </p>
           
-          <button className="btn-primary group">
-            Start Your Journey
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+           <div className="mt-12 md:mt-16 text-center">
+          <button  className="btn-secondary group inline-flex items-center bg-orange-500 text-white">
+             Start Your Journey <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </button>
+        </div>
+          
         </div>
       </div>
     </section>

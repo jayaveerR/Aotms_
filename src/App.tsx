@@ -12,6 +12,8 @@ import AboutUs from "./pages/AboutUs";           // New
 import Contact from "./pages/Contact";           // New
 import Blog from "./pages/Blog";                 // New
 import Placements from "./pages/Placements";     // New
+import Hackathon from "./pages/HackathonsPage";       // New
+import Workshop from "./pages/WorkshopsPage";       // New
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/placements" element={<Placements />} />   {/* New */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+          <Route path="/hackathon" element={<Hackathon />} />     {/* New */}
+          <Route path="/workshop" element={<Workshop />} />     {/* New */}
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

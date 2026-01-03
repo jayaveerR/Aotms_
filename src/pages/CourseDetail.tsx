@@ -20,10 +20,11 @@ import {
 import { coursesData, Course } from "@/data/courses";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { LogoCarousel, Logo } from "@/components/ui/logo-carousel";
+import { CourseCard } from "@/components/courses/CourseCard";
 import {
     SiPython, SiReact, SiNodedotjs, SiAmazonwebservices, SiDocker,
     SiGithub, SiVite, SiPandas, SiNumpy, SiScikitlearn, SiJupyter,
@@ -35,7 +36,7 @@ import {
     SiPytorch, SiKeras, SiOpencv, SiC, SiIntel
 } from "react-icons/si";
 
-const ToolIcons: Record<string, React.ComponentType<any>> = {
+const ToolIcons: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
     "Python": SiPython, "React": SiReact, "Node.js": SiNodedotjs, "AWS": SiAmazonwebservices, "Docker": SiDocker,
     "GitHub": SiGithub, "Vite": SiVite, "Pandas": SiPandas, "NumPy": SiNumpy, "Scikit": SiScikitlearn,
     "Jupyter": SiJupyter, "SQL": SiSqlite, "Tableau": SiTableau, "Azure": SiAmazonwebservices, "GCP": SiGooglecloud,
@@ -523,39 +524,7 @@ export default function CourseDetail() {
                             .filter(c => c.id !== course.id)
                             .slice(0, 3)
                             .map(relatedCourse => (
-                                <Link
-                                    key={relatedCourse.id}
-                                    to={`/course/${relatedCourse.slug}`}
-                                    className="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300"
-                                >
-                                    <div className="aspect-video relative overflow-hidden bg-[#0a192f] flex items-center justify-center p-4">
-                                        <img
-                                            src={relatedCourse.image}
-                                            alt={relatedCourse.title}
-                                            className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                        <div className="absolute top-3 left-3">
-                                            <span className="px-2 py-0.5 bg-white/95 backdrop-blur-sm text-blue-900 text-[10px] font-bold uppercase tracking-wider rounded-full">
-                                                {relatedCourse.category}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="p-6">
-                                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-                                            {relatedCourse.title}
-                                        </h3>
-                                        <p className="text-sm text-slate-500 line-clamp-2 mb-4">
-                                            {relatedCourse.description}
-                                        </p>
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-blue-900 font-bold">{relatedCourse.price}</span>
-                                            <span className="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-                                                Learn More
-                                                <ArrowRight className="w-3 h-3" />
-                                            </span>
-                                        </div>
-                                    </div>
-                                </Link>
+                                <CourseCard key={relatedCourse.id} course={relatedCourse} />
                             ))}
                     </div>
                 </div>

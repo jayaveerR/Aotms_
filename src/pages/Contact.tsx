@@ -1,116 +1,110 @@
 import React from 'react';
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Youtube, Instagram, Linkedin } from 'lucide-react';
 
+
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-      <main className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-10 section-heading">Contact Us</h1>
-        <p className="text-xl text-center text-muted-foreground mb-12 section-subheading">
-          We'd love to hear from you! Reach out to us for any queries or assistance.
-        </p>
+    <div className="min-h-screen bg-white">
+      <Header /><br /><br />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Contact Form */}
-          <section className="bg-card p-8 rounded-lg shadow-md border border-border/50">
-            <h2 className="text-3xl font-bold mb-6 section-heading">Send Us a Message</h2>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Name
-                </label>
-                <Input type="text" id="name" placeholder="Your Name" />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Email
-                </label>
-                <Input type="email" id="email" placeholder="your@example.com" />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Phone Number
-                </label>
-                <Input type="tel" id="phone" placeholder="+91 XXXXXXXXXX" />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Message
-                </label>
-                <Textarea id="message" rows={5} placeholder="Your message..." />
-              </div>
-              <Button type="submit" className="w-full">
-                Send Message
-              </Button>
-            </form>
-          </section>
 
-          {/* Contact Information */}
-          <section className="bg-card p-8 rounded-lg shadow-md border border-border/50">
-            <h2 className="text-3xl font-bold mb-6 section-heading">Our Contact Details</h2>
-            <div className="space-y-6">
-              {/* Phone Numbers */}
+      <main className="container mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            {/* Contact Information */}
+            <div className="space-y-12">
               <div>
-                <h3 className="text-xl font-semibold mb-2">Phone</h3>
-                <div className="flex items-center space-x-2 text-muted-foreground">
-                  <Phone className="w-5 h-5 text-primary" />
-                  <span>+91 8019942233</span>
-                </div>
-                <div className="flex items-center space-x-2 text-muted-foreground">
-                  <Phone className="w-5 h-5 text-primary" />
-                  <span>+91 80199 52233</span>
-                </div>
-                <div className="flex items-center space-x-2 text-muted-foreground">
-                  <Phone className="w-5 h-5 text-primary" />
-                  <span>+91 80199 62233</span>
+                <h2 className="text-sm font-black text-blue-600 uppercase tracking-widest mb-6">Our Offices</h2>
+                <div className="space-y-8">
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
+                      <MapPin className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900 mb-1">Corporate HQ</h3>
+                      <p className="text-slate-500 leading-relaxed">
+                        40-1-140/2, 2nd Floor, MG Road, VJA - 10<br />
+                        Opp. Lucky shopping mall, DV manor
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0">
+                      <MapPin className="w-6 h-6 text-slate-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900 mb-1">Training Annex</h3>
+                      <p className="text-slate-500 leading-relaxed">
+                        Pothuri Towers, 2nd Floor, MG Road<br />
+                        Near DV manor, VJA - 10
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Email */}
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Email</h3>
-                <div className="flex items-center space-x-2 text-muted-foreground">
-                  <Mail className="w-5 h-5 text-primary" />
-                  <span>info@aotms.com</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-slate-100">
+                <div>
+                  <h2 className="text-sm font-black text-blue-600 uppercase tracking-widest mb-4">Direct Contact</h2>
+                  <div className="space-y-3">
+                    <a href="tel:+918019942233" className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
+                      <Phone className="w-4 h-4" />
+                      <span className="font-semibold">+91 80199 42233</span>
+                    </a>
+                    <a href="mailto:info@aotms.com" className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
+                      <Mail className="w-4 h-4" />
+                      <span className="font-semibold">info@aotms.com</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
-
-              {/* Addresses */}
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Addresses</h3>
-                <div className="flex items-start space-x-2 text-muted-foreground mb-2">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span>40-1-140/2, 2nd Floor, MG Road, opp. Lucky shopping mall, DV manor, VJA - 10</span>
-                </div>
-                <div className="flex items-start space-x-2 text-muted-foreground">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span>Pothuri Towers, 2nd Floor, MG Road, Near DV manor, VJA - 10</span>
-                </div>
-              </div>
-
-              {/* Social Media */}
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Follow Us</h3>
-                <div className="flex space-x-4">
-                  <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Youtube className="w-6 h-6" />
-                  </a>
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Instagram className="w-6 h-6" />
-                  </a>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Linkedin className="w-6 h-6" />
-                  </a>
+                <div>
+                  <h2 className="text-sm font-black text-blue-600 uppercase tracking-widest mb-4">Follow Us</h2>
+                  <div className="flex gap-3">
+                    {[Youtube, Instagram, Linkedin].map((Icon, i) => (
+                      <a key={i} href="#" className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                        <Icon className="w-5 h-5" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </section>
+
+            {/* Contact Form */}
+            <div className="bg-white p-8 md:p-10 rounded-[32px] border border-slate-100 shadow-2xl shadow-slate-200/50">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">Send a Message</h2>
+              <p className="text-slate-500 mb-8">We usually respond within 24 hours.</p>
+
+              <form className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Full Name</label>
+                    <Input className="bg-slate-50 border-none h-12 px-4 rounded-xl focus-visible:ring-blue-600" placeholder="John Doe" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Email Address</label>
+                    <Input className="bg-slate-50 border-none h-12 px-4 rounded-xl focus-visible:ring-blue-600" placeholder="john@example.com" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Phone Number</label>
+                  <Input className="bg-slate-50 border-none h-12 px-4 rounded-xl focus-visible:ring-blue-600" placeholder="+91 XXXXXXXXXX" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Message</label>
+                  <Textarea className="bg-slate-50 border-none px-4 py-3 rounded-xl focus-visible:ring-blue-600 min-h-[120px]" placeholder="How can we help you?" />
+                </div>
+                <Button className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xl shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                  Send Message
+                </Button>
+              </form>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />
