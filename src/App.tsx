@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import CourseDetail from "./pages/CourseDetail";
 import NotFound from "./pages/NotFound";
-import CoursesListing from "./pages/CoursesListing"; // New
+
 import WhatWeDo from "./pages/WhatWeDo";         // New
 import AboutUs from "./pages/AboutUs";           // New
 import Contact from "./pages/Contact";           // New
@@ -25,7 +25,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/courses" element={<CoursesListing />} /> {/* New */}
+
           <Route path="/course/:slug" element={<CourseDetail />} />
           <Route path="/what-we-do" element={<WhatWeDo />} />     {/* New */}
           <Route path="/about-us" element={<AboutUs />} />       {/* New */}

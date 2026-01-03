@@ -36,7 +36,7 @@ const navLinks = [
   },
   { name: "Workshop", href: "/workshop" },
   { name: "Hackathon", href: "/hackathon", hashDropdown: true, dropdownItems: hackathons },
-  { name: "Courses", href: "/courses", hasDropdown: true, dropdownItems: courses },
+  { name: "Courses", href: "/#courses", hasDropdown: true, dropdownItems: courses },
   {
     name: "About Us", href: "/about-us", hasDropdown: true, dropdownItems: [
       { name: "Blog", href: "/blog" }
@@ -193,6 +193,7 @@ export const Header = () => {
               <img src={logo} alt="TechVarsity" className="transition-all duration-300 h-11" />
             </Link>
 
+
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
@@ -244,6 +245,50 @@ export const Header = () => {
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
+              {/* Mobile Profile Icon */}
+              <div className="lg:hidden relative">
+                <button
+                  onClick={() => isLoggedIn ? setIsProfileOpen(!isProfileOpen) : setShowAuthModal(true)}
+                  className="p-2 hover:text-blue-600 transition-colors"
+                  aria-label="Profile"
+                >
+                  <User className="w-6 h-6" />
+                </button>
+
+                {/* Mobile Profile Card Dropdown */}
+                <AnimatePresence>
+                  {isLoggedIn && isProfileOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                      className="absolute right-0 mt-2 w-[280px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-5 z-[100]"
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                          <User className="w-6 h-6" />
+                        </div>
+                        <div className="overflow-hidden">
+                          <p className="text-sm font-black text-slate-900 truncate">{user?.name}</p>
+                          <p className="text-xs text-slate-500 font-medium truncate">{user?.email}</p>
+                        </div>
+                      </div>
+                      <div className="grid gap-2">
+                        <button className="w-full py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl font-bold text-xs transition-colors">
+                          Dashbord
+                        </button>
+                        <button
+                          onClick={logout}
+                          className="w-full py-2.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-xl font-bold text-xs transition-colors flex items-center justify-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" /> Sign Out
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <Link to="/cart" className="p-2 relative hover:text-primary transition-colors duration-200">
                 <ShoppingCart className="w-6 h-6" />
                 <span className="absolute top-0 right-0 w-4 h-4 bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
@@ -283,6 +328,7 @@ export const Header = () => {
               <button
                 onClick={() => setShowAuthModal(false)}
                 className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-50 transition-colors text-slate-400"
+                title="Close"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -571,4 +617,3 @@ export const Header = () => {
     </>
   );
 };
- 

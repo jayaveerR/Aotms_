@@ -50,10 +50,10 @@ export const HeroSection = () => {
             <div
               className="flex flex-col sm:flex-row gap-3"
             >
-              <Link to="/courses" className="btn-primary group flex items-center justify-center gap-2 text-sm px-5 py-2.5">
+              <a href="#courses" className="btn-primary group flex items-center justify-center gap-2 text-sm px-5 py-2.5">
                 Start Your Journey
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
               <button className="btn-secondary group flex items-center justify-center gap-2 text-sm px-5 py-2.5">
                 <PlayCircle className="w-4 h-4 text-accent" />
                 Free Demo Class

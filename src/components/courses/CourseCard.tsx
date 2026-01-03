@@ -80,20 +80,31 @@ export const CourseCard = ({ course }: CourseCardProps) => {
                             )}
                         </div>
 
-                        <button
-                            onClick={() => addToCart({
-                                id: course.id,
-                                title: course.title,
-                                price: parseInt(course.price.replace(/[^\d]/g, '')),
-                                image: course.image
-                            })}
-                            className={cn(
-                                "h-12 md:h-14 w-full rounded-[12px] md:rounded-[14px] font-bold text-sm md:text-base transition-all duration-200",
-                                "bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 active:scale-[0.97]"
-                            )}
-                        >
-                            Add to Cart
-                        </button>
+                        <div className="grid grid-cols-2 gap-3">
+                            <Link
+                                to={`/course/${course.slug}`}
+                                className={cn(
+                                    "flex items-center justify-center h-12 md:h-13 rounded-xl font-bold text-xs md:text-sm transition-all duration-200",
+                                    "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 active:scale-[0.97]"
+                                )}
+                            >
+                                Explore
+                            </Link>
+                            <button
+                                onClick={() => addToCart({
+                                    id: course.id,
+                                    title: course.title,
+                                    price: parseInt(course.price.replace(/[^\d]/g, '')),
+                                    image: course.image
+                                })}
+                                className={cn(
+                                    "flex items-center justify-center h-12 md:h-13 rounded-xl font-bold text-xs md:text-sm transition-all duration-200",
+                                    "bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 active:scale-[0.97]"
+                                )}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ const WorkshopsPage = () => {
     return (
         <div className="bg-white min-h-screen">
             <Header />
-            <main className="pt-24 md:pt-32 pb-24 md:pb-20 lg:pb-20">
+            <main className="pt-24 md:pt-32 pb-36 md:pb-20 lg:pb-20">
                 <EventManager
                     events={workshops}
                     onRegister={handleRegister}

@@ -41,18 +41,6 @@ const Placements = () => {
                 </div>
             </section>
 
-            {/* Masonry Layout Section */}
-            <section className="py-20 bg-white">
-                <div className="container mx-auto px-4 box-content min-h-[800px]">
-                    <Masonry
-                        items={masonryItems}
-                        animateFrom="bottom"
-                        stagger={0.08}
-                        hoverScale={0.98}
-                        colorShiftOnHover={true}
-                    />
-                </div>
-            </section>
 
             {/* Bottom Spacing before Footer */}
             <div className="py-20" />

@@ -85,7 +85,7 @@ export const MentorsSection = () => {
               layoutId={`card-${mentor.id}`}
               onClick={() => setSelectedMentor(mentor)}
               className="group cursor-pointer relative overflow-hidden rounded-[18px] transition-all duration-300 active:scale-[0.98] hover:-translate-y-1 hover:shadow-lg
-                w-[220px] h-[300px] sm:w-[200px] sm:h-[280px] md:w-[220px] md:h-[300px] lg:w-[240px] lg:h-[340px] xl:w-[240px] xl:h-[340px] max-w-[220px] w-full"
+                w-full max-w-[280px] h-[340px] sm:max-w-[220px] sm:h-[300px] md:max-w-[240px] md:h-[340px]"
             >
               {/* Person Photo (FULL CARD) */}
               <motion.img
@@ -96,101 +96,129 @@ export const MentorsSection = () => {
               />
 
               {/* BLUR OVERLAY INFO SECTION */}
-              <div className="absolute inset-x-0 bottom-0 h-[30%] p-4 flex flex-col justify-end z-10
-                backdrop-blur-sm bg-white/30 bg-gradient-to-t from-white/80 to-transparent rounded-b-[18px]
-                transition-all duration-300 group-hover:bg-white/50 group-hover:from-white/90">
-                <h3 className="text-black font-bold text-lg mb-1">
+              <div className="absolute inset-x-0 bottom-0 h-[35%] p-4 flex flex-col justify-end z-10
+                backdrop-blur-md bg-white/40 bg-gradient-to-t from-white/90 to-transparent rounded-b-[18px]
+                transition-all duration-300 group-hover:bg-white/60">
+                <h3 className="text-slate-900 font-bold text-lg mb-0.5 leading-tight">
                   {mentor.name}
                 </h3>
-                <p className="text-blue-600 text-sm mb-1">
+                <p className="text-blue-600 text-xs font-bold uppercase tracking-wider mb-1">
                   {mentor.specialty}
                 </p>
-                <p className="text-gray-600 text-xs">
+                <div className="flex items-center gap-1.5 text-slate-500 text-[10px] font-bold">
+                  <Briefcase className="w-3 h-3" />
                   {mentor.experience}
-                </p>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-12 md:mt-16 text-center">
-          <Link to="/courses" className="btn-secondary group inline-flex items-center">
-            Explore Our Courses <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-
         <AnimatePresence>
           {selectedMentor && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center">
+            <div className="fixed inset-0 z-[40] flex flex-col items-center justify-center md:justify-center p-4 md:p-6 overflow-hidden">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedMentor(null)}
-                className="absolute inset-0 bg-background/50 backdrop-blur-md"
+                className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
               />
+
+              <div className="md:hidden h-20 w-full shrink-0" /> {/* Navbar Space on Mobile */}
 
               <motion.div
                 layoutId={`card-${selectedMentor.id}`}
-                className="relative bg-card w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden pointer-events-auto border border-border/50"
+                className="relative bg-white w-full max-w-4xl max-h-[calc(92vh-80px)] md:max-h-[92vh] rounded-[32px] shadow-2xl flex flex-col overflow-hidden pointer-events-auto border border-slate-100"
               >
-                <div className="w-full md:w-2/5 h-64 md:h-auto relative">
-                  <motion.img
-                    layoutId={`image-${selectedMentor.id}`}
-                    src={selectedMentor.image}
-                    alt={selectedMentor.name}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Mobile Header Bar - Fixes the "navbar --- image information" requirement */}
+                <div className="md:hidden flex items-center justify-between px-6 py-4 border-b border-slate-50 shrink-0 bg-white z-20">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Expert Profile</span>
+                  <button
+                    onClick={() => setSelectedMentor(null)}
+                    className="p-2 -mr-2 text-slate-400 hover:text-slate-600 transition-colors"
+                    aria-label="Close Profile"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
                 </div>
 
-                <div className="w-full md:w-3/5 flex flex-col overflow-y-auto custom-scrollbar">
-                  <div className="p-6 sm:p-8 flex-grow">
-                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-                      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                        {selectedMentor.name}
-                      </h2>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-4">
-                        <p className="text-base font-semibold text-primary">{selectedMentor.role}</p>
-                        <div className="flex items-center gap-2 text-muted-foreground text-sm"><Briefcase className="w-4 h-4" />{selectedMentor.experience}</div>
-                      </div>
-                    </motion.div>
-
-                    <motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="text-muted-foreground leading-relaxed text-sm mb-6">
-                      {selectedMentor.bio}
-                    </motion.p>
-
-                    <div className="space-y-6">
-                      <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
-                        <h4 className="font-semibold text-foreground mb-2">Expertise</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedMentor.skills.map((skill) => (
-                            <span key={skill} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-
-                      <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
-                        <h4 className="font-semibold text-foreground mb-3">Key Highlights</h4>
-                        <div className="space-y-2">
-                          {selectedMentor.highlights.map((highlight, idx) => (
-                            <div key={idx} className="flex items-start gap-3">
-                              <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                              <span className="text-sm text-muted-foreground">{highlight}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </div>
+                <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden custom-scrollbar">
+                  {/* Image Section */}
+                  <div className="w-full md:w-[40%] h-72 sm:h-80 md:h-auto relative shrink-0">
+                    <motion.img
+                      layoutId={`image-${selectedMentor.id}`}
+                      src={selectedMentor.image}
+                      alt={selectedMentor.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent md:hidden" />
                   </div>
 
-                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="p-6 sm:p-8 border-t border-border/50 bg-secondary/50 flex flex-col sm:flex-row items-center gap-4">
-                    <button className="btn-primary w-full sm:w-auto">Book a Session <ArrowRight className="w-4 h-4 ml-2" /></button>
-                    <button className="btn-secondary w-full sm:w-auto"><Linkedin className="w-4 h-4 mr-2" /> View Profile</button>
-                  </motion.div>
+                  {/* Information Section */}
+                  <div className="w-full md:w-[60%] flex flex-col md:overflow-y-auto overflow-x-hidden custom-scrollbar">
+                    <div className="p-6 sm:p-10 flex-grow">
+                      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                        <span className="text-blue-600 font-bold text-[10px] uppercase tracking-widest block mb-2">{selectedMentor.specialty}</span>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-2 leading-tight">
+                          {selectedMentor.name}
+                        </h2>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6">
+                          <p className="text-sm font-bold text-slate-500 bg-slate-50 px-3 py-1 rounded-lg border border-slate-100">{selectedMentor.role}</p>
+                          <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-wider"><Briefcase className="w-4 h-4 text-blue-600" />{selectedMentor.experience} Experience</div>
+                        </div>
+                      </motion.div>
+
+                      <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-slate-500 leading-relaxed text-sm mb-8 font-medium italic">
+                        "{selectedMentor.bio}"
+                      </motion.p>
+
+                      <div className="space-y-8">
+                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Core Expertise</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedMentor.skills.map((skill) => (
+                              <span key={skill} className="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl text-xs font-bold border border-blue-100">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </motion.div>
+
+                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                          <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Career Highlights</h4>
+                          <div className="space-y-3">
+                            {selectedMentor.highlights.map((highlight, idx) => (
+                              <div key={idx} className="flex items-start gap-3">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                                <span className="text-sm text-slate-600 font-medium">{highlight}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      </div>
+                    </div>
+
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="p-6 sm:p-10 border-t border-slate-50 bg-slate-50/50 flex flex-col sm:flex-row items-center gap-4">
+                      <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Book a Session <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <button className="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-600 font-bold text-sm rounded-2xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
+                        <Linkedin className="w-4 h-4" /> View Profile
+                      </button>
+                    </motion.div>
+                  </div>
                 </div>
-                <button onClick={() => setSelectedMentor(null)} className="absolute top-4 right-4 w-8 h-8 bg-card/50 hover:bg-card/90 rounded-full flex items-center justify-center backdrop-blur-sm z-20"><X className="w-5 h-5 text-foreground" /></button>
+
+                {/* Desktop Global Close Button */}
+                <button
+                  onClick={() => setSelectedMentor(null)}
+                  className="hidden md:flex absolute top-6 right-6 w-10 h-10 bg-white/90 hover:bg-white rounded-full items-center justify-center shadow-xl border border-slate-100 z-50 text-slate-900 transition-all hover:rotate-90"
+                  aria-label="Close Profile"
+                  title="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </motion.div>
             </div>
           )}

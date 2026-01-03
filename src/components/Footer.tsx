@@ -38,7 +38,7 @@ const socialLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="relative bg-primary text-primary-foreground pt-12 sm:pt-16 md:pt-24 pb-32 sm:pb-12 overflow-hidden border-t border-primary-foreground/10">
+    <footer className="relative bg-primary text-primary-foreground pt-12 sm:pt-16 md:pt-24 pb-48 sm:pb-12 overflow-hidden border-t border-primary-foreground/10">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-foreground/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-black/10 rounded-full blur-[100px] pointer-events-none" />
