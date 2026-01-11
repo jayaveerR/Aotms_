@@ -5,10 +5,16 @@ import { Footer } from "@/components/Footer";
 import { blogPostsData } from "@/data/blogPosts";
 import { BlogPostCard } from "@/components/BlogPostCard";
 import { BlogSidebar } from "@/components/BlogSidebar";
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      <Helmet>
+        <title>Tech Blog & Insights | Academy of Tech Masters</title>
+        <meta name="description" content="Stay updated with the latest tech trends, career advice, and success stories from the Academy of Tech Masters blog." />
+        <link rel="canonical" href="https://aotms.com/blog" />
+      </Helmet>
       <Header />
 
       {/* Premium Hero Section */}

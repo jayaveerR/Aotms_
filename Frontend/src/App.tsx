@@ -4,28 +4,35 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion, useMotionValue } from "framer-motion";
-import { useEffect } from "react";
-import Index from "./pages/Index";
+import { useEffect, Suspense, lazy } from "react";
 
-import CourseDetail from "./pages/CourseDetail";
-import NotFound from "./pages/NotFound";
+// Lazy Load Pages
+const Index = lazy(() => import("./pages/Index"));
+const CourseDetail = lazy(() => import("./pages/CourseDetail"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const WhatWeDo = lazy(() => import("./pages/WhatWeDo"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Placements = lazy(() => import("./pages/Placements"));
+const Hackathon = lazy(() => import("./pages/HackathonsPage"));
+const Workshop = lazy(() => import("./pages/WorkshopsPage"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
+const Winners = lazy(() => import("./pages/HackathonWinnersPage"));
+const FAQPage = lazy(() => import("./pages/FAQPage"));
 
-import WhatWeDo from "./pages/WhatWeDo";         // New
-import AboutUs from "./pages/AboutUs";           // New
-import Contact from "./pages/Contact";           // New
-import Blog from "./pages/Blog";                 // New
-import Placements from "./pages/Placements";     // New
-import Hackathon from "./pages/HackathonsPage";       // New
-import Workshop from "./pages/WorkshopsPage";       // New
-import Cart from "./pages/Cart";                     // New
-import Dashboard from "./pages/Dashboard";           // New
-
-import ResetPassword from "./pages/ResetPassword"; // New
-import Winners from "./pages/HackathonWinnersPage";    // New
-import FAQPage from "./pages/FAQPage";               // New
 import Chatbot from "./components/Chatbot";
 
 const queryClient = new QueryClient();
+
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-screen bg-slate-50">
+    <div className="w-16 h-16 border-4 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
+  </div>
+);
 
 const CustomCursor = () => {
   const mouseX = useMotionValue(-100);
@@ -69,25 +76,26 @@ const App = () => (
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-
-          <Route path="/course/:slug" element={<CourseDetail />} />
-          <Route path="/what-we-do" element={<WhatWeDo />} />     {/* New */}
-          <Route path="/about-us" element={<AboutUs />} />       {/* New */}
-          <Route path="/contact" element={<Contact />} />         {/* New */}
-          <Route path="/blog" element={<Blog />} />               {/* New */}
-          <Route path="/placements" element={<Placements />} />   {/* New */}
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/hackathon" element={<Hackathon />} />     {/* New */}
-          <Route path="/workshop" element={<Workshop />} />     {/* New */}
-          <Route path="/dashboard" element={<Dashboard />} />    {/* New */}
-          <Route path="/winners" element={<Winners />} />      {/* New */}
-          <Route path="/reset-password" element={<ResetPassword />} />  {/* New path for query param */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/course/:slug" element={<CourseDetail />} />
+            <Route path="/what-we-do" element={<WhatWeDo />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/feedback" element={<FeedbackPage />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/placements" element={<Placements />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/hackathon" element={<Hackathon />} />
+            <Route path="/workshop" element={<Workshop />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/winners" element={<Winners />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

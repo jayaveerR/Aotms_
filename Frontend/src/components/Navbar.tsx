@@ -4,7 +4,7 @@ import {
   Menu, X, ChevronDown, Phone, Mail,
   User, LogOut, Eye, EyeOff, KeyRound, ArrowLeft,
   GraduationCap, Smartphone, Trophy, Calendar, Laptop, Building2,
-  LogIn, UserPlus, BookOpen, HelpCircle
+  LogIn, UserPlus, BookOpen, HelpCircle, MessageSquare
 } from "lucide-react";
 import {
   FaReact, FaAws, FaBrain, FaChartBar, FaShieldAlt,
@@ -73,6 +73,7 @@ const navLinks = [
     dropdownItems: [
       { name: "Blog", href: "/blog", icon: FaCloud, desc: "Tech insights" },
       { name: "FAQ", href: "/faq", icon: HelpCircle, desc: "Common questions" },
+      { name: "Feedback", href: "/feedback", icon: MessageSquare, desc: "Share your thoughts" },
       { name: "Contact", href: "/contact", icon: Mail, desc: "Get in touch" },
     ]
   },

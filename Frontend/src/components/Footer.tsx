@@ -6,10 +6,11 @@ import logo from "@/assets/logo.png";
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about-us" },
-  { name: "Resources", href: "/what-we-do#resources" },
+  { name: "Resources", href: "#" },
   { name: "Contact Us", href: "/contact" },
   { name: "Blog", href: "/blog" },
   { name: "FAQ", href: "/FAQ" },
+  { name: "Feedback", href: "/feedback" },
   { name: "Terms & Conditions", href: "/terms" },
 ];
 
