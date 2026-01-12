@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 const Placements = () => {
     const { data: students, isLoading } = useStudentPlacements();
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -147,21 +148,21 @@ const Placements = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="flex gap-8 md:gap-12 pb-2 bg-white/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm"
+                            className="flex gap-4 md:gap-12 pb-2 bg-white/50 backdrop-blur-sm p-3 md:p-4 rounded-2xl border border-slate-200/50 shadow-sm"
                         >
-                            <div className="text-center md:text-left">
-                                <div className="text-2xl md:text-3xl font-black text-slate-900">500+</div>
-                                <div className="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Career Transition Supported</div>
+                            <div className="text-center md:text-left flex-1 md:flex-none">
+                                <div className="text-xl md:text-3xl font-black text-slate-900">500+</div>
+                                <div className="text-[8px] md:text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Career Transition Supported</div>
                             </div>
                             <div className="w-px h-auto bg-slate-200" />
-                            <div className="text-center md:text-left">
-                                <div className="text-2xl md:text-3xl font-black text-slate-900">50+</div>
-                                <div className="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Industry Connections</div>
+                            <div className="text-center md:text-left flex-1 md:flex-none">
+                                <div className="text-xl md:text-3xl font-black text-slate-900">50+</div>
+                                <div className="text-[8px] md:text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Industry Connections</div>
                             </div>
                             <div className="w-px h-auto bg-slate-200" />
-                            <div className="text-center md:text-left">
-                                <div className="text-2xl md:text-3xl font-black text-slate-900">100%</div>
-                                <div className="text-[10px] md:text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Placement Support For Eligible Students</div>
+                            <div className="text-center md:text-left flex-1 md:flex-none">
+                                <div className="text-xl md:text-3xl font-black text-slate-900">100%</div>
+                                <div className="text-[8px] md:text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Placement Support</div>
                             </div>
                         </motion.div>
                     </div>

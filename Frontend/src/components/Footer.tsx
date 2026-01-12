@@ -38,10 +38,10 @@ export const Footer = () => {
     <footer className="bg-[#0066CC] pt-10 pb-6 md:pt-14 md:pb-8 border-t border-white/20 font-sans text-white relative z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-2">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
 
           {/* Column 1: Brand & Contact (Span 3) */}
-          <div className="md:col-span-2 lg:col-span-3 space-y-4">
+          <div className="col-span-2 md:col-span-2 lg:col-span-3 space-y-4">
             <div className="flex items-center justify-between lg:block">
               <Link to="/" className="inline-block bg-white p-3 rounded-2xl shadow-md transform transition-transform hover:scale-105">
                 <img src={logo} alt="AOTMS Logo" className="h-10 md:h-14 w-auto" />
@@ -87,7 +87,7 @@ export const Footer = () => {
           </div>
 
           {/* Column 2: Company (Span 2) */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-3">Company</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
@@ -104,9 +104,9 @@ export const Footer = () => {
           </div>
 
           {/* Column 3: Courses (Span 4) */}
-          <div className="lg:col-span-4">
+          <div className="col-span-1 lg:col-span-4">
             <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-3">Trending Courses</h4>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
               {courses.map((course) => (
                 <li key={course.name}>
                   <Link

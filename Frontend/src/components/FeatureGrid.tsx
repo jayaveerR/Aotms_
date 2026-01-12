@@ -32,8 +32,8 @@ const features: Feature[] = [
 
 export const FeatureGrid = () => {
     return (
-        <div className="w-full">
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-7xl mx-auto">
+        <div className="w-full px-4 md:px-0">
+            <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3 md:gap-6 max-w-7xl mx-auto">
                 {features.map((feature, index) => {
                     const isLast = index === features.length - 1;
                     return (
@@ -45,22 +45,22 @@ export const FeatureGrid = () => {
                             transition={{ delay: index * 0.05 }}
                             whileHover={{ scale: 1.05 }}
                             className={cn(
-                                "flex items-center gap-4 py-3 px-6 rounded-full shadow-lg transition-all duration-300 cursor-default group",
+                                "flex items-center gap-2 md:gap-4 py-2.5 md:py-3 px-4 md:px-6 rounded-2xl md:rounded-full shadow-lg transition-all duration-300 cursor-default group",
                                 isLast
                                     ? "bg-[#ff7a2d] text-white shadow-orange-500/20"
                                     : "bg-white text-slate-800 shadow-black/5 border border-white/20 hover:bg-[#ff7a2d] hover:text-white"
                             )}
                         >
                             <div className={cn(
-                                "w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300",
+                                "w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300",
                                 isLast ? "bg-white/20" : "bg-blue-50 group-hover:bg-white/20"
                             )}>
                                 <feature.icon className={cn(
-                                    "w-5 h-5 transition-colors duration-300",
+                                    "w-4 h-4 md:w-5 md:h-5 transition-colors duration-300",
                                     isLast ? "text-white" : "text-blue-600 group-hover:text-white"
                                 )} />
                             </div>
-                            <span className="text-sm md:text-base font-bold whitespace-nowrap">
+                            <span className="text-[10px] sm:text-xs md:text-base font-bold leading-tight">
                                 {feature.title}
                             </span>
                         </motion.div>

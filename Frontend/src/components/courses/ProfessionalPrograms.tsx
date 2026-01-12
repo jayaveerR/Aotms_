@@ -5,6 +5,7 @@ import { CourseCard } from "./CourseCard";
 import { Badge } from "@/components/ui/badge";
 import { useCallback } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FeatureGrid } from "@/components/FeatureGrid";
 
 export const ProfessionalPrograms = () => {
     const { data: courses, isLoading } = useCourses();
@@ -55,6 +56,10 @@ export const ProfessionalPrograms = () => {
                         Accelerate your career with our industry-leading certification programs.
                         Designed by experts, delivered by professionals.
                     </p>
+
+                    <div className="mt-8 w-full max-w-5xl">
+                        <FeatureGrid />
+                    </div>
 
                     <div className="flex items-center gap-4 mt-6">
                         <button
