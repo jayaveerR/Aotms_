@@ -32,7 +32,7 @@ const fetchCourses = async (): Promise<Course[]> => {
 };
 
 const fetchCourseBySlug = async (slug: string): Promise<Course> => {
-  const { data } = await axios.get(`import.meta.env.VITE_API_URL/api/courses/${slug}`);
+  const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${slug}`);
   return data;
 };
 

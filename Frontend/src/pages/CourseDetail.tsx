@@ -124,6 +124,12 @@ const getCourseOutcomes = (category: string) => {
 };
 
 const getCourseTheme = (category: string) => {
+    if (!category) {
+        return {
+            color: "#FF6B35",
+            image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2706&auto=format&fit=crop",
+        };
+    }
     if (category.includes("Data") || category.includes("AI") || category.includes("Machine")) {
         return {
             color: "#3b82f6", // Blue-500

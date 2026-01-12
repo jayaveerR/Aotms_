@@ -16,6 +16,7 @@ interface CourseCardProps {
 }
 
 const getCourseIcon = (title: string) => {
+    if (!title) return FaCode;
     if (title.includes("Data Science")) return FaDatabase;
     if (title.includes("Cyber")) return FaShieldAlt;
     if (title.includes("Data Analytics")) return FaChartBar;
