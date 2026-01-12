@@ -3,11 +3,13 @@ import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { UpcomingHackathons } from "@/components/Hackathon/UpcomingHackathons";
 import { Calendar, Clock, Trophy, Target, CheckCircle2, Medal, Users } from "lucide-react";
-import axios from "axios";
+import { useWinners } from "@/hooks/useWinners";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Define locally to match backend shape
 interface EventItem {
     id: string;
+    _id?: string;
     name: string;
     description: string;
     thumbnailUrl: string;
@@ -20,25 +22,10 @@ interface EventItem {
     whatYouWillLearn?: string[];
 }
 
-interface WinnerTeam {
-    rank: number;
-    teamName: string;
-    collegeName: string;
-    members: string[];
-    prize: string;
-    imageUrl?: string;
-}
-
-interface HackathonWinnerData {
-    eventId: string;
-    eventName: string;
-    winners: WinnerTeam[];
-}
-
 const HackathonsPage = () => {
     const [selectedHackathon, setSelectedHackathon] = useState<EventItem | null>(null);
     const [viewMode, setViewMode] = useState<'details' | 'winners'>('details');
-    const [allWinners, setAllWinners] = useState<HackathonWinnerData[]>([]);
+    const { data: allWinners = [], isLoading: isLoadingWinners } = useWinners();
     const detailRef = useRef<HTMLDivElement>(null);
 
     // Auto-scroll to detail view on mobile when selection changes
@@ -51,19 +38,6 @@ const HackathonsPage = () => {
         }
     }, [selectedHackathon]);
 
-    // Fetch winners on mount
-    useEffect(() => {
-        const fetchWinners = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/winners`);
-                setAllWinners(res.data);
-            } catch (error) {
-                console.error("Failed to fetch winners:", error);
-            }
-        };
-        fetchWinners();
-    }, []);
-
     const handleRegister = () => {
         if (selectedHackathon?.registrationLink) {
             window.open(selectedHackathon.registrationLink, '_blank');
@@ -73,7 +47,7 @@ const HackathonsPage = () => {
     };
 
     const currentWinners = selectedHackathon
-        ? allWinners.find(w => w.eventId === selectedHackathon.id)?.winners
+        ? allWinners.find(w => w.eventId === (selectedHackathon.id || selectedHackathon._id))?.winners
         : null;
 
     return (

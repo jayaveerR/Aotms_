@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-interface DifferenceItem {
-  _id: string;
-  title: string;
-  description: string;
-  image: string;
-}
+import { useMemo } from "react";
+import { useAcademyDifference } from "@/hooks/useAcademyDifference";
+import { Skeleton } from "./ui/skeleton";
 
 const fallbackReasons = [
   {
@@ -31,25 +25,29 @@ const fallbackReasons = [
 ];
 
 export const WhyChooseUs = () => {
-  const [reasons, setReasons] = useState<DifferenceItem[]>(fallbackReasons);
+    const { data: rawReasons, isLoading } = useAcademyDifference();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/academy-difference`);
-        if (res.data && res.data.length > 0) {
-          setReasons(res.data);
-        } else {
-          // Attempt to seed if empty (optional auto-seed from frontend, or just valid fallback)
-          // For now, we utilize fallback if empty to prevent broken UI
-        }
-      } catch (error) {
-        console.error("Failed to fetch Academy Difference data", error);
-      }
-    };
+    const reasons = useMemo(() => {
+        if (!rawReasons || rawReasons.length === 0) return fallbackReasons;
+        return rawReasons;
+    }, [rawReasons]);
 
-    fetchData();
-  }, []);
+    if (isLoading) {
+        return (
+            <div className="py-20 container mx-auto px-4 text-center">
+                <Skeleton className="h-10 w-64 mx-auto mb-10" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="flex flex-col items-center">
+                            <Skeleton className="w-[230px] h-[230px] rounded-full mb-8" />
+                            <Skeleton className="h-6 w-32 mb-3" />
+                            <Skeleton className="h-4 w-48" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
 
   return (
     <section className="pt-4 md:pt-10 pb-12 md:pb-20 bg-background relative overflow-hidden">

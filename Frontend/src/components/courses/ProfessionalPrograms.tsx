@@ -5,7 +5,6 @@ import { CourseCard } from "./CourseCard";
 import { Badge } from "@/components/ui/badge";
 import { useCallback } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { FeatureGrid } from "@/components/FeatureGrid";
 
 export const ProfessionalPrograms = () => {
     const { data: courses, isLoading } = useCourses();
@@ -49,17 +48,13 @@ export const ProfessionalPrograms = () => {
                         <Sparkles className="w-3.5 h-3.5 mr-2 fill-current" />
                         World Class Education
                     </Badge>
-                    <h2 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight mb-4 max-w-5xl">
+                    <h2 className="text-2xl md:text-6xl font-black text-slate-900 tracking-tighter mb-5 whitespace-nowrap overflow-hidden text-ellipsis">
                         Professional <span className="text-blue-600">Training Programs</span>
                     </h2>
                     <p className="text-sm md:text-base text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
                         Accelerate your career with our industry-leading certification programs.
                         Designed by experts, delivered by professionals.
                     </p>
-
-                    <div className="mt-8 w-full max-w-5xl">
-                        <FeatureGrid />
-                    </div>
 
                     <div className="flex items-center gap-4 mt-6">
                         <button

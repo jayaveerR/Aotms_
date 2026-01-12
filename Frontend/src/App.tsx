@@ -68,17 +68,30 @@ const CustomCursor = () => {
 
 import ScrollToTop from "./components/ScrollToTop";
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <CustomCursor />
-      <Chatbot />
-      <Toaster />
-      <Sonner />
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <ScrollToTop />
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
+const App = () => {
+  useEffect(() => {
+    // Backend Warm-up / Anti-Cold-Start ping
+    const warmUpBackend = async () => {
+      try {
+        await fetch(`${import.meta.env.VITE_API_URL}/api/health`).catch(() => {});
+      } catch (e) {
+        // Silent fail
+      }
+    };
+    warmUpBackend();
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <CustomCursor />
+        <Chatbot />
+        <Toaster />
+        <Sonner />
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <ScrollToTop />
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/course/:slug" element={<CourseDetail />} />
             <Route path="/what-we-do" element={<WhatWeDo />} />
@@ -103,6 +116,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;

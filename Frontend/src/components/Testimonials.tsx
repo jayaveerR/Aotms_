@@ -1,46 +1,42 @@
 import { TestimonialsColumn, Testimonial } from "@/components/ui/testimonials-columns-1";
 import { RatingBadge } from "@/components/foundations/rating-badge";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-interface FeedbackData {
-    _id: string;
-    name: string;
-    role: string;
-    message: string;
-    rating: number;
-}
+import { useMemo } from "react";
+import { useFeedback } from "@/hooks/useFeedback";
+import { Skeleton } from "./ui/skeleton";
 
 export const Testimonials = () => {
-    const [testimonials, setTestimonials] = useState<(Testimonial & { rating: number })[]>([]);
+    const { data: rawFeedback, isLoading } = useFeedback();
 
-    useEffect(() => {
-        const fetchFeedback = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/feedback`);
-                const mappedData = res.data.map((item: FeedbackData) => ({
-                    text: item.message,
-                    image: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=random&color=fff`,
-                    name: item.name,
-                    role: item.role || "Student",
-                    rating: item.rating
-                }));
-                // If no data, fall back to some static or keep empty. The user asked for "original data showing".
-                setTestimonials(mappedData);
-            } catch (error) {
-                console.error("Failed to fetch testimonials:", error);
-            }
-        };
-
-        fetchFeedback();
-    }, []);
+    const testimonials = useMemo(() => {
+        if (!rawFeedback) return [];
+        return rawFeedback.map((item) => ({
+            text: item.message,
+            image: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=random&color=fff`,
+            name: item.name,
+            role: item.role || "Student",
+            rating: item.rating
+        }));
+    }, [rawFeedback]);
 
     const firstColumn = testimonials.slice(0, Math.ceil(testimonials.length / 3));
     const secondColumn = testimonials.slice(Math.ceil(testimonials.length / 3), Math.ceil(2 * testimonials.length / 3));
     const thirdColumn = testimonials.slice(Math.ceil(2 * testimonials.length / 3));
 
-    if (testimonials.length === 0) return null; // Or return a loading state/placeholder
+    if (isLoading) {
+        return (
+            <div className="py-20 container mx-auto px-4 text-center">
+                <Skeleton className="h-10 w-64 mx-auto mb-8" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <Skeleton className="h-64 rounded-2xl" />
+                    <Skeleton className="h-64 rounded-2xl hidden md:block" />
+                    <Skeleton className="h-64 rounded-2xl hidden lg:block" />
+                </div>
+            </div>
+        );
+    }
+
+    if (testimonials.length === 0) return null;
 
     return (
         <section className="bg-background pt-4 md:pt-8 pb-8 md:pb-12 relative overflow-hidden">

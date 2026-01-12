@@ -12,6 +12,11 @@ app.use(cors({
     credentials: true
 }));
 
+// Health Check / Warm-up Endpoint
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'Server is warm' });
+});
+
 // DB Connection
 const connectDB = async () => {
     try {

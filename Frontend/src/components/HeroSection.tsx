@@ -1,19 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, PlayCircle, Users, Award, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CountUpNumber } from "./CountUpNumber";
-
-import axios from "axios";
-
-// Import Carousel Images (Fallback)
-
-
-const fallbackImages: string[] = [];
-
-interface HeroImage {
-  imageUrl: string;
-}
+import { useHeroSection } from "@/hooks/useHeroSection";
+import { Skeleton } from "./ui/skeleton";
 
 const trustStats = [
   { icon: Users, value: 2000, suffix: "+", label: "Students Trained" },
@@ -23,33 +14,19 @@ const trustStats = [
 
 export const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [heroImages, setHeroImages] = useState<string[]>(fallbackImages);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: heroImagesData, isLoading } = useHeroSection();
+
+  const heroImages = useMemo(() => {
+    return heroImagesData?.map(img => img.imageUrl) || [];
+  }, [heroImagesData]);
 
   useEffect(() => {
-    const fetchHeroImages = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/hero`);
-        if (res.data && res.data.length > 0) {
-          // Map backend objects to just image URLs
-          const urls = res.data.map((item: HeroImage) => item.imageUrl);
-          setHeroImages(urls);
-        }
-      } catch (error) {
-        console.error("Failed to fetch hero images", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchHeroImages();
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    if (heroImages.length > 0) {
+      const timer = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+      }, 4000);
+      return () => clearInterval(timer);
+    }
   }, [heroImages.length]);
 
   return (
@@ -149,11 +126,14 @@ export const HeroSection = () => {
               {/* Slider Container */}
               <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white/50 bg-slate-100">
                 <AnimatePresence mode="wait">
-                  {heroImages && heroImages.length > 0 ? (
+                  {isLoading ? (
+                    <Skeleton className="absolute inset-0 w-full h-full rounded-3xl" />
+                  ) : heroImages && heroImages.length > 0 ? (
                     <motion.img
                       key={currentImageIndex}
                       src={heroImages[currentImageIndex] || ""}
                       alt="Institute Gallery"
+                      loading="lazy"
                       initial={{ opacity: 0, scale: 1.1 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0 }}
