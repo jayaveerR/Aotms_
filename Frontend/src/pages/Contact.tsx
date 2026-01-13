@@ -4,7 +4,8 @@ import { Footer } from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Youtube, Instagram, Linkedin } from 'lucide-react';
+import { Phone, Mail, MapPin, Youtube, Instagram, Linkedin, Send } from 'lucide-react';
+import { FaXTwitter } from "react-icons/fa6";
 import axios from 'axios';
 import { toast } from 'sonner';
 
@@ -51,7 +52,7 @@ const Contact = () => {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="container mx-auto px-6 py-24 sm:py-32">
+      <main className="container mx-auto px-6 pt-48 pb-24">
         <div className="max-w-6xl mx-auto space-y-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Left Side: Get In Touch */}
@@ -109,7 +110,9 @@ const Contact = () => {
                       {[
                         { icon: Youtube, href: "https://youtube.com/@aotms" },
                         { icon: Instagram, href: "https://instagram.com/academyoftechmasters" },
-                        { icon: Linkedin, href: "https://linkedin.com" }
+                        { icon: Linkedin, href: "https://linkedin.com" },
+                        { icon: Send, href: "https://t.me/aotms" },
+                        { icon: FaXTwitter, href: "https://twitter.com/aotms" },
                       ].map((item, i) => (
                         <a
                           key={i}
@@ -128,64 +131,67 @@ const Contact = () => {
             </div>
 
             {/* Right Side: Contact Form */}
-            <div className="bg-white p-8 md:p-10 rounded-[32px] border border-slate-100 shadow-2xl shadow-slate-200/50 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] -z-0" />
-              <h2 className="text-2xl font-bold text-slate-900 mb-2 relative z-10">Send a Message</h2>
-              <p className="text-slate-500 mb-8 relative z-10">We usually respond within 24 hours.</p>
+            <div className="bg-gradient-to-br from-primary via-primary to-accent p-8 md:p-10 rounded-[32px] shadow-2xl shadow-primary/20 relative overflow-hidden border border-white/10">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 -z-0" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 -z-0" />
+
+              <h2 className="text-2xl font-bold text-white mb-2 relative z-10">Send a Message</h2>
+              <p className="text-blue-100/70 mb-8 relative z-10">We usually respond within 24 hours.</p>
 
               <form className="space-y-5 relative z-10" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Full Name</label>
+                    <label className="text-xs font-bold text-blue-200/80 uppercase tracking-wider ml-1">Full Name</label>
                     <Input
                       required
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="bg-slate-50 border-none h-12 px-4 rounded-xl focus-visible:ring-blue-600"
+                      className="bg-white/5 border-white/10 h-12 px-4 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 transition-all"
                       placeholder="John Doe"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Email Address</label>
+                    <label className="text-xs font-bold text-blue-200/80 uppercase tracking-wider ml-1">Email Address</label>
                     <Input
                       required
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="bg-slate-50 border-none h-12 px-4 rounded-xl focus-visible:ring-blue-600"
+                      className="bg-white/5 border-white/10 h-12 px-4 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Phone Number</label>
+                  <label className="text-xs font-bold text-blue-200/80 uppercase tracking-wider ml-1">Phone Number</label>
                   <Input
                     required
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="bg-slate-50 border-none h-12 px-4 rounded-xl focus-visible:ring-blue-600"
+                    className="bg-white/5 border-white/10 h-12 px-4 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 transition-all"
                     placeholder="+91 XXXXXXXXXX"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Message</label>
+                  <label className="text-xs font-bold text-blue-200/80 uppercase tracking-wider ml-1">Message</label>
                   <Textarea
                     required
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="bg-slate-50 border-none px-4 py-3 rounded-xl focus-visible:ring-blue-600 min-h-[120px]"
+                    className="bg-white/5 border-white/10 px-4 py-3 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 min-h-[120px] transition-all"
                     placeholder="How can we help you?"
                   />
                 </div>
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xl shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full h-14 bg-white hover:bg-gray-100 text-primary font-bold rounded-xl shadow-lg shadow-black/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   {loading ? 'Sending...' : 'Send Message'}
                 </Button>

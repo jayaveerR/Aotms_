@@ -220,7 +220,7 @@ export const AboutUs = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-slate-50">
+      <section className="relative pt-32 pb-12 md:pt-44 md:pb-20 lg:pt-48 lg:pb-24 overflow-hidden bg-slate-50">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
 
         {/* Background Blobs */}

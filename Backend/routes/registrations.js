@@ -20,4 +20,15 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Get registrations by email
+router.get('/:email', async (req, res) => {
+    try {
+        const registrations = await Registration.find({ email: req.params.email });
+        res.json(registrations);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

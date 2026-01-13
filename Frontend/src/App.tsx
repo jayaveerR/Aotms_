@@ -23,6 +23,9 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
 const Winners = lazy(() => import("./pages/HackathonWinnersPage"));
 const FAQPage = lazy(() => import("./pages/FAQPage"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const CoursesPage = lazy(() => import("./pages/CoursesPage"));
 
 import Chatbot from "./components/Chatbot";
 
@@ -66,12 +69,14 @@ const CustomCursor = () => {
 };
 
 import ScrollToTop from "./components/ScrollToTop";
+import { ScrollButtons } from "./components/ScrollButtons";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <CustomCursor />
       <Chatbot />
+      <ScrollButtons />
       <Toaster />
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -93,6 +98,9 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/winners" element={<Winners />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/courses" element={<CoursesPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

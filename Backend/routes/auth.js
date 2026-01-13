@@ -5,11 +5,19 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const {
+    registerValidation,
+    loginValidation,
+    emailValidation,
+    resetPasswordValidation,
+    validate
+} = require('../middleware/validation');
 
 // Register
-router.post('/register', async (req, res) => {
+router.post('/register', registerValidation, validate, async (req, res) => {
     try {
-        const { name, email, password, phone, qualification } = req.body;
+        console.log("🔍 REGISTER REQUEST BODY:", req.body);
+        const { name, email, password, phone, qualification, college, passoutYear } = req.body;
 
         // Check if user exists
         let user = await User.findOne({ email });
@@ -23,6 +31,8 @@ router.post('/register', async (req, res) => {
             password,
             phone,
             qualification,
+            college,
+            passoutYear,
             avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random` // Default avatar
         });
 
@@ -53,6 +63,8 @@ router.post('/register', async (req, res) => {
                         email: user.email,
                         phone: user.phone,
                         qualification: user.qualification,
+                        college: user.college,
+                        passoutYear: user.passoutYear,
                         avatar: user.avatar,
                         role: user.role
                     }
@@ -66,7 +78,7 @@ router.post('/register', async (req, res) => {
 });
 
 // Login
-router.post('/login', async (req, res) => {
+router.post('/login', loginValidation, validate, async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -116,7 +128,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Forgot Password
-router.post('/forgot-password', async (req, res) => {
+router.post('/forgot-password', emailValidation, validate, async (req, res) => {
     const { email } = req.body;
 
     try {
@@ -193,7 +205,7 @@ router.post('/forgot-password', async (req, res) => {
 });
 
 // Reset Password
-router.put('/reset-password/:resetToken', async (req, res) => {
+router.put('/reset-password/:resetToken', resetPasswordValidation, validate, async (req, res) => {
     try {
         const resetPasswordToken = crypto
             .createHash('sha256')

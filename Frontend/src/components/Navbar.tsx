@@ -4,13 +4,15 @@ import {
   Menu, X, ChevronDown, Phone, Mail,
   User, LogOut, Eye, EyeOff, KeyRound, ArrowLeft,
   GraduationCap, Smartphone, Trophy, Calendar, Laptop, Building2,
-  LogIn, UserPlus, BookOpen, HelpCircle, MessageSquare
+  LogIn, UserPlus, BookOpen, HelpCircle, MessageSquare, Check,
+  Instagram, Youtube, Linkedin, Book
 } from "lucide-react";
 import {
   FaReact, FaAws, FaBrain, FaChartBar, FaShieldAlt,
   FaJava, FaPython, FaDatabase, FaCloud, FaCode
 } from "react-icons/fa";
 import { SiMui } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 
 import { toast } from "sonner";
 import axios from "axios";
@@ -19,6 +21,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/store/authStore";
+import { useCartStore } from "@/store/cartStore";
 
 // --- Configuration & Data ---
 
@@ -50,7 +53,7 @@ const navLinks = [
   },
   {
     name: "Courses",
-    href: "/#courses",
+    href: "/courses",
     hasDropdown: true,
     dropdownItems: courses.map(c => ({ ...c, desc: "Professional Program" })),
     isMegaMenu: true
@@ -79,11 +82,19 @@ const navLinks = [
   },
 ];
 
-const socialLinks = [
-  // Keeping structure in case needed
-];
-
-// --- Components ---
+// Password Strength Indicator Component
+const PasswordRequirement = ({ met, text }: { met: boolean; text: string }) => (
+  <div className={`flex items-center gap-2 text-xs ${met ? 'text-green-600' : 'text-slate-500'}`}>
+    {met ? (
+      <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+      </div>
+    ) : (
+      <div className="w-4 h-4 rounded-full border-2 border-slate-300 flex-shrink-0"></div>
+    )}
+    <span className="font-medium">{text}</span>
+  </div>
+);
 
 export const Header = () => {
   const location = useLocation();
@@ -94,22 +105,98 @@ export const Header = () => {
   // Auth Store
   const { user, token, setAuth, logout: storeLogout } = useAuthStore();
   const isLoggedIn = !!token;
-
-  // Cart Store
-
+  const { items: cartItems } = useCartStore();
 
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register' | 'forgot'>('login');
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   // Form States
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
+
+  // Validation States
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Only allow digits
+    if (countryCode === '+91' && value.length > 10) return;
+    setPhone(value);
+    if (touched.phone) validateField('phone', value);
+  };
+
   const [qualification, setQualification] = useState('B.Tech');
+  const [college, setCollege] = useState('');
+  const [passoutYear, setPassoutYear] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // Password Strength Validation
+  const passwordStrength = {
+    hasMinLength: password.length >= 8,
+    hasNumber: /\d/.test(password),
+    hasUpperCase: /[A-Z]/.test(password),
+    hasLowerCase: /[a-z]/.test(password),
+    hasSpecialChar: /[@$!%*?&]/.test(password)
+  };
+
+  const isPasswordValid = Object.values(passwordStrength).every(Boolean);
+  const isFormValid = authMode === 'register'
+    ? name.trim() && email.trim() && phone.length === 10 && isPasswordValid && password === confirmPassword && passoutYear
+    : email.trim() && password.trim();
+
+  // Field Validation
+  const validateField = (field: string, value: string) => {
+    const newErrors = { ...errors };
+
+    switch (field) {
+      case 'email':
+        if (!value.trim()) {
+          newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          newErrors.email = 'Please enter a valid email address';
+        } else {
+          delete newErrors.email;
+        }
+        break;
+      case 'phone':
+        if (countryCode === '+91' && value.length !== 10) {
+          newErrors.phone = 'Phone number must be exactly 10 digits';
+        } else {
+          delete newErrors.phone;
+        }
+        break;
+      case 'name':
+        if (!value.trim()) {
+          newErrors.name = 'Full name is required';
+        } else if (value.trim().length < 3) {
+          newErrors.name = 'Name must be at least 3 characters';
+        } else {
+          delete newErrors.name;
+        }
+        break;
+      case 'confirmPassword':
+        if (value !== password) {
+          newErrors.confirmPassword = 'Passwords do not match';
+        } else {
+          delete newErrors.confirmPassword;
+        }
+        break;
+    }
+
+    setErrors(newErrors);
+  };
+
+  const handleBlur = (field: string, value: string) => {
+    setTouched({ ...touched, [field]: true });
+    validateField(field, value);
+  };
 
   // Scroll Lock for Mobile Menu
   useEffect(() => {
@@ -132,11 +219,33 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  // Auth Handlers (Simplified for brevity as focus is standardizing layout)
+  // Generate year options (2000-2035)
+  const yearOptions = Array.from({ length: 36 }, (_, i) => 2000 + i);
+
+  // Auth Handlers
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Mark all fields as touched
+    if (authMode === 'register') {
+      setTouched({ name: true, email: true, phone: true, confirmPassword: true });
+
+      // Validate all fields
+      validateField('name', name);
+      validateField('email', email);
+      validateField('phone', phone);
+      validateField('confirmPassword', confirmPassword);
+
+      // Check if there are any errors
+      if (Object.keys(errors).length > 0 || !isFormValid) {
+        toast.error("Please fix all errors before submitting");
+        return;
+      }
+    }
+
     setIsLoading(true);
     const API_URL = "http://localhost:5000/api/auth";
+    const fullPhone = `${countryCode} ${phone}`;
 
     try {
       if (authMode === 'login') {
@@ -145,7 +254,15 @@ export const Header = () => {
         toast.success(`Welcome back!`);
         setShowAuthModal(false);
       } else if (authMode === 'register') {
-        const res = await axios.post(`${API_URL}/register`, { name, email, password, phone, qualification });
+        const payload = {
+          name, email, password,
+          phone: fullPhone,
+          qualification,
+          college: qualification !== 'Others' ? college : undefined,
+          passoutYear: passoutYear ? parseInt(passoutYear) : undefined
+        };
+        console.log("🚀 REGISTER PAYLOAD:", payload);
+        const res = await axios.post(`${API_URL}/register`, payload);
         setAuth(res.data.user, res.data.token);
         toast.success("Account created!");
         setShowAuthModal(false);
@@ -184,28 +301,51 @@ export const Header = () => {
             >
               <div className="container mx-auto px-4 h-9 flex items-center justify-between">
                 <div className="flex items-center gap-3 md:gap-6">
-                  <a href="tel:+918019942233" className="flex items-center gap-1.5 hover:text-accent transition-colors">
+                  <a href="tel:+918019952233" className="flex items-center gap-1.5 hover:text-accent transition-colors">
                     <Phone className="w-3 h-3" />
-                    <span>8019942233</span>
+                    <span>8019952233</span>
                   </a>
                   <a href="mailto:Info@aotms.com" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors">
                     <Mail className="w-3 h-3" />
                     <span>Info@aotms.com</span>
                   </a>
+
+
                 </div>
-                {!isLoggedIn && (
-                  <div className="flex items-center gap-3">
-                    <button onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-[9px] md:text-[10px] transition-colors">
-                      <LogIn className="w-3 h-3" />
-                      Sign In
-                    </button>
-                    <span className="text-white/30">|</span>
-                    <button onClick={() => { setAuthMode('register'); setShowAuthModal(true); }} className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-[9px] md:text-[10px] transition-colors">
-                      <UserPlus className="w-3 h-3" />
-                      Register
-                    </button>
+
+                <div className="flex items-center gap-4">
+                  <div className="hidden sm:flex items-center gap-3 pr-4 border-r border-white/10">
+                    <span className="hidden lg:inline text-white/70">Follow Us:</span>
+                    <div className="flex items-center gap-3">
+                      <a href="https://instagram.com/academyoftechmasters" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors hover:scale-110" aria-label="Instagram">
+                        <Instagram className="w-3.5 h-3.5" />
+                      </a>
+                      <a href="https://youtube.com/@aotms" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors hover:scale-110" aria-label="YouTube">
+                        <Youtube className="w-3.5 h-3.5" />
+                      </a>
+                      <a href="https://twitter.com/aotms" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors hover:scale-110" aria-label="X (Twitter)">
+                        <FaXTwitter className="w-3 h-3" />
+                      </a>
+                      <a href="https://linkedin.com/company/academyoftechmasters" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors hover:scale-110" aria-label="LinkedIn">
+                        <Linkedin className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
-                )}
+
+                  {!isLoggedIn && (
+                    <div className="flex items-center gap-3">
+                      <button onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-[9px] md:text-[10px] transition-colors">
+                        <LogIn className="w-3 h-3" />
+                        Sign In
+                      </button>
+                      <span className="text-white/30">|</span>
+                      <button onClick={() => { setAuthMode('register'); setShowAuthModal(true); }} className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-[9px] md:text-[10px] transition-colors">
+                        <UserPlus className="w-3 h-3" />
+                        Register
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           )}
@@ -290,8 +430,15 @@ export const Header = () => {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-5">
-
-
+              {/* Cart Icon */}
+              <Link to="/cart" className="relative p-2 hover:bg-slate-100 rounded-full transition-colors group">
+                <Book className="w-5 h-5 text-slate-700 group-hover:text-primary transition-colors" />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full animate-bounce">
+                    {cartItems.length}
+                  </span>
+                )}
+              </Link>
 
               {/* User Profile */}
               {isLoggedIn ? (
@@ -329,15 +476,39 @@ export const Header = () => {
                   <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all">
                     <Link to="/contact">Book Free Demo</Link>
                   </Button>
-                  <Button variant="ghost" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="font-bold hover:bg-primary/5">
-                    Login
-                  </Button>
                 </div>
               )}
             </div>
 
             {/* Mobile Toggle */}
             <div className="lg:hidden flex items-center gap-3">
+              <Link to="/cart" className="relative p-1.5 hover:bg-secondary/50 rounded-md transition-colors">
+                <Book className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold w-3.5 h-3.5 flex items-center justify-center rounded-full">
+                    {cartItems.length}
+                  </span>
+                )}
+              </Link>
+
+              {/* Mobile User Icon */}
+              {isLoggedIn ? (
+                <Link to="/dashboard" className="hidden sm:block p-1.5 hover:bg-secondary/50 rounded-md transition-colors">
+                  {user?.avatar ? (
+                    <img src={user.avatar} alt="Profile" className="w-6 h-6 rounded-full object-cover border border-border" />
+                  ) : (
+                    <User className="w-6 h-6 text-foreground" />
+                  )}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
+                  className="p-1.5 hover:bg-secondary/50 rounded-md transition-colors"
+                  aria-label="Login"
+                >
+                  <User className="w-6 h-6 text-foreground" />
+                </button>
+              )}
 
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
@@ -473,10 +644,10 @@ export const Header = () => {
         )}
       </AnimatePresence>
 
-      {/* Auth Modal (Preserved Functionality) */}
+      {/* Auth Modal - Enhanced UX */}
       <AnimatePresence>
         {showAuthModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setShowAuthModal(false)}
@@ -484,9 +655,14 @@ export const Header = () => {
             />
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-[420px] bg-white rounded-3xl shadow-2xl p-8 overflow-hidden z-[101]"
+              className="relative w-full max-w-[500px] max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl p-6 md:p-8 z-[2001]"
             >
-              <button onClick={() => setShowAuthModal(false)} className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400">
+              {/* Enhanced Close Button */}
+              <button
+                onClick={() => setShowAuthModal(false)}
+                className="absolute top-4 right-4 p-2.5 rounded-full hover:bg-red-50 text-slate-400 hover:text-red-500 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-200"
+                aria-label="Close"
+              >
                 <X className="w-5 h-5" />
               </button>
 
@@ -502,32 +678,220 @@ export const Header = () => {
               <form onSubmit={handleAuthSubmit} className="space-y-4">
                 {authMode === 'register' && (
                   <>
-                    <Input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required className="h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white" />
-                    <Input placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white" />
-                    <select value={qualification} onChange={(e) => setQualification(e.target.value)} className="w-full h-11 rounded-xl bg-slate-50 border-transparent px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
-                      <option value="B.Tech">B.Tech</option>
-                      <option value="Degree">Degree</option>
-                      <option value="Others">Others</option>
-                    </select>
+                    {/* Full Name */}
+                    <div>
+                      <Input
+                        placeholder="Full Name"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                          if (touched.name) validateField('name', e.target.value);
+                        }}
+                        onBlur={() => handleBlur('name', name)}
+                        required
+                        className={`h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white ${touched.name && errors.name ? 'border-red-300 focus:border-red-400' : ''}`}
+                      />
+                      {touched.name && errors.name && (
+                        <p className="text-xs text-red-500 mt-1 ml-1">{errors.name}</p>
+                      )}
+                    </div>
+
+                    {/* Phone Number with Helper Text */}
+                    <div>
+                      <div className="flex gap-2">
+                        <select
+                          value={countryCode}
+                          onChange={(e) => {
+                            setCountryCode(e.target.value);
+                            setPhone('');
+                          }}
+                          className="h-11 w-28 rounded-xl bg-slate-50 border border-slate-200 px-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30"
+                        >
+                          <option value="+91">🇮🇳 +91</option>
+                          <option value="+1">🇺🇸 +1</option>
+                          <option value="+44">🇬🇧 +44</option>
+                          <option value="+61">🇦🇺 +61</option>
+                          <option value="+971">🇦🇪 +971</option>
+                          <option value="+49">🇩🇪 +49</option>
+                          <option value="+33">🇫🇷 +33</option>
+                          <option value="+81">🇯🇵 +81</option>
+                        </select>
+                        <Input
+                          type="tel"
+                          inputMode="numeric"
+                          placeholder="Phone Number"
+                          value={phone}
+                          onChange={handlePhoneChange}
+                          onBlur={() => handleBlur('phone', phone)}
+                          required
+                          className={`flex-1 h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white ${touched.phone && errors.phone ? 'border-red-300 focus:border-red-400' : ''}`}
+                          maxLength={countryCode === '+91' ? 10 : 15}
+                        />
+                      </div>
+                      {countryCode === '+91' && (
+                        <p className="text-xs text-slate-500 mt-1 ml-1">Enter 10-digit mobile number</p>
+                      )}
+                      {touched.phone && errors.phone && (
+                        <p className="text-xs text-red-500 mt-1 ml-1">{errors.phone}</p>
+                      )}
+                    </div>
+
+                    {/* Qualification & Passing Year */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <select
+                        value={qualification}
+                        onChange={(e) => setQualification(e.target.value)}
+                        className="w-full h-11 rounded-xl bg-slate-50 border border-slate-200 px-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30"
+                      >
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="Degree">Degree</option>
+                        <option value="M.Tech">M.Tech</option>
+                        <option value="MCA">MCA</option>
+                        <option value="Others">Others</option>
+                      </select>
+                      <select
+                        value={passoutYear}
+                        onChange={(e) => setPassoutYear(e.target.value)}
+                        required
+                        className="w-full h-11 rounded-xl bg-slate-50 border border-slate-200 px-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30"
+                      >
+                        <option value="">Passing Year</option>
+                        {yearOptions.reverse().map(year => (
+                          <option key={year} value={year}>{year}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* College Name - Optional */}
+                    <div>
+                      <Input
+                        placeholder="College / University Name (Optional)"
+                        value={college}
+                        onChange={(e) => setCollege(e.target.value)}
+                        className="h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white"
+                      />
+                    </div>
                   </>
                 )}
-                <Input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white" />
+
+                {/* Email */}
+                <div>
+                  <Input
+                    type="email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (touched.email) validateField('email', e.target.value);
+                    }}
+                    onBlur={() => handleBlur('email', email)}
+                    required
+                    className={`h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white ${touched.email && errors.email ? 'border-red-300 focus:border-red-400' : ''}`}
+                  />
+                  {touched.email && errors.email && (
+                    <p className="text-xs text-red-500 mt-1 ml-1">{errors.email}</p>
+                  )}
+                </div>
+
+                {/* Password Section */}
                 {authMode !== 'forgot' && (
-                  <div className="relative">
-                    <Input type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white pr-10" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  <>
+                    <div className={`grid ${authMode === 'register' ? 'md:grid-cols-2' : 'grid-cols-1'} gap-3`}>
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          className="h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white pr-10"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                        >
+                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                      {authMode === 'register' && (
+                        <div className="relative">
+                          <Input
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => {
+                              setConfirmPassword(e.target.value);
+                              if (touched.confirmPassword) validateField('confirmPassword', e.target.value);
+                            }}
+                            onBlur={() => handleBlur('confirmPassword', confirmPassword)}
+                            required
+                            className={`h-11 rounded-xl bg-slate-50 border-transparent focus:bg-white pr-10 ${touched.confirmPassword && errors.confirmPassword ? 'border-red-300 focus:border-red-400' : ''}`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                          >
+                            {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                    {touched.confirmPassword && errors.confirmPassword && (
+                      <p className="text-xs text-red-500 mt-1 ml-1">{errors.confirmPassword}</p>
+                    )}
+
+                    {/* Password Strength Indicators */}
+                    {authMode === 'register' && password && (
+                      <div className="bg-blue-50/50 p-3 rounded-xl border border-blue-100/50">
+                        <p className="text-xs font-semibold text-blue-700 mb-2">Password Requirements:</p>
+                        <div className="grid grid-cols-2 gap-2">
+                          <PasswordRequirement met={passwordStrength.hasMinLength} text="8+ Characters" />
+                          <PasswordRequirement met={passwordStrength.hasNumber} text="One Number" />
+                          <PasswordRequirement met={passwordStrength.hasUpperCase && passwordStrength.hasLowerCase} text="Aa Case" />
+                          <PasswordRequirement met={passwordStrength.hasSpecialChar} text="Special (@$!%*?&)" />
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* Forgot Password Link */}
+                {authMode === 'login' && (
+                  <div className="flex justify-end -mt-2">
+                    <button
+                      type="button"
+                      onClick={() => setAuthMode('forgot')}
+                      className="text-xs font-semibold text-primary/80 hover:text-primary transition-colors focus:outline-none focus:underline"
+                    >
+                      Forgot Password?
                     </button>
                   </div>
                 )}
 
-                <Button disabled={isLoading} className="w-full h-12 rounded-xl text-base font-bold shadow-lg shadow-primary/20">
-                  {isLoading ? 'Processing...' : authMode === 'login' ? 'Sign In' : authMode === 'register' ? 'Create Account' : 'Send Link'}
+                {/* Submit Button with Loading State */}
+                <Button
+                  type="submit"
+                  disabled={isLoading || (!isFormValid)}
+                  className="w-full h-12 rounded-xl text-base font-bold shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>{authMode === 'login' ? 'Signing In...' : 'Processing...'}</span>
+                    </div>
+                  ) : (
+                    authMode === 'login' ? 'Sign In' : authMode === 'register' ? 'Create Account' : 'Send Link'
+                  )}
                 </Button>
               </form>
 
               <div className="mt-6 text-center pt-4 border-t border-border/50">
-                <button onClick={() => setAuthMode(authMode === 'login' ? 'register' : 'login')} className="text-sm font-bold text-primary hover:underline">
+                <button
+                  onClick={() => setAuthMode(authMode === 'login' ? 'register' : 'login')}
+                  className="text-sm font-bold text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/20 rounded px-2 py-1"
+                >
                   {authMode === 'login' ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
                 </button>
               </div>

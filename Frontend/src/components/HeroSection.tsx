@@ -30,7 +30,7 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[100dvh] pt-36 md:pt-48 pb-12 md:pb-20 flex items-center overflow-hidden bg-background">
+    <section className="relative pt-44 pb-16 lg:pt-48 lg:pb-24 flex items-center overflow-hidden bg-background">
       {/* Modern Background Elements - Subtle & Professional */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Top Right Gradient Orb - Softened */}
@@ -43,13 +43,13 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 h-full">
-        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center w-full">
 
           {/* Left Column: Content */}
-          <div className="flex flex-col gap-6 max-w-2xl lg:max-w-3xl">
+          <div className="flex flex-col gap-6 mx-auto lg:mx-0 w-full">
             {/* Main Headline */}
-            <h1 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl tracking-tight text-foreground leading-[1.1] mb-6">
+            <h1 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-foreground leading-[1.1] mb-6">
               Become <span className="text-primary whitespace-nowrap">Job-Ready</span> in 90 Days with Expert-Led IT Training In
               <span className="text-accent relative inline-block mt-1 ml-2">
                 Vijayawada
@@ -85,8 +85,8 @@ export const HeroSection = () => {
             <div className="grid grid-cols-3 gap-2 sm:gap-12 pt-8 border-t border-border mt-4 w-full text-center sm:text-left">
               {trustStats.map((stat) => (
                 <div key={stat.label} className="flex items-center gap-3 text-left">
-                  <div className="p-2 rounded-full bg-slate-100 text-black transform transition-transform hover:scale-110 duration-300">
-                    <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2} />
+                  <div className="p-3 rounded-full bg-slate-100 text-primary flex items-center justify-center shadow-sm transform transition-transform hover:scale-110 duration-300 shrink-0">
+                    <stat.icon className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={2} />
                   </div>
                   <div className="flex flex-col">
                     <span className="text-xl sm:text-2xl md:text-4xl font-bold text-primary font-display flex items-baseline tracking-tight leading-none">
@@ -102,22 +102,16 @@ export const HeroSection = () => {
           </div>
 
           {/* Right Column: Visual (Slider) */}
-          <div className="relative flex items-center justify-center lg:justify-end">
+          <div className="relative flex items-center justify-center lg:justify-center w-full">
 
             {/* Professional Background Design - Enhanced but lighter */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-gradient-to-tr from-primary/10 via-transparent to-accent/10 rounded-full blur-[60px] -z-20" />
 
-            {/* Decorative Layers */}
-            <div className="absolute inset-0 bg-primary/5 rounded-3xl transform rotate-6 scale-95 -z-15 transition-transform duration-500 hover:rotate-3" />
-            <div className="absolute inset-0 border-2 border-dashed border-primary/30 rounded-3xl transform rotate-6 scale-105 -z-10" />
-            <div className="absolute inset-0 border-2 border-dashed border-accent/30 rounded-3xl transform -rotate-3 scale-110 -z-10" />
+            {/* Decorative Layers - Relative to the column for better scaling */}
+            <div className="absolute inset-0 bg-primary/5 rounded-3xl transform rotate-6 scale-95 -z-15 transition-transform duration-500 hover:rotate-3 opacity-0 lg:opacity-100" />
 
-            {/* Floating Orbs */}
-            <div className="absolute -top-8 -right-8 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-pulse -z-10" />
-            <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-primary/20 rounded-full blur-xl -z-10" />
-
-            {/* Slider Container - Increased Size */}
-            <div className="relative w-full max-w-lg lg:max-w-xl aspect-square rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white/50 bg-slate-100">
+            {/* Slider Container - Wider and Shorter */}
+            <div className="relative w-full max-w-3xl aspect-[5/4.7] rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white/50 bg-slate-100">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentImageIndex}
@@ -133,10 +127,14 @@ export const HeroSection = () => {
 
               {/* Dark Gradient Overlay for text visibility if needed, keeping mostly clear */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+
+              {/* Floating Orbs - Inside relative container to stick with image */}
+              <div className="absolute -top-8 -right-8 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-pulse z-10 pointer-events-none" />
+              <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-primary/20 rounded-full blur-xl z-10 pointer-events-none" />
             </div>
 
             {/* Floating "Excellence" Card */}
-            <div className="absolute -bottom-3 -left-3 bg-card p-3 rounded-lg shadow-xl border border-border max-w-[200px] hidden md:block z-20">
+            <div className="absolute bottom-[5%] left-[5%] lg:-left-4 lg:bottom-10 bg-card p-3 rounded-lg shadow-xl border border-border max-w-[200px] hidden md:block z-20">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                   <Award className="w-5 h-5 text-primary" />
@@ -150,7 +148,6 @@ export const HeroSection = () => {
               </p>
             </div>
           </div>
-
         </div>
       </div>
     </section>

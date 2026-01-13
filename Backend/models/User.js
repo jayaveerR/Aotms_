@@ -20,7 +20,15 @@ const UserSchema = new mongoose.Schema({
     },
     qualification: {
         type: String,
-        enum: ['B.Tech', 'Degree', 'Others'],
+        enum: ['B.Tech', 'Degree', 'M.Tech', 'MCA', 'Others'],
+        required: false
+    },
+    college: {
+        type: String,
+        required: false
+    },
+    passoutYear: {
+        type: Number,
         required: false
     },
     avatar: {

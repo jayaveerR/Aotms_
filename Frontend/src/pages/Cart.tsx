@@ -31,8 +31,8 @@ const Cart = () => {
     return (
         <div className="min-h-screen bg-slate-50 font-inter">
             <Header />
-            <main className="container mx-auto px-4 py-32">
-                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8">Shopping Cart</h1>
+            <main className="container mx-auto px-4 pt-48 pb-20">
+                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8">Enrollment Cart</h1>
 
                 {items.length === 0 ? (
                     <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-slate-100">
@@ -72,7 +72,7 @@ const Cart = () => {
 
                         <div className="lg:col-span-1">
                             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 sticky top-32">
-                                <h2 className="text-xl font-bold text-slate-900 mb-6">Order Summary</h2>
+                                <h2 className="text-xl font-bold text-slate-900 mb-6">Confirmation / Enrollment Success</h2>
                                 <div className="space-y-3 mb-6">
                                     <div className="flex justify-between text-lg font-black text-slate-900">
                                         <span>Total</span>

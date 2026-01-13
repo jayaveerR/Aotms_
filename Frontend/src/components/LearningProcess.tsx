@@ -1,134 +1,139 @@
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Terminal, Laptop, Briefcase, LucideIcon, Rocket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface Step {
   number: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  image: string;
 }
+
+import fundamentalsImg from "@/assets/fundamentals.jpg";
+import handsOnImg from "@/assets/hands-on.png";
+import realTimeProjectsImg from "@/assets/real-time-projects.png";
+import careerPlacementImg from "@/assets/career-placement.jpg";
 
 const steps: Step[] = [
   {
     number: "01",
     title: "Strong Fundamentals",
     description: "Industry-aligned concepts explained clearly from basics",
-    icon: BookOpen
+    image: fundamentalsImg
   },
   {
     number: "02",
     title: "Hands-On Practice",
     description: "Daily labs, tasks, and mentor-guided practice",
-    icon: Terminal
+    image: handsOnImg
   },
   {
     number: "03",
     title: "Real-Time Projects",
     description: "Build resume-ready projects based on real scenarios",
-    icon: Laptop
+    image: realTimeProjectsImg
   },
   {
     number: "04",
     title: "Career & Placement",
     description: "Mock interviews, resume help, and job assistance",
-    icon: Briefcase
+    image: careerPlacementImg
   }
 ];
 
 export const LearningProcess = () => {
   return (
-    <section className="py-12 md:py-24 bg-background relative overflow-hidden">
-      {/* Background Rocket Animation */}
-      <motion.div
-        animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 right-10 lg:right-40 text-primary/20 pointer-events-none -z-0"
-      >
-        <Rocket size={400} strokeWidth={0.5} />
-      </motion.div>
-
-      {/* Background Gradients */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none opacity-50" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] pointer-events-none opacity-50" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+    <section className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
+      {/* Background Pattern - Modern Dots */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12 lg:mb-20 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-wider mb-4">
-            Our Learning Model
+        <div className="text-center mb-16 lg:mb-24 max-w-3xl mx-auto">
+          <div className="inline-block mb-4">
+            <span className="py-2 px-5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 text-xs font-black uppercase tracking-widest border border-blue-200 shadow-sm">
+              Our Proven Methodology
+            </span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-5xl font-black text-foreground font-display tracking-tight leading-[1.15]">
-            How Your Training <span className="text-primary">Unfolds</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 font-display tracking-tight leading-[1.1] mb-6">
+            Your Journey to <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066CC] to-[#003366]">IT Excellence</span>
           </h2>
 
-          <p className="text-base md:text-lg text-muted-foreground mt-4 leading-relaxed font-medium">
-            A structured path designed to take you from a beginner to a <span className="text-primary font-bold">Job-Ready Professional</span>.
+          <p className="text-lg text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
+            We don't just teach; we transform. Follow our structured 4-step roadmap designed to build your skills and launch your career.
           </p>
         </div>
 
-        {/* Process Steps with Connecting Line */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-          {/* Connected Blue Arrow Line (Desktop Only) */}
-          <div className="hidden lg:block absolute top-[60px] left-[10%] right-[10%] h-0.5 pointer-events-none -z-10">
-            {/* The Line */}
-            <div className="w-full h-full border-t-2 border-dashed border-primary relative">
-              {/* Arrow Heads between steps */}
-              <div className="absolute top-1/2 -translate-y-1/2 left-[33%] text-primary bg-background px-1">
-                <ArrowRight className="w-6 h-6" />
-              </div>
-              <div className="absolute top-1/2 -translate-y-1/2 left-[66%] text-primary bg-background px-1">
-                <ArrowRight className="w-6 h-6" />
-              </div>
-              {/* End Arrow */}
-              <div className="absolute top-1/2 -translate-y-1/2 -right-2 text-primary bg-background px-1">
-                <ArrowRight className="w-6 h-6" />
-              </div>
-            </div>
+        {/* Process Steps */}
+        <div className="relative">
+          {/* Abstract Connecting Path (Desktop) */}
+          <div className="hidden lg:block absolute top-[20%] left-0 right-0 h-32 opacity-20 pointer-events-none -z-10">
+            <svg className="w-full h-full" viewBox="0 0 1200 100" preserveAspectRatio="none">
+              <path d="M0,50 C300,50 300,50 600,50 C900,50 900,50 1200,50" stroke="url(#line-gradient)" strokeWidth="4" fill="none" strokeDasharray="12 12" />
+              <defs>
+                <linearGradient id="line-gradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#0066CC" stopOpacity="0" />
+                  <stop offset="50%" stopColor="#0066CC" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#ff6b35" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
 
-          {steps.map((step, index) => (
-            <div key={step.number} className="group relative">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative bg-card/60 backdrop-blur-sm border border-border/60 rounded-3xl p-6 lg:p-8 text-center hover:bg-card hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col items-center overflow-hidden"
-              >
-                {/* Background Watermark Icon */}
-                <div className="absolute -bottom-6 -right-6 text-primary/10 group-hover:text-primary/20 transition-colors duration-500 transform rotate-[-10deg] scale-100 group-hover:scale-110 pointer-events-none">
-                  <step.icon strokeWidth={1} className="w-32 h-32" />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            {steps.map((step, index) => (
+              <div key={step.number} className="group relative">
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: index * 0.15 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-[2rem] p-2 h-full shadow-lg hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-500 hover:-translate-y-3"
+                >
+                  <div className="bg-slate-50/50 rounded-[1.7rem] p-3 md:p-6 lg:p-8 h-full flex flex-col items-center border-2 border-blue-200 relative overflow-hidden group-hover:bg-white transition-colors duration-500">
 
-                {/* Step Number Circle */}
-                <div className="mb-6 relative">
-                  <div className="w-20 h-20 rounded-full bg-background border-4 border-card shadow-lg flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-300 group-hover:border-primary/20">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:from-primary group-hover:to-primary text-primary group-hover:text-white transition-all duration-300">
-                      <span className="text-2xl font-black font-display">
-                        {step.number}
-                      </span>
+                    {/* Gradient Border Bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+
+                    {/* Number Badge - Standardized Floating */}
+                    <div className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center border border-slate-100 group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors duration-300 z-20">
+                      <span className="text-lg font-black text-slate-300 group-hover:text-white font-display transition-colors duration-300">{step.number}</span>
                     </div>
+
+                    {/* Illustration Container */}
+                    <div className="mb-6 relative w-full aspect-square max-w-[200px] md:max-w-[360px] flex items-center justify-center">
+                      <div className="absolute inset-0 bg-blue-100 rounded-full blur-3xl opacity-0 group-hover:opacity-50 transition-opacity duration-500 scale-90" />
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="relative z-10 w-full h-full object-cover drop-shadow-md transform group-hover:scale-105 transition-transform duration-500 rounded-[2rem]"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="text-center relative z-10">
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 font-display group-hover:text-blue-700 transition-colors">
+                        {step.title}
+                      </h3>
+                      <p className="text-[15px] text-slate-500 leading-relaxed font-medium">
+                        {step.description}
+                      </p>
+                    </div>
+
                   </div>
-                </div>
-
-                <h3 className="text-xl font-bold text-foreground mb-3 font-display group-hover:text-primary transition-colors duration-300 relative z-10">
-                  {step.title}
-                </h3>
-
-                <p className="text-sm text-muted-foreground leading-relaxed font-medium relative z-10">
-                  {step.description}
-                </p>
-              </motion.div>
-            </div>
-          ))}
+                </motion.div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-16 flex justify-center">
-          <button className="inline-flex items-center justify-center h-14 px-10 text-lg font-bold text-white transition-all bg-accent rounded-full hover:bg-accent/90 hover:scale-105 active:scale-95 shadow-lg shadow-accent/25 ring-offset-2 focus:ring-2 focus:ring-accent">
-            Start Your Journey
-            <ArrowRight className="w-6 h-6 ml-2" strokeWidth={2.5} />
+        <div className="mt-20 flex justify-center">
+          <button className="relative inline-flex items-center justify-center h-16 px-12 text-lg font-bold text-white transition-all duration-300 bg-gradient-to-r from-[#0066CC] to-[#003366] rounded-full hover:shadow-[0_10px_40px_-10px_rgba(0,102,204,0.5)] hover:scale-105 active:scale-95 group overflow-hidden">
+            <span className="relative z-10 flex items-center">
+              Begin Your Success Story
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={3} />
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </button>
         </div>
       </div>

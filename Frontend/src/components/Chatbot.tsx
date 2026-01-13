@@ -127,17 +127,17 @@ const Chatbot: React.FC = () => {
 
         {/* Header - White with Black Text */}
         <div className="chat-header relative">
-          <h2 className="text-black font-semibold text-base">Academy Of Tech Masters</h2>
+          <h2 className="text-white font-semibold text-base">Academy Of Tech Masters</h2>
           <div className="flex items-center gap-1">
             <button
               onClick={() => setShowMenu(!showMenu)}
-              className="text-black hover:bg-black/5 rounded-full p-2 transition-colors relative"
+              className="text-white hover:bg-white/10 rounded-full p-2 transition-colors relative"
             >
               <MoreHorizontal className="w-5 h-5" />
             </button>
             <button
               onClick={toggleChat}
-              className="text-black hover:bg-black/5 rounded-full p-2 transition-colors"
+              className="text-white hover:bg-white/10 rounded-full p-2 transition-colors"
               aria-label="Close"
             >
               <X className="w-5 h-5" />

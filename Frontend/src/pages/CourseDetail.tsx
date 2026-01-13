@@ -192,7 +192,7 @@ export default function CourseDetail() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative pt-24 pb-8 md:pt-28 md:pb-12 bg-[#0B1221] overflow-hidden flex items-center min-h-[calc(100vh-80px)]">
+            <section className="relative pt-32 pb-8 md:pt-44 md:pb-12 bg-[#0B1221] overflow-hidden flex items-center min-h-[calc(100vh-80px)]">
                 {/* Background Textures */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute inset-0 bg-[#0B1221]" />
