@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sanitizeInput, validate } from '@/utils/validation';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, User, Phone, GraduationCap, UserPlus, AlertCircle, CheckCircle2 } from 'lucide-react';
@@ -37,6 +38,22 @@ export default function Signup() {
         setError('');
         setErrors({});
         setLoading(true);
+
+        if (!validate.isName(formData.name)) {
+            setError("Please enter a valid name (letters and spaces only)");
+            setLoading(false);
+            return;
+        }
+        if (!validate.isEmail(formData.email)) {
+            setError("Please enter a valid email address");
+            setLoading(false);
+            return;
+        }
+        if (formData.phone && !validate.isPhone(formData.phone)) {
+            setError("Please enter a valid phone number");
+            setLoading(false);
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:5000/api/auth/register', {
@@ -125,7 +142,7 @@ export default function Signup() {
                                     type="text"
                                     required
                                     value={formData.name}
-                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, name: sanitizeInput.name(e.target.value) })}
                                     className={`w-full pl-12 pr-4 py-3 border-2 ${errors.name ? 'border-red-300' : 'border-slate-200'} rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-slate-900`}
                                     placeholder="John Doe"
                                 />
@@ -144,7 +161,7 @@ export default function Signup() {
                                     type="email"
                                     required
                                     value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, email: sanitizeInput.email(e.target.value) })}
                                     className={`w-full pl-12 pr-4 py-3 border-2 ${errors.email ? 'border-red-300' : 'border-slate-200'} rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-slate-900`}
                                     placeholder="you@example.com"
                                 />
@@ -162,7 +179,8 @@ export default function Signup() {
                                 <input
                                     type="tel"
                                     value={formData.phone}
-                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, phone: sanitizeInput.phone(e.target.value) })}
+                                    maxLength={10}
                                     className={`w-full pl-12 pr-4 py-3 border-2 ${errors.phone ? 'border-red-300' : 'border-slate-200'} rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-slate-900`}
                                     placeholder="9876543210"
                                 />
@@ -180,7 +198,7 @@ export default function Signup() {
                                 <input
                                     type="text"
                                     value={formData.qualification}
-                                    onChange={(e) => setFormData({ ...formData, qualification: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, qualification: sanitizeInput.text(e.target.value) })}
                                     className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-slate-900"
                                     placeholder="B.Tech, MCA, etc."
                                 />

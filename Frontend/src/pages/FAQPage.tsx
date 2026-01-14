@@ -119,16 +119,20 @@ const FAQPage = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <div className="pt-48 pb-16 bg-primary relative overflow-hidden">
+            <div className="pt-32 md:pt-48 pb-12 bg-[#0066CC] relative overflow-hidden">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:32px_32px] opacity-5 pointer-events-none" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent pointer-events-none" />
 
+                {/* Subtle Orange Glows */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B35] opacity-60 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FF6B35] opacity-40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <span className="inline-block py-1 px-3 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-xs font-bold tracking-widest uppercase mb-4">
+                    <span className="inline-block py-1 px-3 rounded-full bg-accent/10 border border-accent/200 text-accent font-mono text-xs font-bold tracking-widest uppercase mb-6">
                         Got Questions?
                     </span>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight">
-                        Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Questions</span>
+                        Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-accent">Questions</span>
                     </h1>
                     <p className="text-blue-100/80 max-w-2xl mx-auto text-lg leading-relaxed">
                         Find answers to common questions about our courses, admissions, placement support, and more.
@@ -219,7 +223,7 @@ const FAQPage = () => {
                 )}
 
                 {/* Contact CTA */}
-                <div className="mt-20 bg-primary rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group">
+                <div className="mt-20 bg-[#0066CC] rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { validate } from "@/utils/validation";
 import { useSearchParams, useNavigate } from "react-router-dom"; // Updated imports
 import { toast } from "sonner";
 import axios from "axios";
@@ -27,8 +28,8 @@ const ResetPassword = () => {
             return;
         }
 
-        if (password.length < 6) {
-            toast.error("Password must be at least 6 characters");
+        if (!validate.isStrongPassword(password)) {
+            toast.error("Password must be at least 8 characters, include uppercase, lowercase, number, and special character.");
             return;
         }
 
@@ -81,6 +82,7 @@ const ResetPassword = () => {
                                     className="pl-11 pr-11 bg-slate-50 border-none h-12 rounded-xl"
                                     placeholder="••••••••"
                                     value={password}
+                                    maxLength={128}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <button
@@ -103,6 +105,7 @@ const ResetPassword = () => {
                                     className="pl-11 pr-11 bg-slate-50 border-none h-12 rounded-xl"
                                     placeholder="••••••••"
                                     value={confirmPassword}
+                                    maxLength={128}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
                             </div>

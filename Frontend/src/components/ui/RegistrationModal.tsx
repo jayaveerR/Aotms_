@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sanitizeInput, validate } from "@/utils/validation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +24,12 @@ export const RegistrationModal = ({ itemName, isOpen, onClose, eventType = 'work
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.preventDefault();
     setIsSubmitting(true);
+
+    if (!validate.isName(name)) { toast.error("Invalid name"); setIsSubmitting(false); return; }
+    if (!validate.isEmail(email)) { toast.error("Invalid email"); setIsSubmitting(false); return; }
+    if (!validate.isPhone(phone)) { toast.error("Invalid phone number"); setIsSubmitting(false); return; }
     try {
       await axios.post('http://localhost:5000/api/registrations', {
         name,
@@ -66,7 +72,7 @@ export const RegistrationModal = ({ itemName, isOpen, onClose, eventType = 'work
                 id="name"
                 placeholder="Name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setName(sanitizeInput.name(e.target.value))}
                 disabled={isSubmitting}
                 required
               />
@@ -75,7 +81,7 @@ export const RegistrationModal = ({ itemName, isOpen, onClose, eventType = 'work
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(sanitizeInput.email(e.target.value))}
                 disabled={isSubmitting}
                 required
               />
@@ -84,7 +90,8 @@ export const RegistrationModal = ({ itemName, isOpen, onClose, eventType = 'work
                 type="tel"
                 placeholder="Phone Number"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setPhone(sanitizeInput.phone(e.target.value))}
+                maxLength={10}
                 disabled={isSubmitting}
                 required
               />
@@ -92,7 +99,7 @@ export const RegistrationModal = ({ itemName, isOpen, onClose, eventType = 'work
                 id="course"
                 placeholder="Your Current Course / Year"
                 value={course}
-                onChange={(e) => setCourse(e.target.value)}
+                onChange={(e) => setCourse(sanitizeInput.text(e.target.value))}
                 disabled={isSubmitting}
                 required
               />

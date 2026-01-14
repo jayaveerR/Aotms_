@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sanitizeInput, validate } from '@/utils/validation';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
@@ -18,6 +19,12 @@ export default function Login() {
         e.preventDefault();
         setError('');
         setLoading(true);
+
+        if (!validate.isEmail(formData.email)) {
+            setError("Please enter a valid email address");
+            setLoading(false);
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:5000/api/auth/login', {
@@ -96,7 +103,7 @@ export default function Login() {
                                     type="email"
                                     required
                                     value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, email: sanitizeInput.email(e.target.value) })}
                                     className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-slate-900"
                                     placeholder="you@example.com"
                                 />

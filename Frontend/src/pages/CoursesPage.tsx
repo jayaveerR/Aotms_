@@ -176,13 +176,17 @@ const GlobalCoursesPage = () => {
             <Header />
 
             {/* --- Professional Hero Section --- */}
-            <section className="relative pt-40 pb-16 overflow-hidden bg-primary">
+            <section className="relative pt-32 md:pt-40 pb-12 overflow-hidden bg-[#0066CC]">
                 {/* Subtle Geometric Background Pattern */}
                 <div className="absolute inset-0 opacity-10" style={{
                     backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
                     backgroundSize: '32px 32px'
                 }}></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
+
+                {/* Subtle Orange Glows */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B35] opacity-60 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FF6B35] opacity-40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -193,7 +197,7 @@ const GlobalCoursesPage = () => {
                     >
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
                             Advance Your Career with <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Industry-Standard Certification</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-accent">Industry-Standard Certification</span>
                         </h1>
 
                         <p className="text-lg text-blue-100/80 max-w-2xl mx-auto mb-8 leading-relaxed font-light">

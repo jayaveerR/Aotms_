@@ -1,5 +1,6 @@
-
 import { useState } from "react";
+import axios from "axios";
+import { sanitizeInput, validate } from "@/utils/validation";
 import { Header as Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Star, Send, MessageSquare, ThumbsUp } from "lucide-react";
@@ -24,17 +25,28 @@ const FeedbackPage = () => {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        if (!validate.isName(formData.name)) {
+            toast.error("Please enter a valid name");
+            setLoading(false); return;
+        }
+        if (!validate.isEmail(formData.email)) {
+            toast.error("Please enter a valid email");
+            setLoading(false); return;
+        }
 
-        console.log({ ...formData, rating });
-        toast.success("Thank you for your feedback!", {
-            description: "We appreciate your input and will use it to improve."
-        });
-
-        setFormData({ name: "", email: "", category: "Course Content", message: "" });
-        setRating(0);
-        setLoading(false);
+        try {
+            await axios.post('http://localhost:5000/api/feedback', { ...formData, rating });
+            toast.success("Thank you for your feedback!", {
+                description: "We appreciate your input and will use it to improve."
+            });
+            setFormData({ name: "", email: "", category: "Course Content", message: "" });
+            setRating(0);
+        } catch (error: any) {
+            console.error(error);
+            toast.error(error.response?.data?.msg || "Failed to submit feedback. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -42,16 +54,20 @@ const FeedbackPage = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <div className="pt-48 pb-16 bg-primary relative overflow-hidden">
+            <div className="pt-32 md:pt-48 pb-12 bg-[#0066CC] relative overflow-hidden">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:32px_32px] opacity-5 pointer-events-none" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent pointer-events-none" />
 
+                {/* Subtle Orange Glows */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B35] opacity-60 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FF6B35] opacity-40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <span className="inline-block py-1 px-3 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-xs font-bold tracking-widest uppercase mb-4">
+                    <span className="inline-block py-1 px-3 rounded-full bg-accent/10 border border-accent/200 text-accent font-mono text-xs font-bold tracking-widest uppercase mb-6">
                         Share Your Thoughts
                     </span>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight">
-                        We Value Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Feedback</span>
+                        We Value Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-accent">Feedback</span>
                     </h1>
                     <p className="text-blue-100/80 max-w-2xl mx-auto text-lg leading-relaxed">
                         Your feedback helps us improve our courses and training methodology. Let us know how we're doing!
@@ -89,7 +105,7 @@ const FeedbackPage = () => {
                             </div>
                         </div>
 
-                        <div className="p-6 bg-primary rounded-2xl relative overflow-hidden">
+                        <div className="p-6 bg-[#0066CC] rounded-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full blur-2xl translate-x-10 -translate-y-10" />
                             <h3 className="text-white font-bold text-lg mb-2 relative z-10">Need immediate help?</h3>
                             <p className="text-blue-100/80 text-sm mb-4 relative z-10">If you have a query that needs urgent attention, please contact our support team directly.</p>
@@ -137,7 +153,7 @@ const FeedbackPage = () => {
                                         required
                                         placeholder="John Doe"
                                         value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        onChange={(e) => setFormData({ ...formData, name: sanitizeInput.name(e.target.value) })}
                                         className="h-12 bg-slate-50 border-slate-200 focus:bg-white focus:border-primary transition-all"
                                     />
                                 </div>
@@ -148,7 +164,7 @@ const FeedbackPage = () => {
                                         type="email"
                                         placeholder="john@example.com"
                                         value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        onChange={(e) => setFormData({ ...formData, email: sanitizeInput.email(e.target.value) })}
                                         className="h-12 bg-slate-50 border-slate-200 focus:bg-white focus:border-primary transition-all"
                                     />
                                 </div>
@@ -177,7 +193,7 @@ const FeedbackPage = () => {
                                     placeholder="Tell us what you liked or what we can do better..."
                                     rows={5}
                                     value={formData.message}
-                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, message: sanitizeInput.text(e.target.value) })}
                                     className="bg-slate-50 border-slate-200 focus:bg-white focus:border-primary transition-all resize-none"
                                 />
                             </div>

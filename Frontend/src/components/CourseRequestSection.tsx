@@ -1,8 +1,33 @@
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
+import { sanitizeInput, validate } from "@/utils/validation";
 import img from "@/assets/Workshop-1.jpg";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
 export const CourseRequestSection = () => {
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "", course: "" });
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+
+        if (!validate.isName(formData.name)) { toast.error("Invalid Name"); setLoading(false); return; }
+        if (!validate.isEmail(formData.email)) { toast.error("Invalid Email"); setLoading(false); return; }
+        if (!validate.isPhone(formData.phone)) { toast.error("Invalid Phone"); setLoading(false); return; }
+
+        try {
+            await axios.post('http://localhost:5000/api/leads', formData);
+            toast.success("Request submitted successfully!");
+            setFormData({ name: "", email: "", phone: "", course: "" });
+        } catch (error: any) {
+            toast.error("Failed to submit request");
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <section className="py-12 md:py-20 bg-background relative overflow-hidden">
             <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -66,21 +91,43 @@ export const CourseRequestSection = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.3 }}
                             className="flex flex-col gap-4 w-full"
+                            onSubmit={handleSubmit}
                         >
                             <div className="flex flex-col sm:flex-row gap-4 w-full">
                                 <input
                                     type="text"
+                                    placeholder="Full Name"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: sanitizeInput.name(e.target.value) })}
+                                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
+                                />
+                                <input
+                                    type="tel"
+                                    placeholder="Phone"
+                                    maxLength={10}
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({ ...formData, phone: sanitizeInput.phone(e.target.value) })}
+                                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
+                                />
+                            </div>
+                            <div className="flex flex-col sm:flex-row gap-4 w-full">
+                                <input
+                                    type="text"
                                     placeholder="Course Name"
+                                    value={formData.course}
+                                    onChange={(e) => setFormData({ ...formData, course: sanitizeInput.text(e.target.value) })}
                                     className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
                                 />
                                 <input
                                     type="email"
                                     placeholder="Email Address"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: sanitizeInput.email(e.target.value) })}
                                     className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/10 backdrop-blur-sm transition-all"
                                 />
                             </div>
-                            <button className="px-8 py-4 bg-accent text-white font-bold rounded-xl hover:bg-accent/90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-accent/20 whitespace-nowrap w-full sm:w-auto self-start">
-                                Submit Request
+                            <button disabled={loading} className="px-8 py-4 bg-accent text-white font-bold rounded-xl hover:bg-accent/90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-accent/20 whitespace-nowrap w-full sm:w-auto self-start">
+                                {loading ? "Submitting..." : "Submit Request"}
                             </button>
                         </motion.form>
                     </div>

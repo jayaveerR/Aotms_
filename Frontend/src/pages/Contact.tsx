@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sanitizeInput, validate } from "@/utils/validation";
 import { Header } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Input } from "@/components/ui/input";
@@ -21,7 +22,25 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+
+    // Apply Input Sanitization
+    switch (name) {
+      case 'name':
+        value = sanitizeInput.name(value);
+        break;
+      case 'phone':
+        value = sanitizeInput.phone(value);
+        break;
+      case 'email':
+        value = sanitizeInput.email(value);
+        break;
+      case 'message':
+        value = sanitizeInput.text(value);
+        break;
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,8 +48,28 @@ const Contact = () => {
     setLoading(true);
 
     // Basic validation
+    // Validation
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
       toast.error("Please fill in all fields");
+      setLoading(false);
+      return;
+    }
+
+    if (!validate.isName(formData.name)) {
+      toast.error("Please enter a valid name (letters only)");
+      setLoading(false);
+      return;
+    }
+
+    if (!validate.isEmail(formData.email)) {
+      toast.error("Please enter a valid email address");
+      setLoading(false);
+      return;
+    }
+
+
+    if (!validate.isPhone(formData.phone)) {
+      toast.error("Please enter a valid phone number (exactly 10 digits)");
       setLoading(false);
       return;
     }
@@ -131,7 +170,7 @@ const Contact = () => {
             </div>
 
             {/* Right Side: Contact Form */}
-            <div className="bg-gradient-to-br from-primary via-primary to-accent p-8 md:p-10 rounded-[32px] shadow-2xl shadow-primary/20 relative overflow-hidden border border-white/10">
+            <div className="bg-gradient-to-br from-[#0066CC] via-[#0066CC] to-accent p-8 md:p-10 rounded-[32px] shadow-2xl shadow-[#0066CC]/20 relative overflow-hidden border border-white/10">
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 -z-0" />
               <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 -z-0" />
@@ -148,6 +187,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      maxLength={50}
                       className="bg-white/5 border-white/10 h-12 px-4 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 transition-all"
                       placeholder="John Doe"
                     />
@@ -160,6 +200,7 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      maxLength={100}
                       className="bg-white/5 border-white/10 h-12 px-4 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 transition-all"
                       placeholder="john@example.com"
                     />
@@ -173,8 +214,9 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    maxLength={10}
                     className="bg-white/5 border-white/10 h-12 px-4 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 transition-all"
-                    placeholder="+91 XXXXXXXXXX"
+                    placeholder="XXXXXXXXXX"
                   />
                 </div>
                 <div className="space-y-2">
@@ -184,6 +226,7 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    maxLength={1000}
                     className="bg-white/5 border-white/10 px-4 py-3 rounded-xl text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/50 min-h-[120px] transition-all"
                     placeholder="How can we help you?"
                   />

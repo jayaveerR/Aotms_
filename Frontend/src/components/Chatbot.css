@@ -11,9 +11,9 @@
 .chat-toggle-btn {
     padding: 12px 24px;
     border-radius: 30px;
-    background: #0B4E96;
+    background: #0066CC;
     color: white;
-    border: none;
+    border: 2px solid white;
     cursor: pointer;
     box-shadow: 0 4px 14px rgba(11, 78, 150, 0.3);
     display: flex;
@@ -58,7 +58,7 @@
 /* Header - Clean White (AOTMS Content Style) */
 .chat-header {
     padding: 1rem 1.25rem;
-    background: #0B4E96;
+    background: #0066CC;
     /* Reverted to White */
     color: white;
     display: flex;

@@ -46,8 +46,9 @@ export const ScrollButtons = () => {
                     onClick={scrollToTop}
                     className="group w-9 h-9 rounded-full text-white shadow-lg touch-manipulation transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center -webkit-tap-highlight-transparent"
                     style={{
-                        background: '#0B4E96',
-                        boxShadow: '0 4px 14px rgba(11, 78, 150, 0.3)'
+                        background: '#0066CC',
+                        boxShadow: '0 4px 14px rgba(0, 102, 204, 0.3)',
+                        border: '2px solid white'
                     }}
                     aria-label="Scroll to top"
                 >
@@ -61,8 +62,9 @@ export const ScrollButtons = () => {
                     onClick={scrollToBottom}
                     className="group w-9 h-9 rounded-full text-white shadow-lg touch-manipulation transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center -webkit-tap-highlight-transparent"
                     style={{
-                        background: '#0B4E96',
-                        boxShadow: '0 4px 14px rgba(11, 78, 150, 0.3)'
+                        background: '#0066CC',
+                        boxShadow: '0 4px 14px rgba(0, 102, 204, 0.3)',
+                        border: '2px solid white'
                     }}
                     aria-label="Scroll to bottom"
                 >

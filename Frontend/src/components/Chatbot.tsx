@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { sanitizeInput } from '@/utils/validation';
 import './Chatbot.css';
 import { MoreHorizontal, Send, MessageSquare, Smile, Copy, ThumbsUp, ThumbsDown, RefreshCw, MessageSquarePlus, MessageSquareX, History, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -222,7 +223,7 @@ const Chatbot: React.FC = () => {
             <Input
               className="border-none focus-visible:ring-0 shadow-none bg-transparent"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => setInputValue(sanitizeInput.text(e.target.value))}
               placeholder="Message..."
             />
             <div className="flex items-center gap-2 pr-2">

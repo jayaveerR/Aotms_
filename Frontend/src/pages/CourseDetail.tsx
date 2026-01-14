@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { coursesData, Course } from "@/data/courses";
+import { CourseDetailHero } from "@/components/CourseDetailHero";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Navbar";
@@ -192,121 +193,11 @@ export default function CourseDetail() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-8 md:pt-44 md:pb-12 bg-[#0B1221] overflow-hidden flex items-center min-h-[calc(100vh-80px)]">
-                {/* Background Textures */}
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-[#0B1221]" />
-                    <div className="absolute -top-[500px] -right-[500px] w-[1000px] h-[1000px] bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen" />
-                </div>
+            {/* Hero Section */}
+            <CourseDetailHero course={course} handleEnroll={handleEnroll} />
 
-                <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 relative z-10">
-                    {/* REFERENCE IMAGE STYLE - SPLIT HERO CARD - COMPACT FIT */}
-                    <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/40 flex flex-col md:flex-row min-h-[500px] lg:min-h-[560px]">
-
-                        {/* LEFT SIDE: Visual Content */}
-                        <div className="relative w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center overflow-hidden">
-                            {/* Background Image */}
-                            <div className="absolute inset-0">
-                                <img
-                                    src={getCourseTheme(course.category).image}
-                                    alt="Course BG"
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute inset-0 bg-blue-950/80 mix-blend-multiply" />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-[#003366]/90 to-transparent" />
-                            </div>
-
-                            {/* Content */}
-                            <div className="relative z-10">
-                                <div className="inline-block px-4 py-1.5 rounded-full bg-orange-500 text-white text-[11px] font-black uppercase tracking-[0.2em] mb-6 shadow-lg shadow-orange-500/30">
-                                    Kickstart Your Developer Journey
-                                </div>
-                                <h1 className="text-4xl md:text-6xl font-display font-black text-white mb-6 leading-[1.1] uppercase">
-                                    Become A <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">{course.title} PRO</span>
-                                </h1>
-                                <p className="text-blue-100 text-lg font-medium max-w-md leading-relaxed mb-8">
-                                    Dominate the digital world with our comprehensive {course.category} training program.
-                                </p>
-
-                                <div className="flex items-center gap-4">
-                                    <div className="flex -space-x-3">
-                                        {[1, 2, 3, 4].map(i => (
-                                            <div key={i} className="w-10 h-10 rounded-full border-2 border-[#003366] bg-slate-200 relative overflow-hidden">
-                                                <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="text-white text-xs font-bold">
-                                        <span className="text-orange-400 block text-sm">4.9/5.0</span>
-                                        Student Rating
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* RIGHT SIDE: Skewed Form */}
-                        <div className="relative w-full md:w-1/2 bg-[#0066CC] flex flex-col justify-center p-8 md:p-12">
-
-                            {/* The Skewed Divider Effect */}
-                            <div className="hidden md:block absolute top-0 bottom-0 -left-20 w-40 bg-[#0066CC] transform -skew-x-[12deg] z-0 shadow-[-20px_0_40px_rgba(0,0,0,0.2)]" />
-
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
-                                        <BookOpen className="w-5 h-5" />
-                                    </div>
-                                    <span className="text-blue-100 font-bold uppercase tracking-wider text-sm">Course Request</span>
-                                </div>
-
-                                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
-                                    Find Your Best <br /> Course With Us
-                                </h2>
-                                <p className="text-blue-100 text-lg mb-10 opacity-90 leading-relaxed max-w-md">
-                                    Start your IT Career Today! Enroll Now for a free demo and get expert guidance.
-                                </p>
-
-                                <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleEnroll(); }}>
-                                    <div className="space-y-6">
-                                        <div>
-                                            <input
-                                                type="text"
-                                                placeholder="Your Name"
-                                                className="w-full h-14 rounded-xl bg-blue-800/50 border border-blue-400/30 text-white placeholder:text-blue-300/50 px-6 focus:outline-none focus:bg-blue-800 focus:border-blue-300 transition-all font-medium text-lg"
-                                            />
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="email"
-                                                placeholder="Email Address"
-                                                className="w-full h-14 rounded-xl bg-blue-800/50 border border-blue-400/30 text-white placeholder:text-blue-300/50 px-6 focus:outline-none focus:bg-blue-800 focus:border-blue-300 transition-all font-medium text-lg"
-                                            />
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="tel"
-                                                placeholder="Phone Number"
-                                                className="w-full h-14 rounded-xl bg-blue-800/50 border border-blue-400/30 text-white placeholder:text-blue-300/50 px-6 focus:outline-none focus:bg-blue-800 focus:border-blue-300 transition-all font-medium text-lg"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <Button className="w-full h-16 bg-[#FF6B35] hover:bg-orange-600 text-white rounded-xl font-bold text-xl mt-8 shadow-xl shadow-orange-900/30 transition-transform active:scale-95">
-                                        Submit Request
-                                    </Button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div
-                className="relative py-20 overflow-hidden bg-[#0066CC]"
-            >
-                {/* Subtle overlay to soften the theme color if needed */}
-                <div className="absolute inset-0 bg-black/5 pointer-events-none" />
-
+            {/* Feature Grid - Compact */}
+            <div className="relative py-8 bg-[#0066CC] border-t border-white/10">
                 <div className="container mx-auto px-6 relative z-10">
                     <FeatureGrid />
                 </div>

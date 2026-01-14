@@ -3,6 +3,9 @@ import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { coursesData } from "@/data/courses";
 import logo from "@/assets/logo.png";
+import { sanitizeInput, validate } from "@/utils/validation";
+import axios from "axios";
+import { toast } from "sonner";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -143,7 +146,7 @@ export const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#0066CC] hover:scale-110 hover:shadow-lg hover:shadow-white/20 transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#007bff] hover:scale-110 hover:shadow-lg hover:shadow-white/20 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -164,12 +167,36 @@ export const Footer = () => {
             </p>
           </div>
 
-          <form className="flex w-full max-w-md gap-3 relative z-10" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="flex w-full max-w-md gap-3 relative z-10"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const emailInput = (e.currentTarget.elements[0] as HTMLInputElement);
+              const email = emailInput.value;
+
+              if (!validate.isEmail(email)) {
+                toast.error("Please enter a valid email");
+                return;
+              }
+
+              try {
+                await axios.post('http://localhost:5000/api/subscribers', { email });
+                toast.success("Subscribed successfully!");
+                emailInput.value = "";
+              } catch (error: any) {
+                toast.error(error.response?.data?.msg || "Subscription failed");
+              }
+            }}
+          >
             <input
               type="email"
               placeholder="Enter your work email"
               className="bg-primary text-white border border-primary-foreground/20 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-primary-foreground/30 text-sm"
               required
+              onChange={(e) => {
+                const val = sanitizeInput.email(e.target.value);
+                if (e.target.value !== val) e.target.value = val;
+              }}
             />
             <button className="bg-accent hover:bg-accent/90 text-white font-bold px-6 py-3 rounded-lg transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent/20 text-sm sm:text-base whitespace-nowrap">
               Subscribe
