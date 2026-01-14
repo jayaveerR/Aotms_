@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const compression = require('compression');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const helmet = require('helmet').default;
+const { rateLimit } = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
@@ -85,6 +85,8 @@ app.use('/api/registrations', require('./routes/registrations'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/events', require('./routes/events'));
 app.use('/api/winners', require('./routes/winners'));
+app.use('/api/feedback', require('./routes/feedback'));
+app.use('/api/subscribers', require('./routes/subscribers'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -103,14 +105,13 @@ app.use((req, res) => {
 const PORT = process.env.PORT || 5000;
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
     console.log('SIGTERM signal received: closing HTTP server');
-    server.close(() => {
+    server.close(async () => {
         console.log('HTTP server closed');
-        mongoose.connection.close(false, () => {
-            console.log('MongoDB connection closed');
-            process.exit(0);
-        });
+        await mongoose.connection.close();
+        console.log('MongoDB connection closed');
+        process.exit(0);
     });
 });
 

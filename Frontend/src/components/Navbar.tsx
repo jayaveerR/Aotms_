@@ -254,13 +254,25 @@ export const Header = () => {
         toast.success(`Welcome back!`);
         setShowAuthModal(false);
       } else if (authMode === 'register') {
-        const payload = {
-          name, email, password,
+        // Build payload with only defined optional fields
+        const payload: any = {
+          name,
+          email,
+          password,
           phone: fullPhone,
-          qualification,
-          college: qualification !== 'Others' ? college : undefined,
-          passoutYear: passoutYear ? parseInt(passoutYear) : undefined
+          qualification
         };
+
+        // Only include college if it has a value
+        if (college && college.trim().length > 0) {
+          payload.college = college.trim();
+        }
+
+        // Only include passoutYear if selected
+        if (passoutYear) {
+          payload.passoutYear = parseInt(passoutYear);
+        }
+
         console.log("🚀 REGISTER PAYLOAD:", payload);
         const res = await axios.post(`${API_URL}/register`, payload);
         setAuth(res.data.user, res.data.token);
@@ -272,7 +284,17 @@ export const Header = () => {
         setAuthMode('login');
       }
     } catch (error: any) {
-      toast.error(error.response?.data?.msg || "Something went wrong");
+      console.error("❌ AUTH ERROR:", error.response?.data);
+
+      // Handle validation errors from backend
+      if (error.response?.data?.errors && Array.isArray(error.response.data.errors)) {
+        const errorMessages = error.response.data.errors.map((err: any) =>
+          `${err.field}: ${err.message}`
+        ).join(', ');
+        toast.error(errorMessages);
+      } else {
+        toast.error(error.response?.data?.msg || "Something went wrong");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -297,7 +319,7 @@ export const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="bg-primary text-white text-[10px] md:text-[11px] font-medium border-b border-primary-foreground/10 relative z-50"
+              className="bg-[#0047b3] text-white text-[10px] md:text-[11px] font-medium border-b border-primary-foreground/10 relative z-50"
             >
               <div className="container mx-auto px-4 h-9 flex items-center justify-between">
                 <div className="flex items-center gap-3 md:gap-6">
@@ -473,7 +495,7 @@ export const Header = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-3">
-                  <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all">
+                  <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all bg-[#0066CC] hover:bg-[#005bb5] text-white">
                     <Link to="/contact">Book Free Demo</Link>
                   </Button>
                 </div>
@@ -565,7 +587,7 @@ export const Header = () => {
                   </div>
                 ) : (
                   <div className="flex flex-col gap-3 mb-6">
-                    <Button asChild className="w-full h-11 rounded-xl font-bold shadow-md">
+                    <Button asChild className="w-full h-11 rounded-xl font-bold shadow-md bg-[#0066CC] hover:bg-[#005bb5] text-white">
                       <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Book Free Demo</Link>
                     </Button>
                     <div className="grid grid-cols-2 gap-3">

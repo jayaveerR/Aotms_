@@ -41,7 +41,7 @@ const registerValidation = [
     body('phone')
         .optional()
         .trim()
-        .matches(/^\+?[0-9\s-]{7,15}$/).withMessage('Invalid phone number format'),
+        .matches(/^\+?[0-9\s-]{10,20}$/).withMessage('Invalid phone number format'),
 
     body('qualification')
         .optional()
@@ -106,7 +106,7 @@ const contactValidation = [
     body('phone')
         .optional()
         .trim()
-        .matches(/^\+?[0-9\s-]{7,15}$/).withMessage('Invalid phone number format'),
+        .matches(/^\+?[0-9\s-]{10,20}$/).withMessage('Invalid phone number format'),
 
     body('message')
         .trim()
@@ -132,7 +132,7 @@ const leadValidation = [
     body('phone')
         .trim()
         .notEmpty().withMessage('Phone is required')
-        .matches(/^\+?[0-9\s-]{7,15}$/).withMessage('Invalid phone number format'),
+        .matches(/^\+?[0-9\s-]{10,20}$/).withMessage('Invalid phone number format'),
 
     body('course')
         .optional()
