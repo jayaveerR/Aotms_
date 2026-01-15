@@ -170,14 +170,14 @@ export default function CourseDetail() {
 
             {/* Clean Feature Grid Footer - Integrated below Hero */}
             <div className="bg-white py-12 relative z-20 border-b border-slate-100">
-                <div className="px-6 lg:px-12">
+                <div className="container mx-auto px-6">
                     <FeatureGrid />
                 </div>
             </div>
 
             {/* Smart Sticky Navigation Bar */}
             <div className="sticky top-[80px] lg:top-[96px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/60 py-2 md:py-4 mb-8 shadow-sm">
-                <div className="px-6 lg:px-12 overflow-x-auto scrollbar-hide">
+                <div className="container mx-auto px-6 overflow-x-auto scrollbar-hide">
                     <div className="flex items-center gap-2 md:gap-4 md:justify-center min-w-max py-1">
                         {[
                             { id: "curriculum", label: "Curriculum", icon: BookOpen },
@@ -206,19 +206,19 @@ export default function CourseDetail() {
 
             {/* Course Content */}
             <section className="py-12 md:py-24 bg-white">
-                <div className="px-6 lg:px-12 lg:px-20">
+                <div className="container mx-auto px-6">
                     <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
 
                         {/* Main Content */}
                         <div className="lg:col-span-8">
                             <div id="curriculum" className="curriculum detailed-curriculum mb-12 scroll-mt-40">
-                                <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-4 flex items-center gap-3">
-                                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
-                                        <BookOpen className="w-4.5 h-4.5 md:w-5 md:h-5 text-blue-600" />
+                                <h2 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-4 flex items-center gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                                        <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                                     </div>
                                     Detailed Curriculum
                                 </h2>
-                                <p className="text-slate-600 mb-8 max-w-2xl text-sm md:text-lg leading-relaxed">
+                                <p className="text-slate-600 mb-8 max-w-2xl text-[10px] md:text-lg leading-relaxed">
                                     Learn from Industry Professionals with 10+ Years of Experience <br />
                                     At Academy Of Tech Masters, we believe that the right skills can transform into Professional careers. Our mission is to equip aspiring IT professionals with job-ready expertise through hands-on training, live projects, and expert mentorship.
                                 </p>
@@ -274,19 +274,19 @@ export default function CourseDetail() {
                                 const program = getProgramDetails(course.category);
                                 return (
                                     <div className="program-structure program-details mb-20 scroll-mt-40">
-                                        <h2 className="text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
-                                                <PieChart className="w-5 h-5 text-purple-600" />
+                                        <h2 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
+                                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+                                                <PieChart className="w-4 h-4 text-purple-600" />
                                             </div>
                                             Program Structure & Duration
                                         </h2>
                                         <div className="bg-white rounded-3xl p-5 md:p-8 border border-slate-100 shadow-sm flex flex-col md:flex-row items-center gap-8 md:gap-12">
                                             {/* Pie Chart Representation */}
                                             <div className="relative w-64 h-64 shrink-0">
-                                                <div className={`w-full h-full rounded-full ${program.gradient} p-8 shadow-inner`}>
+                                                <div className={`w-full h-full rounded-full ${program.gradient} p-6 md:p-8 shadow-inner`}>
                                                     <div className="w-full h-full rounded-full bg-white flex items-center justify-center flex-col shadow-sm">
-                                                        <span className="text-4xl font-bold text-slate-900">{program.duration}</span>
-                                                        <span className="text-sm font-medium text-slate-500 uppercase tracking-wide">{program.unit}</span>
+                                                        <span className="text-2xl md:text-4xl font-bold text-slate-900">{program.duration}</span>
+                                                        <span className="text-[10px] md:text-sm font-medium text-slate-500 uppercase tracking-wide">{program.unit}</span>
                                                     </div>
                                                 </div>
                                                 {/* Legend overlay */}
@@ -302,18 +302,18 @@ export default function CourseDetail() {
 
                                             {/* Structure Details */}
                                             <div className="flex-1 space-y-6">
-                                                <div className="grid sm:grid-cols-2 gap-6">
-                                                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                                        <h4 className="font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                                            <Clock className="w-4 h-4 text-emerald-500" /> {program.learning}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                                                    <div className="bg-slate-50 p-3 md:p-4 rounded-xl border border-slate-100">
+                                                        <h4 className="font-bold text-slate-900 mb-1 flex items-center gap-2 text-xs md:text-base">
+                                                            <Clock className="w-3 h-3 text-emerald-500" /> {program.learning}
                                                         </h4>
-                                                        <p className="text-sm text-slate-600">{program.learningText}</p>
+                                                        <p className="text-[10px] md:text-sm text-slate-600">{program.learningText}</p>
                                                     </div>
-                                                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                                        <h4 className="font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                                            <Briefcase className="w-4 h-4 text-blue-500" /> {program.project}
+                                                    <div className="bg-slate-50 p-3 md:p-4 rounded-xl border border-slate-100">
+                                                        <h4 className="font-bold text-slate-900 mb-1 flex items-center gap-2 text-xs md:text-base">
+                                                            <Briefcase className="w-3 h-3 text-blue-500" /> {program.project}
                                                         </h4>
-                                                        <p className="text-sm text-slate-600">{program.projectText}</p>
+                                                        <p className="text-[10px] md:text-sm text-slate-600">{program.projectText}</p>
                                                     </div>
                                                 </div>
 
@@ -348,8 +348,8 @@ export default function CourseDetail() {
                             <div id="outcomes" className="mb-20 scroll-mt-40">
                                 <div className="bg-slate-50/50 border border-slate-100 rounded-3xl p-5 md:p-8">
                                     <div className="text-center mb-8">
-                                        <h2 className="text-2xl font-display font-bold text-slate-900 mb-2">Capstone Project Ideas</h2>
-                                        <p className="text-sm text-slate-500">Real-world projects you will build during this course</p>
+                                        <h2 className="text-xl md:text-2xl font-display font-bold text-slate-900 mb-2">Capstone Project Ideas</h2>
+                                        <p className="text-[10px] md:text-sm text-slate-500">Real-world projects you will build during this course</p>
                                     </div>
                                     <div className="flex flex-col gap-4">
                                         {getCourseOutcomes(course.category).map((outcome, i) => {
@@ -360,8 +360,8 @@ export default function CourseDetail() {
                                                         <span className="font-bold text-blue-600 text-sm">{i + 1}</span>
                                                     </div>
                                                     <div>
-                                                        <h4 className="font-bold text-slate-900 text-sm mb-0.5">{title}</h4>
-                                                        <p className="text-sm text-slate-600 leading-relaxed">{desc}</p>
+                                                        <h4 className="font-bold text-slate-900 text-xs md:text-sm mb-0.5">{title}</h4>
+                                                        <p className="text-[10px] md:text-sm text-slate-600 leading-relaxed">{desc}</p>
                                                     </div>
                                                 </div>
                                             );
@@ -372,19 +372,19 @@ export default function CourseDetail() {
 
                             {/* Career Opportunities Dynamic */}
                             <div className="mb-20 scroll-mt-40">
-                                <h2 className="text-2xl font-display font-bold text-slate-900 mb-6 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center">
-                                        <Briefcase className="w-5 h-5 text-indigo-600" />
+                                <h2 className="text-xl md:text-2xl font-display font-bold text-slate-900 mb-6 flex items-center gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-indigo-100 flex items-center justify-center">
+                                        <Briefcase className="w-4 h-4 md:w-5 md:h-5 text-indigo-600" />
                                     </div>
                                     Career Opportunities
                                 </h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                                     {getProgramDetails(course.category).roles.map((role, idx) => (
-                                        <div key={idx} className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3 hover:shadow-md transition-all hover:border-indigo-100 group">
-                                            <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors shrink-0">
-                                                <TrendingUp className="w-4 h-4 text-slate-400 group-hover:text-indigo-500" />
+                                        <div key={idx} className="bg-white p-3 md:p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3 hover:shadow-md transition-all hover:border-indigo-100 group">
+                                            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors shrink-0">
+                                                <TrendingUp className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-500" />
                                             </div>
-                                            <span className="font-bold text-slate-700 text-sm leading-tight">{role}</span>
+                                            <span className="font-bold text-slate-700 text-[10px] md:text-sm leading-tight">{role}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -392,9 +392,9 @@ export default function CourseDetail() {
 
                             {/* What You Will Get (Program Benefits) */}
                             <div className="mb-20 scroll-mt-40">
-                                <h2 className="text-2xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
-                                        <Award className="w-5 h-5 text-orange-600" />
+                                <h2 className="text-xl md:text-2xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                                        <Award className="w-4 h-4 md:w-5 md:h-5 text-orange-600" />
                                     </div>
                                     What You Will Get
                                 </h2>
@@ -430,10 +430,10 @@ export default function CourseDetail() {
                                                 whileHover={{ scale: 1.02, y: -2, boxShadow: "0 4px 12px -2px rgba(0,0,0,0.08)" }}
                                                 className="flex flex-col items-center text-center p-3 rounded-lg border border-slate-100 hover:border-blue-100 transition-all bg-white group cursor-default"
                                             >
-                                                <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors mb-3", item.bg)}>
-                                                    <Icon className={cn("w-5 h-5", item.color)} />
+                                                <div className={cn("w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors mb-2 md:mb-3", item.bg)}>
+                                                    <Icon className={cn("w-4 h-4 md:w-5 md:h-5", item.color)} />
                                                 </div>
-                                                <h4 className="font-bold text-slate-800 text-sm mb-1 flex items-center justify-center flex-wrap gap-1 leading-tight">
+                                                <h4 className="font-bold text-slate-800 text-[10px] md:text-sm mb-1 flex items-center justify-center flex-wrap gap-1 leading-tight">
                                                     {item.title === "Beginner to PRO" ? (
                                                         <>
                                                             Beginner
@@ -460,7 +460,7 @@ export default function CourseDetail() {
                                                         item.title
                                                     )}
                                                 </h4>
-                                                <p className="text-xs text-slate-500 font-medium leading-tight">{item.text}</p>
+                                                <p className="text-[9px] md:text-xs text-slate-500 font-medium leading-tight">{item.text}</p>
                                             </motion.div>
                                         );
                                     })}
@@ -476,8 +476,8 @@ export default function CourseDetail() {
                                 id="tools" className="mb-20 scroll-mt-40"
                             >
                                 <div className="text-center mb-10">
-                                    <h2 className="text-3xl font-display font-bold text-slate-900 mb-4 tracking-tight">Tools & Technologies</h2>
-                                    <p className="text-slate-500 font-medium">Master the essential software used in the industry</p>
+                                    <h2 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-4 tracking-tight">Tools & Technologies</h2>
+                                    <p className="text-[10px] md:text-sm text-slate-500 font-medium">Master the essential software used in the industry</p>
                                 </div>
                                 <div className="flex flex-col gap-6 w-full relative overflow-hidden">
                                     <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-slate-50 to-transparent z-10" />
@@ -525,9 +525,9 @@ export default function CourseDetail() {
                             </motion.div>
 
                             <div id="instructor" className="mb-20 scroll-mt-40">
-                                <h2 className="text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                                        <Users className="w-5 h-5 text-blue-600" />
+                                <h2 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                                        <Users className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                                     </div>
                                     Meet Your Instructor
                                 </h2>
@@ -539,10 +539,10 @@ export default function CourseDetail() {
                                     </div>
                                     <div>
                                         <div className="flex flex-wrap items-center gap-3 mb-4">
-                                            <h3 className="text-2xl font-bold text-slate-900">{course.trainer}</h3>
-                                            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 border-none px-3 py-1 text-[10px] font-bold uppercase tracking-wider">Lead Instructor</Badge>
+                                            <h3 className="text-xl md:text-2xl font-bold text-slate-900">{course.trainer}</h3>
+                                            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 border-none px-2 md:px-3 py-0.5 md:py-1 text-[9px] md:text-[10px] font-bold uppercase tracking-wider">Lead Instructor</Badge>
                                         </div>
-                                        <p className="text-slate-600 leading-relaxed mb-6">
+                                        <p className="text-slate-600 leading-relaxed mb-6 text-[10px] md:text-base">
                                             With over 10+ years of industry experience, {course.trainer} has mentored thousands of students to successful careers in tech. Expert in {course.category} and real-world project delivery.
                                         </p>
                                         <div className="flex flex-wrap gap-4">
@@ -558,10 +558,10 @@ export default function CourseDetail() {
                             </div>
 
                             <div id="hiring-partners" className="mb-20 scroll-mt-40 text-center">
-                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-[#4285F4] mb-8">
+                                <h2 className="text-lg md:text-3xl lg:text-4xl font-display font-bold text-[#4285F4] mb-4 md:mb-8">
                                     Companies where Our students got placed
                                 </h2>
-                                <p className="text-slate-600 mb-8 text-base md:text-lg">
+                                <p className="text-slate-600 mb-8 text-[10px] md:text-lg">
                                     Our graduates are hired by top MNCs and product-based companies.
                                 </p>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-10 items-center">
@@ -590,14 +590,14 @@ export default function CourseDetail() {
                             </div>
 
                             <div id="certifications" className="mb-12 scroll-mt-40">
-                                <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                                        <Award className="w-5 h-5 text-blue-600" />
+                                <h2 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                                        <Award className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                                     </div>
                                     Certifications & Career Preparation
                                 </h2>
-                                <div className="bg-slate-50 rounded-3xl p-5 md:p-8 border border-slate-100">
-                                    <h4 className="text-lg font-bold text-slate-900 mb-6">Certifications Covered / Recommended:</h4>
+                                <div className="bg-slate-50 rounded-3xl p-5 md:p-8 border border-slate-100 text-left">
+                                    <h4 className="text-sm md:text-lg font-bold text-slate-900 mb-6">Certifications Covered / Recommended:</h4>
                                     <ul className="space-y-4">
                                         {(course.category === "AI/Machine Learning" ? [
                                             "Microsoft Certified: Azure AI Engineer Associate (AI-102)",
@@ -682,11 +682,11 @@ export default function CourseDetail() {
                                             "Google UX Design (Recommended External Certification)",
                                             "Adobe XD Prototyping Certificate (Optional)"
                                         ]).map((cert, i) => (
-                                            <li key={i} className="flex items-start gap-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                                                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-green-600">
-                                                    <CheckCircle2 className="w-4 h-4" />
+                                            <li key={i} className="flex items-start gap-3 md:gap-4 p-3 md:p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-green-600">
+                                                    <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                                                 </div>
-                                                <span className="font-bold text-slate-700 mt-1 text-sm md:text-base">{cert}</span>
+                                                <span className="font-bold text-slate-700 mt-0.5 text-[10px] md:text-base text-left leading-relaxed">{cert}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -694,9 +694,9 @@ export default function CourseDetail() {
                             </div>
                             {/* FAQ Section */}
                             <div id="faq" className="mb-20 scroll-mt-40">
-                                <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
-                                        <MessageSquare className="w-5 h-5 text-orange-600" />
+                                <h2 className="text-xl md:text-3xl font-display font-bold text-slate-900 mb-8 flex items-center gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                                        <MessageSquare className="w-4 h-4 md:w-5 md:h-5 text-orange-600" />
                                     </div>
                                     Frequently Asked Questions
                                 </h2>
@@ -713,20 +713,20 @@ export default function CourseDetail() {
                                             className="border border-slate-100 rounded-2xl bg-white overflow-hidden shadow-sm"
                                         >
                                             <button
-                                                className="w-full text-left p-5 flex items-center justify-between hover:bg-slate-50 transition-colors"
+                                                className="w-full text-left p-4 flex items-center justify-between hover:bg-slate-50 transition-colors"
                                                 onClick={() => {
                                                     const faqIdx = (activeModule === i ? null : i);
                                                     setActiveModule(faqIdx as any);
                                                 }}
                                             >
-                                                <span className="font-bold text-slate-900 pr-4 text-sm md:text-base">{faq.q}</span>
+                                                <span className="font-bold text-slate-900 pr-3 text-[10px] md:text-base">{faq.q}</span>
                                                 <ChevronDown className={cn("w-4 h-4 md:w-5 md:h-5 text-slate-400 transition-transform duration-300", activeModule === i && "rotate-180")} />
                                             </button>
                                             <div className={cn(
                                                 "transition-all duration-300 ease-in-out",
-                                                activeModule === i ? "max-h-96 px-5 pb-5 opacity-100" : "max-h-0 px-5 pb-0 opacity-0 overflow-hidden"
+                                                activeModule === i ? "max-h-96 px-4 pb-4 opacity-100" : "max-h-0 px-4 pb-0 opacity-0 overflow-hidden"
                                             )}>
-                                                <p className="text-slate-600 leading-relaxed font-medium text-sm md:text-base">{faq.a}</p>
+                                                <p className="text-slate-600 leading-relaxed font-medium text-[10px] md:text-base">{faq.a}</p>
                                             </div>
                                         </motion.div>
                                     ))}
@@ -899,7 +899,7 @@ export default function CourseDetail() {
 
             {/* Related Courses */}
             <section className="py-16 md:py-24 bg-slate-50">
-                <div className="px-6 lg:px-12">
+                <div className="container mx-auto px-6">
                     <div className="flex items-center justify-between mb-12">
                         <div>
                             <h2 className="text-3xl font-bold text-slate-900 mb-2">Explore Related Courses</h2>
