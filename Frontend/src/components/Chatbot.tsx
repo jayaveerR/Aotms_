@@ -71,7 +71,7 @@ const Chatbot: React.FC = () => {
         { id: 1, text: 'Hello! How can I help you today?', sender: 'bot' },
       ]);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);

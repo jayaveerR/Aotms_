@@ -41,9 +41,10 @@ const FeedbackPage = () => {
             });
             setFormData({ name: "", email: "", category: "Course Content", message: "" });
             setRating(0);
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(error);
-            toast.error(error.response?.data?.msg || "Failed to submit feedback. Please try again.");
+            const errorMessage = (error as any).response?.data?.msg || "Failed to submit feedback. Please try again.";
+            toast.error(errorMessage);
         } finally {
             setLoading(false);
         }

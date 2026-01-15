@@ -22,7 +22,8 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    let { name, value } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
 
     // Apply Input Sanitization
     switch (name) {
@@ -79,9 +80,10 @@ const Contact = () => {
       await axios.post(API_URL, formData);
       toast.success("Message sent successfully! We will get back to you soon.");
       setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      toast.error(error.response?.data?.msg || "Something went wrong. Please try again.");
+      const errorMessage = (error as any).response?.data?.msg || "Something went wrong. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
