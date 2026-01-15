@@ -54,7 +54,7 @@ export const ProfessionalPrograms = () => {
                         World Class Education
                     </Badge>
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mb-5 whitespace-nowrap overflow-hidden text-ellipsis text-slate-900">
-                        Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Training Programs</span>
+                        Professional <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Training Programs</span>
                     </h2>
                     <p className="text-sm md:text-base text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
                         Accelerate your career with our industry-leading certification programs.

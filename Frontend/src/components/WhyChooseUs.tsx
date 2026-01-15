@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useAcademyDifference } from "@/hooks/useAcademyDifference";
 import { Skeleton } from "./ui/skeleton";
+import { Sparkles } from "lucide-react";
 
 const fallbackReasons = [
   {
@@ -60,9 +61,17 @@ export const WhyChooseUs = () => {
         <div className="text-center mb-10">
           <motion.span
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-blue-100/50 backdrop-blur-sm border border-blue-200 text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A] text-xs font-black tracking-widest uppercase mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50/50 backdrop-blur-sm border border-blue-200 rounded-full uppercase tracking-widest shadow-sm"
           >
-            Why Choose AOTMS
+
+            {/* ICON — SOLID COLOR */}
+            <Sparkles className="w-3.5 h-3.5 text-[#FD5A1A]" />
+
+            {/* TEXT — GRADIENT */}
+            <span className="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">
+              Why Choose AOTMS
+            </span>
+
           </motion.span>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mb-5 font-display text-slate-900">
             The Academy <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Difference</span>

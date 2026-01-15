@@ -1,4 +1,4 @@
-import { BookOpen, Terminal, Laptop, Briefcase, LucideIcon, ArrowRight } from "lucide-react";
+import { BookOpen, Terminal, Laptop, Briefcase, LucideIcon, ArrowRight, Sparkles } from "lucide-react";
 
 interface Step {
   number: string;
@@ -45,6 +45,7 @@ export const LearningProcess = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0075CF] text-xs font-bold uppercase tracking-wider mb-4">
+            <Sparkles className="w-3.5 h-3.5 mr-2 fill-current" />
             Our Learning Model
           </div>
 

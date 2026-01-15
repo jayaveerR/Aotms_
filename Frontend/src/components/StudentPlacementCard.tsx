@@ -1,5 +1,5 @@
 import React from 'react';
-import { StudentPlacement } from '@/data/placements';
+import { StudentPlacement } from '@/hooks/usePlacements';
 
 interface StudentPlacementCardProps {
   placement: StudentPlacement;

@@ -99,6 +99,46 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
     line-height: 1.5;
+    /* Mobile performance optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Hardware acceleration for smoother animations - Applied selectively instead of globally to prevent fixed positioning issues */
+  img,
+  video,
+  .hardware-accelerated {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Touch optimization for mobile */
+  @media (hover: none) and (pointer: coarse) {
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button,
+    a {
+      touch-action: manipulation;
+    }
   }
 
   h1,
@@ -280,14 +320,5 @@
   iframe {
     max-width: 100%;
     height: auto;
-  }
-
-  /* Fix 6: Ensure readable text */
-  p,
-  li,
-  span,
-  div {
-    font-size: 1rem;
-    /* Base size 16px */
   }
 }

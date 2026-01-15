@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Factory, Users, Briefcase } from "lucide-react";
+import { Factory, Users, Briefcase, Sparkles } from "lucide-react";
 
 const highlights = [
   {
@@ -52,13 +52,22 @@ export const AboutSection = () => {
           {/* Right Column - Content */}
           <div className="space-y-8 order-2 lg:order-2 text-center lg:text-left">
             <div className="flex flex-col gap-3 items-center lg:items-start">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50/50 backdrop-blur-sm border border-blue-200 text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A] text-xs font-black rounded-full uppercase tracking-widest shadow-sm">
-                About Our training model
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50/50 backdrop-blur-sm border border-blue-200 rounded-full uppercase tracking-widest shadow-sm">
+
+                {/* ICON — SOLID COLOR */}
+                <Sparkles className="w-3.5 h-3.5 text-[#FD5A1A]" />
+
+                {/* TEXT — GRADIENT */}
+                <span className="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">
+                  About Our Training Model
+                </span>
+
               </span>
+
             </div>
 
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.15]">
-              World-class <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">education</span>,<br className="hidden md:block" /> and the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Academy</span> difference.
+              World-Class <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Education</span>,<br className="hidden md:block" /> and the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Academy</span> difference.
             </h2>
 
             <p className="text-base text-slate-500 mx-auto lg:mx-0 leading-relaxed font-medium max-w-xl">
@@ -129,7 +138,7 @@ export const AboutSection = () => {
                   <div className="h-8 w-px bg-border" />
                   <div className="text-right">
                     <div className="text-xs font-semibold text-foreground">Our Founder's Vision</div>
-                    <div className="text-xs text-accent font-bold">Mr.Sayyed Ameenmuddin</div>
+                    <div className="text-xs text-accent font-bold">Mr.Sayyed Ameenuddin</div>
                   </div>
                 </div>
               </div>

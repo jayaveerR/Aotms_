@@ -39,6 +39,11 @@ const defaultLogos: Logo[] = [
     { id: "tech-13", description: "OpenAI", icon: SiOpenai, color: "#412991" },
     { id: "tech-14", description: "MongoDB", icon: SiMongodb, color: "#47A248" },
     { id: "tech-15", description: "Google Cloud", icon: SiGooglecloud, color: "#4285F4" },
+    { id: "tech-16", description: "Jenkins", icon: SiJenkins, color: "#4285F4" },
+    { id: "tech-17", description: "Linux", icon: SiLinux, color: "#4285F4" },
+    { id: "tech-18", description: "Terraform", icon: SiTerraform, color: "#4285F4" },
+    { id: "tech-19", description: "Django", icon: SiDjango, color: "#050f1eff" },
+    { id: "tech-20", description: "Spring Boot", icon: SiSpringboot, color: "#1fc25eff" },
 ];
 
 interface CompanyLogosProps {
@@ -47,13 +52,44 @@ interface CompanyLogosProps {
     className?: string;
 }
 
-const CompanyLogos = ({
+// Memoized logo item component to prevent unnecessary re-renders
+const LogoItem = React.memo(({ logo, index }: { logo: Logo; index: number }) => {
+    const Icon = logo.icon;
+    return (
+        <CarouselItem
+            key={`${logo.id}-${index}`}
+            className="pl-4 flex basis-auto min-w-[150px] justify-center"
+        >
+            <div className="flex items-center gap-3 px-4 py-2 group select-none">
+                {Icon && (
+                    <Icon
+                        className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400 group-hover:scale-110 transition-transform duration-300 will-change-transform"
+                        style={{ color: logo.color }}
+                    />
+                )}
+                <span className="text-sm sm:text-base font-bold text-slate-600 whitespace-nowrap">{logo.description}</span>
+            </div>
+        </CarouselItem>
+    );
+});
+
+LogoItem.displayName = 'LogoItem';
+
+const CompanyLogos = React.memo(({
     logos = defaultLogos,
     className = "",
 }: CompanyLogosProps) => {
     const plugins = React.useMemo(() => [
-        AutoScroll({ playOnInit: true, speed: 1.0, stopOnInteraction: false, stopOnMouseEnter: true })
+        AutoScroll({
+            playOnInit: true,
+            speed: 0.8, // Slightly slower for smoother animation
+            stopOnInteraction: false,
+            stopOnMouseEnter: true
+        })
     ], []);
+
+    // Memoize the duplicated logos array
+    const duplicatedLogos = React.useMemo(() => [...logos, ...logos], [logos]);
 
     if (!logos || logos.length === 0) return null;
 
@@ -61,30 +97,14 @@ const CompanyLogos = ({
         <section className={`py-4 bg-slate-50 border-b border-slate-100 ${className}`}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-center">
                 <Carousel
-                    opts={{ loop: true, align: "start" }}
+                    opts={{ loop: true, align: "start", skipSnaps: false, dragFree: true }}
                     plugins={plugins}
                     className="w-full"
                 >
                     <CarouselContent className="-ml-4">
-                        {[...logos, ...logos].map((logo, index) => {
-                            const Icon = logo.icon;
-                            return (
-                                <CarouselItem
-                                    key={`${logo.id}-${index}`}
-                                    className="pl-4 flex basis-auto min-w-[150px] justify-center"
-                                >
-                                    <div className="flex items-center gap-3 px-4 py-2 group select-none">
-                                        {Icon && (
-                                            <Icon
-                                                className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400 group-hover:scale-110 transition-transform duration-300"
-                                                style={{ color: logo.color }}
-                                            />
-                                        )}
-                                        <span className="text-sm sm:text-base font-bold text-slate-600 whitespace-nowrap">{logo.description}</span>
-                                    </div>
-                                </CarouselItem>
-                            );
-                        })}
+                        {duplicatedLogos.map((logo, index) => (
+                            <LogoItem key={`${logo.id}-${index}`} logo={logo} index={index} />
+                        ))}
                     </CarouselContent>
                 </Carousel>
                 <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"></div>
@@ -92,6 +112,8 @@ const CompanyLogos = ({
             </div>
         </section>
     );
-};
+});
+
+CompanyLogos.displayName = 'CompanyLogos';
 
 export { CompanyLogos };

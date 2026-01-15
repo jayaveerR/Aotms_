@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useFeedback } from "@/hooks/useFeedback";
 import { Skeleton } from "./ui/skeleton";
+import { Sparkles } from "lucide-react";
 
 export const Testimonials = () => {
     const { data: rawFeedback, isLoading } = useFeedback();
@@ -50,8 +51,16 @@ export const Testimonials = () => {
                     className="flex flex-col items-center justify-center w-full mx-auto mb-8 text-center"
                 >
                     <div className="mb-4">
-                        <span className="text-xs font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A] border border-blue-200 py-1.5 px-4 rounded-full bg-blue-50/50 backdrop-blur-sm">
-                            Alumni Reviews
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50/50 backdrop-blur-sm border border-blue-200 rounded-full uppercase tracking-widest shadow-sm">
+
+                            {/* ICON — SOLID COLOR */}
+                            <Sparkles className="w-3.5 h-3.5 text-[#FD5A1A]" />
+
+                            {/* TEXT — GRADIENT */}
+                            <span className="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">
+                                Alumni Reviews
+                            </span>
+
                         </span>
                     </div>
 

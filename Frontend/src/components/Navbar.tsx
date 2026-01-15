@@ -78,7 +78,7 @@ const navLinks = [
     hasDropdown: false, // Changed to false as Info is now separate
   },
   {
-    name: "Info",
+    name: "Insights",
     href: "#",
     hasDropdown: true,
     dropdownItems: [
@@ -309,7 +309,7 @@ export const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="bg-[#0075CF] text-white text-xs font-semibold border-b border-primary-foreground/10 relative z-50 py-1 md:py-0"
+              className="bg-[#0066CC] text-white text-xs font-semibold border-b border-primary-foreground/10 relative z-50 py-1 md:py-0"
             >
               <div className="container mx-auto px-4 h-8 md:h-9 flex items-center justify-between">
                 <div className="flex items-center gap-3 md:gap-6">
@@ -506,7 +506,7 @@ export const Header = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-3">
-                  <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg bg-[#0075CF] shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all">
+                  <Button asChild className="h-10 px-6 font-bold rounded-full shadow-lg bg-[#0066CC] shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all">
                     <Link to="/contact">Book Free Demo</Link>
                   </Button>
                   <Button variant="ghost" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="font-bold hover:bg-primary/5">
@@ -540,13 +540,13 @@ export const Header = () => {
           <>
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 z-[99998] bg-black/60 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
               initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-white z-[1001] shadow-2xl flex flex-col text-slate-900"
+              className="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-white z-[99999] shadow-2xl flex flex-col text-slate-900"
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-border/50">
@@ -569,13 +569,16 @@ export const Header = () => {
                       <p className="font-bold text-sm truncate text-slate-900">{user?.name}</p>
                       <p className="text-xs text-slate-500 truncate">{user?.email}</p>
                       <div className="flex gap-2 mt-2">
-                        <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-[10px] font-bold text-white bg-[#0075CF] px-3 py-1.5 rounded-md uppercase tracking-wider">Dashboard</Link>
+                        <Link to="/cart" onClick={() => setIsMobileMenuOpen(false)} className="text-[10px] font-bold text-white bg-[#0066CC] px-3 py-1.5 rounded-md uppercase tracking-wider flex items-center gap-1.5">
+                          <FaBook className="w-3 h-3" /> Cart ({cartItemCount})
+                        </Link>
+                        <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-[10px] font-bold text-white bg-[#0066CC] px-3 py-1.5 rounded-md uppercase tracking-wider">Dashboard</Link>
                       </div>
                     </div>
                   </div>
                 ) : (
                   <div className="flex flex-col gap-3 mb-6">
-                    <Button asChild className="w-full h-12 rounded-xl font-bold shadow-lg bg-[#0075CF] text-white hover:bg-[#0066CC]">
+                    <Button asChild className="w-full h-12 rounded-xl font-bold shadow-lg bg-[#0066CC] text-white hover:bg-[#0052a3]">
                       <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Book Free Demo</Link>
                     </Button>
                     <div className="grid grid-cols-2 gap-3">
@@ -655,7 +658,7 @@ export const Header = () => {
               {/* Footer Actions */}
               {isLoggedIn && (
                 <div className="p-4 border-t border-white/20">
-                  <Button variant="ghost" className="w-full justify-start text-red-200 hover:text-white hover:bg-red-500/50 text-xs font-bold h-9" onClick={logout}>
+                  <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 text-xs font-bold h-9 bg-red-50/50" onClick={logout}>
                     <LogOut className="w-4 h-4 mr-2" /> Sign Out
                   </Button>
                 </div>

@@ -386,7 +386,7 @@ export const AboutUs = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <h3 className="text-2xl font-bold mb-1">Mr.Sayyed Ameenmuddin</h3>
+                  <h3 className="text-2xl font-bold mb-1">Mr.Sayyed Ameenuddin</h3>
                   <p className="text-blue-200 font-medium">Founder & CEO</p>
                 </div>
               </div>

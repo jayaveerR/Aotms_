@@ -107,9 +107,9 @@ const Dashboard = () => {
 
     // Stats Data with logo colors (lighter blue)
     const statsData = [
-        { label: "Active Courses", value: "0", subtext: "Start Learning", icon: BookOpen, gradient: "from-blue-600 to-blue-700" },
+        { label: "Active Courses", value: "0", subtext: "Start Learning", icon: BookOpen, gradient: "from-[#0066CC] to-[#0052a3]" },
         { label: "Workshops", value: workshops.length.toString(), subtext: "Available Now", icon: Zap, gradient: "from-[#FD5A1A] to-orange-600" },
-        { label: "Community", value: allLeads.length.toString(), subtext: "Students Active", icon: Users, gradient: "from-blue-600 to-[#FD5A1A]" },
+        { label: "Community", value: allLeads.length.toString(), subtext: "Students Active", icon: Users, gradient: "from-[#0066CC] to-[#FD5A1A]" },
         { label: "Hackathons", value: hackathons.length.toString(), subtext: "Competitions", icon: Trophy, gradient: "from-[#FD5A1A] to-red-600" },
     ];
 
@@ -132,7 +132,7 @@ const Dashboard = () => {
                         <div className="flex-1 min-w-0">
                             <p className="text-xs md:text-sm text-slate-700 font-medium">
                                 <span className="font-bold text-slate-900">{currentPopLead.name.split(' ')[0]}</span> just joined{' '}
-                                <span className="text-blue-600 font-bold">{currentPopLead.course || "an event"}</span>!
+                                <span className="text-[#0066CC] font-bold">{currentPopLead.course || "an event"}</span>!
                             </p>
                         </div>
                     </motion.div>
@@ -148,11 +148,11 @@ const Dashboard = () => {
 
                     <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6">
                         <div className="space-y-2 md:space-y-3 max-w-2xl">
-                            <div className="inline-flex items-center gap-1.5 px-2.5 md:px-3 py-1 bg-gradient-to-r from-blue-50 to-orange-50 backdrop-blur-sm border border-blue-200 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1 md:mb-2">
+                            <div className="inline-flex items-center gap-1.5 px-2.5 md:px-3 py-1 bg-gradient-to-r from-blue-50 to-orange-50 backdrop-blur-sm border border-[#0066CC]/20 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-[#0066CC] mb-1 md:mb-2">
                                 <LayoutDashboard className="w-3 h-3" /> Dashboard
                             </div>
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
-                                Hello, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-[#FD5A1A]">{user?.name?.split(' ')[0] || "Student"}</span> 👋
+                                Hello, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066CC] to-[#FD5A1A]">{user?.name?.split(' ')[0] || "Student"}</span> 👋
                             </h1>
                             <p className="text-slate-600 font-medium text-sm sm:text-base md:text-lg max-w-lg">
                                 Ready to level up? Explore new courses and track your progress here.
@@ -161,7 +161,7 @@ const Dashboard = () => {
                         <div className="flex items-center gap-2 md:gap-3 w-full md:w-auto">
                             <Button
                                 onClick={() => window.location.href = '/courses'}
-                                className="h-11 md:h-12 px-4 md:px-6 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-600/90 hover:to-blue-700/90 text-white font-bold shadow-lg shadow-blue-900/20 flex-1 md:flex-none text-sm md:text-base"
+                                className="h-11 md:h-12 px-4 md:px-6 rounded-xl bg-gradient-to-r from-[#0066CC] to-[#0052a3] hover:from-[#0066CC]/90 hover:to-[#0066CC]/90 text-white font-bold shadow-lg shadow-[#0066CC]/20 flex-1 md:flex-none text-sm md:text-base"
                             >
                                 <BookOpen className="w-4 h-4 mr-2" /> <span className="hidden sm:inline">Browse</span> Courses
                             </Button>
@@ -242,13 +242,13 @@ const Dashboard = () => {
                                         >
                                             {[...allLeads.slice(0, 10), ...allLeads.slice(0, 10)].map((lead, idx) => (
                                                 <div key={`${idx}-lead`} className="flex items-center gap-2 md:gap-3 bg-gradient-to-br from-slate-50 to-blue-50/30 border border-slate-100 p-2.5 md:p-3 rounded-xl md:rounded-2xl w-[220px] md:w-[260px] shrink-0">
-                                                    <div className="h-9 w-9 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-600 to-[#FD5A1A] shadow-sm flex items-center justify-center text-[10px] md:text-xs font-bold text-white">
+                                                    <div className="h-9 w-9 md:h-10 md:w-10 rounded-lg md:rounded-xl bg-gradient-to-br from-[#0066CC] to-[#FD5A1A] shadow-sm flex items-center justify-center text-[10px] md:text-xs font-bold text-white">
                                                         {lead.name.slice(0, 2).toUpperCase()}
                                                     </div>
                                                     <div className="min-w-0 flex-1">
                                                         <p className="text-xs md:text-sm font-bold text-slate-900 truncate">{lead.name}</p>
                                                         <p className="text-[9px] md:text-[10px] text-slate-500 font-medium truncate">
-                                                            Joined <span className="text-blue-600 font-bold">{lead.course || "Event"}</span>
+                                                            Joined <span className="text-[#0066CC] font-bold">{lead.course || "Event"}</span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -267,7 +267,7 @@ const Dashboard = () => {
                                 <h3 className="text-lg md:text-xl font-black text-slate-900">Upcoming Events</h3>
                                 <Button
                                     variant="ghost"
-                                    className="text-blue-600 hover:text-[#FD5A1A] hover:bg-orange-50 font-bold text-xs md:text-sm h-7 md:h-8 px-2 md:px-3"
+                                    className="text-[#0066CC] hover:text-[#FD5A1A] hover:bg-orange-50 font-bold text-xs md:text-sm h-7 md:h-8 px-2 md:px-3"
                                     onClick={() => window.location.href = '/events'}
                                 >
                                     View All
@@ -352,13 +352,13 @@ const Dashboard = () => {
                     <div className="lg:col-span-4 space-y-4 md:space-y-6">
 
                         {/* Profile Card with Logo Colors */}
-                        <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl md:rounded-[2.5rem] p-6 md:p-8 text-white relative overflow-hidden shadow-2xl shadow-blue-900/20 group">
+                        <div className="bg-gradient-to-br from-[#0066CC] to-[#0052a3] rounded-2xl md:rounded-[2.5rem] p-6 md:p-8 text-white relative overflow-hidden shadow-2xl shadow-[#0066CC]/20 group">
                             <div className="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 bg-[#FD5A1A]/20 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700" />
                             <div className="absolute bottom-0 left-0 w-24 h-24 md:w-32 md:h-32 bg-white/10 rounded-full blur-2xl -ml-10 -mb-10" />
 
                             <div className="relative z-10 flex flex-col items-center text-center">
                                 <div className="w-20 h-20 md:w-24 md:h-24 p-1.5 bg-white/10 backdrop-blur-md rounded-full mb-4 md:mb-5">
-                                    <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-blue-600 text-2xl md:text-3xl font-black shadow-inner">
+                                    <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-[#0066CC] text-2xl md:text-3xl font-black shadow-inner">
                                         {user?.name?.charAt(0).toUpperCase()}
                                     </div>
                                 </div>
@@ -377,7 +377,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
 
-                                <Button className="w-full bg-white text-blue-600 hover:bg-blue-50 font-black h-10 md:h-12 rounded-xl transition-colors text-sm md:text-base">
+                                <Button className="w-full bg-white text-[#0066CC] hover:bg-[#0066CC]/10 font-black h-10 md:h-12 rounded-xl transition-colors text-sm md:text-base">
                                     Edit Profile
                                 </Button>
                             </div>
@@ -399,7 +399,7 @@ const Dashboard = () => {
                                 <p className="text-[10px] md:text-xs text-slate-400 font-medium mb-3 md:mb-4">Enroll in a course to track progress.</p>
                                 <Button
                                     onClick={() => window.location.href = '/courses'}
-                                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-600/90 hover:to-blue-700/90 text-white font-bold h-9 md:h-10 rounded-xl text-xs md:text-sm"
+                                    className="w-full bg-gradient-to-r from-[#0066CC] to-[#0052a3] hover:from-[#0066CC]/90 hover:to-[#0066CC]/90 text-white font-bold h-9 md:h-10 rounded-xl text-xs md:text-sm"
                                 >
                                     Start Learning
                                 </Button>

@@ -82,18 +82,18 @@ export const CourseRequestSection = () => {
     };
 
     return (
-        <section className="py-8 md:py-16 lg:py-20 bg-[#007FCF] relative overflow-hidden w-full">
+        <section className="py-8 md:py-16 lg:py-20 bg-[#0066CC] relative overflow-hidden w-full">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-0 left-1/3 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
             <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 relative z-10">
                 <div className="flex flex-col lg:flex-row items-center justify-between relative gap-10 lg:gap-16">
-                    {/* Left Side - Course Image Auto-Scroll Carousel */}
-                    <div className="lg:w-[50%] relative h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden flex flex-col justify-center gap-4 sm:gap-6 order-2 lg:order-1">
+                    {/* Right Side - Course Image Auto-Scroll Carousel */}
+                    <div className="lg:w-[50%] relative h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden flex flex-col justify-center gap-4 sm:gap-6 order-2 lg:order-2">
                         {/* Overlay Gradient for smooth fade on sides */}
-                        <div className="absolute top-0 left-0 bottom-0 w-20 bg-gradient-to-r from-[#007FCF] to-transparent z-10" />
-                        <div className="absolute top-0 right-0 bottom-0 w-20 bg-gradient-to-l from-[#007FCF] to-transparent z-10" />
+                        <div className="absolute top-0 left-0 bottom-0 w-20 bg-gradient-to-r from-[#0066CC] to-transparent z-10" />
+                        <div className="absolute top-0 right-0 bottom-0 w-20 bg-gradient-to-l from-[#0066CC] to-transparent z-10" />
 
                         {marqueeCourses.length > 0 ? (
                             <>
@@ -155,8 +155,8 @@ export const CourseRequestSection = () => {
                         )}
                     </div>
 
-                    {/* Right Side - Content */}
-                    <div className="lg:w-[45%] flex flex-col justify-center relative z-10 w-full order-1 lg:order-2 text-center lg:text-left">
+                    {/* Left Side - Content */}
+                    <div className="lg:w-[45%] flex flex-col justify-center relative z-10 w-full order-1 lg:order-1 text-center lg:text-left">
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}

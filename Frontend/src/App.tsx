@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, MotionConfig } from "framer-motion";
 import { useEffect, Suspense, lazy } from "react";
 
 // Lazy Load Pages
@@ -26,6 +26,7 @@ const FAQPage = lazy(() => import("./pages/FAQPage"));
 const ComingSoon = lazy(() => import("./pages/ComingSoon"));
 const CoursesPage = lazy(() => import("./pages/CoursesPage"));
 const InternshipsPage = lazy(() => import("./pages/InternshipsPage"));
+const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 
 import Chatbot from "./components/Chatbot";
 
@@ -38,30 +39,33 @@ export const LoadingFallback = () => (
 );
 
 const CustomCursor = () => {
-  const mouseX = useMotionValue(-100);
-  const mouseY = useMotionValue(-100);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", moveCursor);
     return () => {
       window.removeEventListener("mousemove", moveCursor);
     };
-  }, [mouseX, mouseY]);
+  }, [cursorX, cursorY]);
 
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 bg-orange-500 rounded-full pointer-events-none z-[9999] hidden md:block"
+        className="fixed top-0 left-0 w-3.5 h-3.5 bg-orange-500 rounded-full pointer-events-none z-[99999] hidden md:block"
         style={{
-          x: mouseX,
-          y: mouseY,
+          x: cursorX,
+          y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
+        }}
+        transition={{
+          duration: 0
         }}
       />
     </>
@@ -85,42 +89,44 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <CustomCursor />
-        <Chatbot />
-        <ScrollButtons />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <ScrollToTop />
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/course/:slug" element={<CourseDetail />} />
-              <Route path="/what-we-do" element={<WhatWeDo />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/feedback" element={<FeedbackPage />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/placements" element={<Placements />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/hackathon" element={<Hackathon />} />
-              <Route path="/workshop" element={<Workshop />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/courses" element={<CoursesPage />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+    <MotionConfig reducedMotion="never">
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <CustomCursor />
+          <Chatbot />
+          <ScrollButtons />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <ScrollToTop />
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/course/:slug" element={<CourseDetail />} />
+                <Route path="/what-we-do" element={<WhatWeDo />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/feedback" element={<FeedbackPage />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/placements" element={<Placements />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/hackathon" element={<Hackathon />} />
+                <Route path="/workshop" element={<Workshop />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/courses" element={<CoursesPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
 
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/internships" element={<InternshipsPage />} />
-              <Route path="/resources" element={<ComingSoon />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/internships" element={<InternshipsPage />} />
+                <Route path="/resources" element={<ResourcesPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </MotionConfig>
   );
 };
 
