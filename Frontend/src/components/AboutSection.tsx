@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Factory, Users, Briefcase, Sparkles } from "lucide-react";
+import { Factory, Users, Briefcase, Sparkles, ArrowRight } from "lucide-react";
 
 const highlights = [
   {
@@ -47,7 +47,7 @@ export const AboutSection = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
 
           {/* Right Column - Content */}
           <div className="space-y-8 order-2 lg:order-2 text-center lg:text-left">
@@ -66,7 +66,7 @@ export const AboutSection = () => {
 
             </div>
 
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.15]">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.15]">
               World-Class <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Education</span>,<br className="hidden md:block" /> and the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075CF] to-[#FD5A1A]">Academy</span> difference.
             </h2>
 
@@ -97,7 +97,8 @@ export const AboutSection = () => {
                 onClick={() => window.location.href = '/about-us'}
                 className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold text-white transition-colors bg-[#0075CF] rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 shadow-lg shadow-blue-500/20"
               >
-                Know More About Us
+                <ArrowRight />
+                <span className="ml-2">Know More About Us</span>
               </button>
             </div>
           </div>

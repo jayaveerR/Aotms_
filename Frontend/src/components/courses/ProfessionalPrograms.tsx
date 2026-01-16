@@ -87,7 +87,7 @@ export const ProfessionalPrograms = () => {
                             {courses.map((course) => (
                                 <div
                                     key={course.id}
-                                    className="embla__slide flex-[0_0_85%] sm:flex-[0_0_50%] md:flex-[0_0_calc(33.333%-22px)] px-4 md:px-0"
+                                    className="embla__slide flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_calc(33.333%-22px)] px-4 md:px-0"
                                 >
                                     <CourseCard course={course} />
                                 </div>

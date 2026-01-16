@@ -1,20 +1,13 @@
 import { useEffect } from "react";
 import { Calendar, Cpu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEvents } from "@/hooks/useEvents";
+import { useEvents, EventItem } from "@/hooks/useEvents";
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface EventItem {
-    id: string;
-    _id?: string;
-    name: string;
-    mode: "Online" | "Offline";
-    date: string;
-    thumbnailUrl: string;
-}
+
 
 interface UpcomingHackathonsProps {
-    onSelect?: (hackathon: any) => void;
+    onSelect?: (hackathon: EventItem) => void;
     selectedId?: string;
 }
 

@@ -185,7 +185,7 @@
     }
 
     .chat-toggle-btn {
-        padding: 16px 30px;
-        /* Mobile Padding (User Request) */
+        padding: 10px 20px;
+        font-size: 0.85rem;
     }
 }

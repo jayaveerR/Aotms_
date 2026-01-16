@@ -217,7 +217,7 @@ const TestimonialCarousel = () => {
   );
 };
 
-export const AboutUs = () => {
+export const WhoWeAre = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -464,4 +464,4 @@ export const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default WhoWeAre;

@@ -14,10 +14,11 @@ export interface EventItem {
     actionButtonText?: string;
     whatYouWillLearn?: string[];
     type?: string;
+    _id?: string;
 }
 
 const fetchEvents = async (type?: string): Promise<EventItem[]> => {
-    const url = type 
+    const url = type
         ? `${import.meta.env.VITE_API_URL}/api/events?type=${type}`
         : `${import.meta.env.VITE_API_URL}/api/events`;
     const { data } = await axios.get(url);

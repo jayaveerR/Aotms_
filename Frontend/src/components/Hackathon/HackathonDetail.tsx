@@ -1,4 +1,4 @@
-import { Hackathon } from "@/data/events";
+import { Hackathon } from "../../data/events";
 import { Button } from "@/components/ui/button";
 import { Users, Globe, Calendar, Award, Trophy, Info } from "lucide-react";
 

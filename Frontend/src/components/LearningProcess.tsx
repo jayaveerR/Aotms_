@@ -101,10 +101,10 @@ export const LearningProcess = () => {
 
         <div className="mt-16 flex justify-center">
           <button
-            onClick={() => window.location.href = '/course/ai-ml'}
+            onClick={() => window.location.href = '/courses'}
             className="inline-flex items-center justify-center h-14 px-10 text-lg font-bold text-white transition-all bg-[#0075CF] rounded-full hover:bg-blue-700 hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/25 ring-offset-2 focus:ring-2 focus:ring-blue-500"
           >
-            Start Your Journey
+            <span className="ml-2">Start Your Journey</span>
             <ArrowRight className="w-6 h-6 ml-2" strokeWidth={2.5} />
           </button>
         </div>

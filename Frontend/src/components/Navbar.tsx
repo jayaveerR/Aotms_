@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaBookOpen, FaXTwitter } from "react-icons/fa6";
 import {
   Menu, X, ChevronDown, Phone, Mail,
   User, LogOut, Eye, EyeOff, KeyRound, ArrowLeft,
@@ -9,7 +10,7 @@ import {
 import {
   FaReact, FaAws, FaBrain, FaChartBar, FaShieldAlt,
   FaJava, FaPython, FaDatabase, FaCloud, FaCode,
-  FaInstagram, FaYoutube, FaLinkedin, FaTwitter,
+  FaInstagram, FaYoutube, FaLinkedin, FaTelegram,
   FaNetworkWired, FaUserTie, FaAngular, FaBook, FaFacebook
 } from "react-icons/fa";
 import { SiMui, SiThreads } from "react-icons/si";
@@ -23,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
 import { cn } from "@/lib/utils";
+import { TopNavbar } from "./TopNavbar";
 
 // --- Configuration & Data ---
 
@@ -52,7 +54,7 @@ const navLinks = [
     dropdownItems: [
       { name: "Placement", href: "/placements", icon: FaChartBar, desc: "Success records" },
       { name: "Internships", href: "/internships", icon: GraduationCap, desc: "Industrial training" },
-      { name: "Resources", href: "/resources", icon: FaDatabase, desc: "Learning materials" },
+      { name: "Career Resources", href: "/Career Resources", icon: FaUserTie, desc: "Learning materials" },
     ]
   },
   {
@@ -82,7 +84,7 @@ const navLinks = [
     href: "#",
     hasDropdown: true,
     dropdownItems: [
-      { name: "Blog", href: "/blog", icon: FaCloud, desc: "Tech insights" },
+      { name: "Blog", href: "/blog", icon: FaBookOpen, desc: "Tech insights" },
       { name: "FAQ", href: "/faq", icon: HelpCircle, desc: "Common questions" },
       { name: "Feedback", href: "/feedback", icon: MessageSquare, desc: "Share your thoughts" },
       { name: "Contact", href: "/contact", icon: Mail, desc: "Get in touch" },
@@ -303,93 +305,20 @@ export const Header = () => {
         className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}
       >
         {/* Top Bar (Hidden on Scroll) */}
-        <AnimatePresence>
-          {!isScrolled && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="bg-[#0066CC] text-white text-xs font-semibold border-b border-primary-foreground/10 relative z-50 py-1 md:py-0"
-            >
-              <div className="container mx-auto px-4 h-8 md:h-9 flex items-center justify-between">
-                <div className="flex items-center gap-3 md:gap-6">
-                  <a href="tel:+918019952233" className="flex items-center gap-1.5 hover:text-accent transition-colors">
-                    <Phone className="w-3 h-3" />
-                    <span>8019952233</span>
-                  </a>
-                  <a href="mailto:Info@aotms.com" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors">
-                    <Mail className="w-3 h-3" />
-                    <span>Info@aotms.com</span>
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  {/* Social Links */}
-                  <div className="hidden md:flex items-center gap-3 text-xs">
-                    <span className="opacity-80">Follow us :</span>
-                    <div className="flex items-center gap-2.5">
-                      <a href="https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-accent transition-colors">
-                        <FaInstagram className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </a>
-                      <a href="https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-accent transition-colors">
-                        <FaYoutube className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </a>
-                      <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-accent transition-colors">
-                        <FaLinkedin className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </a>
-                      <a href="https://twitter.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-accent transition-colors">
-                        <FaTwitter className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </a>
-                      <a href="https://www.facebook.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-accent transition-colors">
-                        <FaFacebook className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </a>
-                      <a href="https://threads.net" target="_blank" rel="noopener noreferrer" aria-label="Threads" className="hover:text-accent transition-colors">
-                        <SiThreads className="w-3 h-3 md:w-3 md:h-3" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="hidden md:block w-px h-3 bg-white/20"></div>
-
-                  {!isLoggedIn ? (
-                    <div className="flex items-center gap-3">
-                      <button type="button" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }} className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-[9px] md:text-[10px] transition-colors">
-                        <LogIn className="w-3 h-3" />
-                        Sign In
-                      </button>
-                      <span className="text-white/30">|</span>
-                      <button type="button" onClick={() => { setAuthMode('register'); setShowAuthModal(true); }} className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-[9px] md:text-[10px] transition-colors">
-                        <UserPlus className="w-3 h-3" />
-                        Register
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-3">
-                      <Link to="/cart" className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-xs transition-colors">
-                        <FaBook className="w-3.5 h-3.5" />
-                        <span>Cart ({cartItemCount})</span>
-                      </Link>
-                      <span className="text-white/30">|</span>
-                      <Link to="/dashboard" className="flex items-center gap-1.5 hover:text-accent uppercase tracking-wider font-bold text-xs transition-colors">
-                        <User className="w-3 h-3" />
-                        <span>Account</span>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Top Bar */}
+        <TopNavbar
+          isScrolled={isScrolled}
+          setAuthMode={setAuthMode}
+          setShowAuthModal={setShowAuthModal}
+        />
 
         {/* Main Navbar */}
-        <nav className={`bg-background/95 backdrop-blur-md border-b border-border/40 transition-all duration-300 flex items-center ${isScrolled ? 'h-16 md:h-16' : 'h-20 md:h-24'}`}>
+        <nav className={`bg-background/95 backdrop-blur-md border-b border-border/40 transition-all duration-300 flex items-center ${isScrolled ? 'h-16 md:h-16' : 'h-20 md:h-20'}`}>
           <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-full">
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
-              <img src={logo} alt="AOTMS" className={`w-auto transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-14 md:h-20'}`} />
+              <img src={logo} alt="AOTMS" className={`w-auto transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'}`} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -648,11 +577,10 @@ export const Header = () => {
                   <a href="https://www.instagram.com/academyoftechmasters?igsh=enZ5YjYwOXg1cW80&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaInstagram className="w-5 h-5" /> </a>
                   <a href="https://youtube.com/@aotms?si=mj3-j_JH4lHC3zeF" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaYoutube className="w-5 h-5" /> </a>
                   <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaLinkedin className="w-5 h-5" /> </a>
-                  <a href="https://twitter.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaTwitter className="w-5 h-5" /> </a>
+                  <a href="https://twitter.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaXTwitter className="w-5 h-5" /> </a>
                   <a href="https://www.facebook.com/aotms" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaFacebook className="w-5 h-5" /> </a>
-                  <a href="https://threads.net" target="_blank" rel="noopener noreferrer" aria-label="Threads" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <SiThreads className="w-5 h-5" /> </a>
+                  <a href="https://t.me/aotms" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="p-2.5 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition"> <FaTelegram className="w-5 h-5" /> </a>
                 </div>
-
               </div>
 
               {/* Footer Actions */}

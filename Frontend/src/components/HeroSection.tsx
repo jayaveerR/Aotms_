@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowRight, PlayCircle, Users, Award, Clock } from "lucide-react";
+import { ArrowRight, PlayCircle, Users, Award, Clock, ThumbsUp } from "lucide-react";
 import axios from "axios";
 import { CountUpNumber } from "./CountUpNumber";
 
@@ -65,58 +65,49 @@ export const HeroSection = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* LEFT CONTENT */}
           <div className="flex flex-col gap-8">
 
-            {/* MOBILE HEADLINE (BIGGER) */}
+            {/* MOBILE HEADLINE */}
             <h1
-              className="font-display font-bold tracking-tight text-foreground leading-[1.05] sm:hidden"
-              style={{ fontSize: "clamp(2.6rem, 7vw, 3.2rem)" }}
+              className="sm:hidden font-display font-bold tracking-tight text-foreground leading-[1.1] mt-8"
+              style={{ fontSize: "clamp(2.3rem, 6vw, 3rem)" }}
             >
-              Become <span className="text-[#0075CF]">Job-Ready</span> in 90 Days
-              with Expert-Led IT Training in{" "}
-              <span className="text-[#FD5A1A] relative inline-block">
-                Vijayawada
-                <svg
-                  className="absolute w-full h-3 -bottom-2 left-0 opacity-30"
-                  viewBox="0 0 100 10"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 5 Q 50 10 100 5"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </svg>
-              </span>
+              Become <span className="text-[#0075CF]">Job-Ready</span> in 90 Days with
+              Expert-Led IT Training in{" "}
+              <span className="text-[#FD5A1A]">Vijayawada</span>
             </h1>
 
+
             {/* DESKTOP HEADLINE */}
-            <h1 className="hidden sm:block font-display font-bold tracking-tight text-foreground leading-[1.05] text-5xl md:text-6xl">
+            <h1 className="hidden sm:block font-display font-bold tracking-tight text-foreground leading-[1.1] text-4xl md:text-5xl lg:text-[3.5rem]">
               <span className="block">
                 Become <span className="text-[#0075CF]">Job-Ready</span> in
               </span>
-              <span className="block">90 Days with Expert-Led</span>
-              <span className="block">IT Training in</span>
-              <span className="block text-[#FD5A1A] relative inline-block">
-                Vijayawada
-                <svg
-                  className="absolute w-full h-3 -bottom-2 left-0 opacity-30"
-                  viewBox="0 0 100 10"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 5 Q 50 10 100 5"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </svg>
+
+              <span className="block">
+                90 Days with Expert-Led IT Training in{" "}
+                <span className="text-[#FD5A1A] relative inline-block">
+                  Vijayawada
+                  <svg
+                    className="absolute w-full h-3 -bottom-2 left-0 opacity-30"
+                    viewBox="0 0 100 10"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 5 Q 50 10 100 5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                    />
+                  </svg>
+                </span>
               </span>
             </h1>
+
+
 
             {/* SUBTEXT */}
             <p className="text-base sm:text-lg text-muted-foreground max-w-xl">
@@ -127,7 +118,7 @@ export const HeroSection = () => {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="#courses"
+                href="/courses"
                 className="inline-flex items-center justify-center h-11 px-8 text-sm font-medium text-white bg-[#FD5A1A] rounded-md hover:bg-[#0066b3] transition"
               >
                 Start Your Journey
@@ -136,7 +127,9 @@ export const HeroSection = () => {
 
               <button className="inline-flex items-center justify-center h-11 px-8 text-sm font-medium text-[#0075CF] bg-[#0075CF]/5 border border-[#0075CF]/20 rounded-md hover:bg-[#0075CF]/10">
                 <PlayCircle className="mr-2 w-4 h-4 text-orange-500" />
-                Book a Free Demo Class
+                <a href="/contact">
+                  Book a Free Demo Class
+                </a>
               </button>
             </div>
 
@@ -164,7 +157,7 @@ export const HeroSection = () => {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="relative flex justify-center md:justify-end">
             <div className="relative w-full max-w-md lg:max-w-xl aspect-square">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent/10 rounded-full blur-[80px]" />
               <div className="relative w-full h-full p-2 rounded-[2rem] bg-gradient-to-br from-[#0075CF] via-white/20 to-[#FD5A1A] shadow-2xl">

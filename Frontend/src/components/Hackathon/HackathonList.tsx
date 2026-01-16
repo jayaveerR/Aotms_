@@ -1,4 +1,4 @@
-import { Hackathon } from "../../data/events";
+import { Hackathon } from "@/data/events";
 
 interface HackathonListProps {
     hackathons: Hackathon[];
@@ -16,8 +16,8 @@ export const HackathonList = ({ hackathons, selectedHackathonId, onSelectHackath
                         key={hackathon.id}
                         onClick={() => onSelectHackathon(hackathon)}
                         className={`w-full text-left p-4 rounded-lg border transition-all duration-200 ${selectedHackathonId === hackathon.id
-                                ? "bg-blue-50 border-blue-500 shadow-md"
-                                : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                            ? "bg-blue-50 border-blue-500 shadow-md"
+                            : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
                             }`}
                     >
                         <div className="flex items-center gap-4">

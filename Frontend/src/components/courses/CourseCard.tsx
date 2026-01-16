@@ -58,6 +58,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
                 "group relative flex flex-col bg-white overflow-hidden transition-all duration-300",
                 "w-full max-w-[340px] mx-auto min-h-[400px] md:min-h-[440px]", // Compacted Height
                 "rounded-[18px] md:rounded-[22px]",
+                "border-2 border-slate-200 hover:border-blue-300",
                 "hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50",
                 isClicked && "scale-[0.98]"
             )}

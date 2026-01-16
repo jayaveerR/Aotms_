@@ -11,7 +11,7 @@ const Index = lazy(() => import("./pages/Index"));
 const CourseDetail = lazy(() => import("./pages/CourseDetailPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const WhatWeDo = lazy(() => import("./pages/WhatWeDo"));
-const AboutUs = lazy(() => import("./pages/AboutUs"));
+const WhoWeAre = lazy(() => import("./pages/WhoWeAre"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Placements = lazy(() => import("./pages/Placements"));
@@ -74,6 +74,7 @@ const CustomCursor = () => {
 
 import ScrollToTop from "./components/ScrollToTop";
 import { ScrollButtons } from "./components/ScrollButtons";
+import AboutUs from "./pages/WhoWeAre";
 
 const App = () => {
   useEffect(() => {
@@ -104,7 +105,7 @@ const App = () => {
                 <Route path="/" element={<Index />} />
                 <Route path="/course/:slug" element={<CourseDetail />} />
                 <Route path="/what-we-do" element={<WhatWeDo />} />
-                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/about-us" element={<WhoWeAre />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/feedback" element={<FeedbackPage />} />
                 <Route path="/blog" element={<Blog />} />
